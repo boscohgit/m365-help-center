@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const popular = [
+  ["收不到验证电话", `${base}/guides/security-info/#phone-troubleshooting`],
+  ["苹果手机怎么设置验证器", `${base}/guides/security-info/#iphone`],
+  ["安卓手机怎么扫描二维码", `${base}/guides/security-info/#android`],
+  ["如何修改 Microsoft 365 密码", `${base}/guides/security-info/#password`],
+];
+const categories = [
+  { icon: "◎", title: "账号与安全", count: "1 篇指引", href: `${base}/guides/security-info/`, active: true },
+  { icon: "✉", title: "Outlook 邮箱", count: "准备中" },
+  { icon: "◫", title: "Office 安装", count: "准备中" },
+  { icon: "☁", title: "OneDrive", count: "准备中" },
+  { icon: "T", title: "Teams", count: "准备中" },
+  { icon: "S", title: "SharePoint", count: "准备中" },
+];
+---
+
+<BaseLayout
+  title="M365 帮助中心｜Microsoft 365 自助操作指引"
+  description="搜索 Microsoft 365 登录、密码、多重身份验证、Outlook、Teams、OneDrive 和 Office 安装指引。"
+>
+  <section class="hero">
+    <div class="container hero-inner">
+      <p class="eyebrow">Microsoft 365 · 自助支持</p>
+      <h1>遇到了什么问题？</h1>
+      <p class="hero-copy">用自己的话描述问题。无需知道正确的产品名称，也不需要输入完整标题。</p>
+      <div id="search" class="search-shell" aria-label="搜索帮助中心"></div>
+      <div class="question-row" aria-label="常见问题">
+        <span>大家常问：</span>
+        {popular.map(([label, href]) => <a href={href}>{label}</a>)}
+      </div>
+      <p class="privacy-note"><strong>安全提醒：</strong>本网站不会要求您提交密码、验证码或身份证明。</p>
+    </div>
+  </section>
+
+  <section class="container categories" id="categories">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">按类别查找</p>
+        <h2 class="section-title">选择您正在使用的服务</h2>
+      </div>
+      <p>第一批指引正在陆续整理，搜索会自动覆盖所有已上线内容。</p>
+    </div>
+    <div class="category-grid">
+      {categories.map((item) => item.active ? (
+        <a class="category-card active" href={item.href}>
+          <span class="category-icon">{item.icon}</span>
+          <span><strong>{item.title}</strong><small>{item.count}</small></span>
+          <b>→</b>
+        </a>
+      ) : (
+        <div class="category-card muted" aria-disabled="true">
+          <span class="category-icon">{item.icon}</span>
+          <span><strong>{item.title}</strong><small>{item.count}</small></span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container featured">
+    <div class="featured-copy">
+      <p class="eyebrow">最新指引</p>
+      <h2>添加账号验证方式</h2>
+      <p>电话验证、苹果 Microsoft Authenticator、安卓腾讯身份验证器，以及按需修改密码。</p>
+      <a class="primary-button" href={`${base}/guides/security-info/`}>打开完整指引 <span>→</span></a>
+    </div>
+    <div class="featured-map" aria-hidden="true">
+      <div class="map-start">选择验证方式</div>
+      <div class="map-branches">
+        <span>电话验证</span>
+        <span>苹果验证器</span>
+        <span>安卓验证器</span>
+      </div>
+      <div class="map-end">完成安全信息设置</div>
+    </div>
+  </section>
+
+  <link href={`${base}/pagefind/pagefind-ui.css`} rel="stylesheet" />
+  <script is:inline define:vars={{ base }}>
+    window.addEventListener("DOMContentLoaded", () => {
+      const script = document.createElement("script");
+      script.src = `${base}/pagefind/pagefind-ui.js`;
+      script.onload = () => {
+        new PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          autofocus: false,
+          translations: {
+            placeholder: "例如：收不到验证电话，Authenticator 换手机……",
+            zero_results: "没有找到“[SEARCH_TERM]”的结果，请尝试更短的关键词。",
+            many_results: "找到 [COUNT] 个结果",
+            one_result: "找到 1 个结果",
+            alt_search: "没有找到“[SEARCH_TERM]”。显示“[DIFFERENT_TERM]”的结果。",
+            search_suggestion: "没有找到“[SEARCH_TERM]”。可以尝试：",
+            searching: "正在搜索“[SEARCH_TERM]”……"
+          }
+        });
+      };
+      script.onerror = () => {
+        const shell = document.querySelector("#search");
+        shell.innerHTML = `<p class="search-fallback">搜索索引将在网站发布后启用。您现在可以通过下方分类浏览指引。</p>`;
+      };
+      document.head.appendChild(script);
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .hero { position: relative; overflow: hidden; padding: 84px 0 68px; background:
+    radial-gradient(circle at 82% 15%, rgba(9,105,218,.12), transparent 31%),
+    radial-gradient(circle at 14% 86%, rgba(200,0,24,.08), transparent 26%),
+    linear-gradient(180deg,#fff 0%,#f7f9fc 100%); border-bottom:1px solid var(--line); }
+  .hero::before { content:""; position:absolute; inset:0; opacity:.28; background-image:linear-gradient(rgba(36,56,75,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(36,56,75,.05) 1px,transparent 1px); background-size:40px 40px; mask-image:linear-gradient(to bottom,black,transparent); }
+  .hero-inner { position:relative; z-index:1; }
+  h1 { max-width:800px; margin:0; color:var(--navy); font-size:clamp(42px,7vw,76px); line-height:1.05; letter-spacing:-.055em; }
+  .hero-copy { margin:20px 0 30px; color:var(--muted); font-size:18px; line-height:1.7; }
+  .search-shell { max-width:900px; min-height:68px; }
+  .question-row { display:flex; flex-wrap:wrap; gap:8px 12px; align-items:center; margin-top:18px; color:var(--muted); font-size:14px; }
+  .question-row a { padding:7px 11px; border:1px solid var(--line); border-radius:999px; background:#fff; text-decoration:none; transition:.2s ease; }
+  .question-row a:hover { color:var(--blue); border-color:#b9d3ef; transform:translateY(-1px); }
+  .privacy-note { margin:24px 0 0; color:var(--muted); font-size:13px; }
+  .privacy-note strong { color:var(--green); }
+  .search-fallback { padding:20px; border:1px solid var(--line); border-radius:16px; background:#fff; color:var(--muted); }
+  .categories { padding-top:76px; }
+  .section-heading { display:flex; justify-content:space-between; gap:32px; align-items:end; }
+  .section-heading > p { max-width:380px; margin:0; color:var(--muted); line-height:1.7; }
+  .category-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:30px; }
+  .category-card { display:flex; gap:14px; align-items:center; min-height:104px; padding:22px; border:1px solid var(--line); border-radius:20px; background:var(--surface); text-decoration:none; box-shadow:0 8px 30px rgba(34,51,75,.04); }
+  .category-card.active { transition:.2s ease; }
+  .category-card.active:hover { border-color:#b9d3ef; box-shadow:var(--shadow); transform:translateY(-2px); }
+  .category-card.muted { opacity:.62; }
+  .category-icon { display:grid; place-items:center; width:48px; height:48px; flex:0 0 auto; border-radius:15px; background:var(--blue-soft); color:var(--blue); font-size:21px; font-weight:800; }
+  .category-card strong,.category-card small { display:block; }
+  .category-card strong { color:var(--navy); font-size:16px; }
+  .category-card small { margin-top:6px; color:var(--muted); }
+  .category-card b { margin-left:auto; color:var(--blue); font-size:21px; }
+  .featured { display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:center; margin-top:86px; padding:56px; border:1px solid #ced9e5; border-radius:30px; background:linear-gradient(135deg,#fff,#edf4fa); box-shadow:var(--shadow); }
+  .featured h2 { margin:0; color:var(--navy); font-size:34px; letter-spacing:-.035em; }
+  .featured-copy > p:not(.eyebrow) { color:var(--muted); line-height:1.8; }
+  .primary-button { display:inline-flex; gap:16px; align-items:center; margin-top:12px; padding:13px 18px; border-radius:12px; background:var(--navy); color:#fff; text-decoration:none; font-weight:700; }
+  .featured-map { padding:26px; border-radius:22px; background:#fff; }
+  .map-start,.map-end { width:max-content; margin:auto; padding:13px 18px; border-radius:12px; font-weight:700; }
+  .map-start { background:var(--navy); color:#fff; }
+  .map-end { background:var(--green-soft); color:var(--green); }
+  .map-branches { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:42px 0; }
+  .map-branches::before,.map-branches::after { content:""; position:absolute; left:50%; width:1px; height:28px; background:#aeb8c5; }
+  .map-branches::before { top:-35px; }.map-branches::after { bottom:-35px; }
+  .map-branches span { padding:16px 10px; border:1px solid var(--line); border-radius:13px; color:var(--navy); text-align:center; font-weight:700; }
+  @media (max-width:800px) {
+    .hero { padding-top:58px; }
+    .section-heading { display:block; }.section-heading > p { margin-top:14px; }
+    .category-grid { grid-template-columns:1fr 1fr; }
+    .featured { grid-template-columns:1fr; padding:32px; }
+  }
+  @media (max-width:540px) {
+    .category-grid { grid-template-columns:1fr; }
+    .featured { width:calc(100% - 28px); padding:24px; }
+    .map-branches { grid-template-columns:1fr; margin:30px 0; }
+    .map-branches::before,.map-branches::after { display:none; }
+  }
+</style>

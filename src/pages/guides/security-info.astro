@@ -1,0 +1,219 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Step from "../../components/Step.astro";
+import Figure from "../../components/Figure.astro";
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const asset = `${base}/assets/security`;
+---
+
+<BaseLayout
+  title="添加账号验证方式（电话 / 验证器）及修改密码｜M365 帮助中心"
+  description="为 Microsoft 365 账号添加电话验证、苹果 Microsoft Authenticator 或安卓腾讯身份验证器，并按需修改密码。"
+>
+  <article class="guide" data-pagefind-body>
+    <header class="guide-hero">
+      <div class="container guide-hero-grid">
+        <div>
+          <nav class="breadcrumbs" aria-label="面包屑">
+            <a href={`${base}/`}>首页</a><span>/</span><span>账号与安全</span>
+          </nav>
+          <p class="eyebrow" data-pagefind-meta="category">账号与安全</p>
+          <h1 data-pagefind-meta="title">添加账号验证方式</h1>
+          <p class="guide-subtitle">电话 / 验证器 · 并按需修改密码</p>
+          <p class="guide-lead">选择一种适合您的验证方法，并按照对应设备的步骤完成设置。</p>
+          <div class="meta-row">
+            <span>预计 5–10 分钟</span><span>电脑 + 手机</span><span>更新于 2026-07-26</span>
+          </div>
+        </div>
+        <div class="completion-card">
+          <strong>完成标准</strong>
+          <p>“安全信息”页面中能看到已登记的电话号码或验证器应用。</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="container guide-layout">
+      <aside class="toc">
+        <strong>本页内容</strong>
+        <a href="#prepare">开始前准备</a>
+        <a href="#start">进入安全信息</a>
+        <a href="#phone">方式一：电话验证</a>
+        <a href="#iphone">苹果验证器</a>
+        <a href="#android">安卓验证器</a>
+        <a href="#troubleshooting">遇到问题</a>
+        <a href="#password">修改密码</a>
+      </aside>
+
+      <div class="guide-content">
+        <section id="prepare">
+          <p class="eyebrow">开始前准备</p>
+          <h2>把这些东西放在手边</h2>
+          <div class="prep-grid">
+            <div><b>账号</b><span>公司 Microsoft 365 邮箱和当前密码</span></div>
+            <div><b>手机</b><span>可接听国际电话，或可安装验证器应用</span></div>
+            <div><b>浏览器</b><span>Microsoft Edge 或 Google Chrome</span></div>
+          </div>
+          <div class="callout warning"><strong>重要</strong><p>不要向任何人提供密码、验证码或验证器中的确认数字。</p></div>
+        </section>
+
+        <section id="start">
+          <p class="eyebrow">共同步骤</p>
+          <h2>进入 Microsoft“安全信息”</h2>
+          <Step number="1" title="打开“我的账户”">
+            在浏览器中打开 <a href="https://myaccount.microsoft.com">myaccount.microsoft.com</a>，使用公司账号登录。
+          </Step>
+          <Step number="2" title="进入“安全信息”">
+            在主页找到“安全信息”，点击“更新信息”。如果主页没有显示卡片，可从左侧菜单进入。
+          </Step>
+          <div class="choice-card">
+            <strong>接下来请选择一种方式</strong>
+            <div><a href="#phone">电话验证</a><a href="#iphone">苹果验证器</a><a href="#android">安卓验证器</a></div>
+          </div>
+        </section>
+
+        <section id="phone" data-pagefind-meta="keywords: 收不到电话, 国际电话, 手机验证, 呼叫我, MFA">
+          <p class="eyebrow">方式一</p>
+          <h2>使用电话验证</h2>
+          <Step number="3" title="选择“电话”">
+            点击“添加登录方法”，在弹出的窗口中选择“电话”。
+            <Figure src={`${asset}/phone/select-phone.png`} alt="添加登录方法窗口中选择电话" caption="选择“电话”作为登录验证方式" />
+          </Step>
+          <Step number="4" title="填写手机号码">
+            选择号码所属国家或地区，输入手机号码，确认选择“呼叫我”，然后点击“下一步”。
+            <div class="inline-note">常用区号：中国 +86 · 香港 +852 · 新加坡 +65</div>
+          </Step>
+          <Step number="5" title="接听电话并按“#”键">
+            接听验证电话，按照语音提示按下“#”键。听到 “Your sign in is successful” 后即可挂断。
+          </Step>
+          <Step number="6" title="点击“完成”">
+            浏览器显示电话号码已成功注册后，点击“完成”。
+            <Figure src={`${asset}/phone/success.png`} alt="电话号码成功注册及完成按钮" caption="看到绿色对勾后点击“完成”" narrow />
+          </Step>
+          <div class="callout success"><strong>电话验证完成</strong><p>返回“安全信息”页面，应能看到刚刚登记的电话号码。</p></div>
+        </section>
+
+        <section id="iphone" data-pagefind-meta="keywords: 苹果, iPhone, 微软验证器, Authenticator, 数字匹配, MFA">
+          <p class="eyebrow">方式二 · 苹果手机</p>
+          <h2>Microsoft Authenticator</h2>
+          <Step number="A1" title="安装 Microsoft Authenticator">
+            在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。
+            <Figure src={`${asset}/ios/setup.png`} alt="Microsoft Authenticator 设置页面" caption="安装应用后点击“下一步”" />
+          </Step>
+          <Step number="A2" title="添加“工作或学校账户”">
+            打开 Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。
+            <Figure src={`${asset}/ios/add-account.png`} alt="苹果 Microsoft Authenticator 中添加工作或学校账户" caption="依次选择“+”→“工作或学校账户”→“扫描 QR 码”" />
+          </Step>
+          <Step number="A3" title="扫描电脑上的二维码">
+            浏览器再次点击“下一步”后会显示二维码。用手机扫描，然后回到电脑点击“下一步”。二维码是一次性设置凭据，请不要截图分享。
+          </Step>
+          <Step number="A4" title="在手机中确认数字">
+            电脑网页会显示一个数字，手机同时弹出批准窗口。在手机中输入网页数字，再点击“是”。
+            <Figure src={`${asset}/ios/number-match.png`} alt="Microsoft Authenticator 苹果手机数字匹配窗口" caption="输入电脑网页显示的数字并批准" narrow />
+          </Step>
+          <div class="callout success"><strong>苹果验证器完成</strong><p>浏览器显示配置成功后点击“完成”，并确认安全信息中出现 Microsoft Authenticator。</p></div>
+        </section>
+
+        <section id="android" data-pagefind-meta="keywords: 安卓, Android, 腾讯身份验证器, 六位验证码, 二维码, MFA">
+          <p class="eyebrow">方式二 · 安卓手机</p>
+          <h2>腾讯身份验证器</h2>
+          <Step number="B1" title="安装腾讯身份验证器">
+            按照公司现有安卓指引，通过腾讯应用宝安装“腾讯身份验证器”。
+            <div class="inline-note">下载地址：sj.qq.com/appdetail/com.tencent.authenticator</div>
+          </Step>
+          <Step number="B2" title="选择其他身份验证器">
+            在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。
+            <Figure src={`${asset}/android/other-app.png`} alt="我想要使用其他身份验证器选项" caption="安卓流程需要选择“其他身份验证器”" />
+          </Step>
+          <Step number="B3" title="扫描二维码">
+            在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。成功后，手机会显示 6 位动态数字。
+            <Figure src={`${asset}/android/token.png`} alt="腾讯身份验证器显示六位动态验证码" caption="验证码会定时更新" narrow />
+          </Step>
+          <Step number="B4" title="输入 6 位验证码">
+            回到电脑点击“下一步”，输入手机中当前显示的 6 位数字，然后再次点击“下一步”。
+            <Figure src={`${asset}/android/enter-code.png`} alt="浏览器中输入验证器六位验证码" caption="请在数字失效前完成输入" />
+          </Step>
+          <div class="callout success"><strong>安卓验证器完成</strong><p>浏览器显示“成功”后点击“完成”，并确认安全信息中出现验证器应用。</p></div>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow">故障排查</p>
+          <h2>遇到问题怎么办</h2>
+          <details id="phone-troubleshooting" open><summary>一直收不到验证电话</summary><p>检查手机信号、国家区号和号码；关闭国际电话或陌生号码拦截后重试。</p></details>
+          <details><summary>验证器扫码失败</summary><p>调高电脑屏幕亮度，确认手机相机权限已开启，并完整扫描二维码。</p></details>
+          <details><summary>6 位数字提示错误</summary><p>等待验证器生成一组新数字后立即输入，并确认手机日期和时间为自动设置。</p></details>
+          <details><summary>苹果手机没有确认窗口</summary><p>打开 Microsoft Authenticator 查看待处理请求，并确认应用通知权限已开启。</p></details>
+          <details><summary>页面卡住或显示失败</summary><p>不要连续点击。刷新页面并重新进入“安全信息”后再操作一次。</p></details>
+        </section>
+
+        <section id="password" data-pagefind-meta="keywords: 修改密码, 更改密码, 密码错误, 新密码">
+          <p class="eyebrow">可选操作</p>
+          <h2>修改账号密码</h2>
+          <div class="callout info"><strong>不需要修改？</strong><p>如果您只需要添加验证方式，可以跳过本节。</p></div>
+          <Step number="1" title="打开“密码”页面">
+            返回 <a href="https://myaccount.microsoft.com">Microsoft“我的账户”</a>，在“密码”卡片中点击“更改密码”。
+          </Step>
+          <Step number="2" title="输入并提交新密码">
+            在“新密码”和“确认新密码”中输入同一个密码。满足页面显示的要求后点击“提交”。
+          </Step>
+          <div class="callout success"><strong>修改完成</strong><p>以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。</p></div>
+        </section>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .guide-hero { padding:54px 0 46px; background:linear-gradient(140deg,#fff 35%,#edf4fa); border-bottom:1px solid var(--line); }
+  .guide-hero-grid { display:grid; grid-template-columns:1fr 330px; gap:60px; align-items:end; }
+  .breadcrumbs { display:flex; gap:8px; margin-bottom:30px; color:var(--muted); font-size:13px; }
+  .breadcrumbs a { text-decoration:none; }.breadcrumbs a:hover { color:var(--blue); }
+  .guide h1 { margin:0; color:var(--navy); font-size:clamp(38px,6vw,62px); letter-spacing:-.055em; line-height:1.08; }
+  .guide-subtitle { margin:10px 0 0; color:var(--red); font-size:19px; font-weight:750; }
+  .guide-lead { max-width:700px; margin:20px 0 0; color:var(--muted); font-size:17px; line-height:1.7; }
+  .meta-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
+  .meta-row span { padding:7px 10px; border:1px solid var(--line); border-radius:999px; background:#fff; color:var(--muted); font-size:12px; }
+  .completion-card { padding:25px; border-left:4px solid var(--green); border-radius:4px 18px 18px 4px; background:var(--green-soft); }
+  .completion-card strong { color:var(--green); }.completion-card p { margin:9px 0 0; line-height:1.7; }
+  .guide-layout { display:grid; grid-template-columns:220px minmax(0,760px); gap:70px; align-items:start; padding-top:48px; }
+  .toc { position:sticky; top:108px; display:flex; flex-direction:column; gap:6px; padding:18px; border:1px solid var(--line); border-radius:16px; background:#fff; }
+  .toc strong { margin-bottom:8px; color:var(--navy); }
+  .toc a { padding:8px 10px; border-radius:9px; color:var(--muted); font-size:13px; text-decoration:none; }
+  .toc a:hover { background:var(--blue-soft); color:var(--blue); }
+  .guide-content section { scroll-margin-top:100px; padding:28px 0 50px; border-bottom:1px solid var(--line); }
+  .guide-content section:first-child { padding-top:0; }
+  .guide-content h2 { margin:0 0 20px; color:var(--navy); font-size:clamp(28px,4vw,38px); letter-spacing:-.035em; }
+  .prep-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .prep-grid div { padding:18px; border:1px solid var(--line); border-radius:15px; background:#fff; }
+  .prep-grid b,.prep-grid span { display:block; }.prep-grid b { color:var(--red); }.prep-grid span { margin-top:9px; color:var(--muted); font-size:13px; line-height:1.65; }
+  .callout { margin:18px 0; padding:18px 20px; border-left:4px solid; border-radius:4px 14px 14px 4px; }
+  .callout strong { display:block; }.callout p { margin:5px 0 0; line-height:1.75; }
+  .callout.warning { border-color:var(--red); background:var(--red-soft); }.callout.warning strong { color:var(--red); }
+  .callout.success { border-color:var(--green); background:var(--green-soft); }.callout.success strong { color:var(--green); }
+  .callout.info { border-color:var(--blue); background:var(--blue-soft); }.callout.info strong { color:var(--blue); }
+  .choice-card { margin:28px 0 0; padding:22px; border:1px solid #b9d3ef; border-radius:18px; background:var(--blue-soft); }
+  .choice-card strong { display:block; color:var(--navy); }.choice-card div { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .choice-card a { padding:10px 13px; border-radius:10px; background:#fff; color:var(--blue); text-decoration:none; font-weight:700; }
+  .step { position:relative; margin:24px 0 36px; padding-left:64px; }
+  .step-number { position:absolute; left:0; top:0; display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:var(--navy); color:#fff; font-size:14px; font-weight:800; }
+  .step h3 { margin:0; color:var(--navy); font-size:21px; }.step-body { margin-top:8px; color:#3b4654; line-height:1.9; }
+  .step-body a { color:var(--blue); }
+  figure { margin:18px 0 0; padding:16px; border:1px solid var(--line); border-radius:18px; background:#fff; box-shadow:0 10px 35px rgba(34,51,75,.05); }
+  figure.narrow { max-width:500px; }
+  figure img { width:100%; height:auto; border-radius:10px; }
+  figcaption { margin-top:11px; color:var(--muted); font-size:12px; text-align:center; }
+  .inline-note { margin-top:14px; padding:12px 14px; border-radius:11px; background:var(--blue-soft); color:#315c7e; font-size:13px; }
+  details { margin:10px 0; border:1px solid var(--line); border-radius:14px; background:#fff; }
+  summary { padding:17px 19px; cursor:pointer; color:var(--navy); font-weight:750; }
+  details p { margin:0; padding:0 19px 18px; color:var(--muted); line-height:1.75; }
+  @media (max-width:900px) {
+    .guide-hero-grid { grid-template-columns:1fr; gap:30px; }
+    .guide-layout { grid-template-columns:1fr; }
+    .toc { position:static; display:grid; grid-template-columns:repeat(3,1fr); }
+    .toc strong { grid-column:1/-1; }
+  }
+  @media (max-width:600px) {
+    .guide-hero { padding-top:38px; }
+    .prep-grid,.toc { grid-template-columns:1fr; }
+    .step { padding-left:0; padding-top:56px; }
+  }
+</style>

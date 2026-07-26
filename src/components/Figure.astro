@@ -1,0 +1,13 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+  narrow?: boolean;
+}
+const { src, alt, caption, narrow = false } = Astro.props;
+---
+<figure class:list={{ narrow }}>
+  <img src={src} alt={alt} loading="lazy" />
+  <figcaption>{caption}</figcaption>
+</figure>

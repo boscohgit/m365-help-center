@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f7f9" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={`${base}/`} aria-label="M365 帮助中心首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>
+          <strong>M365 帮助中心</strong>
+          <small>Microsoft 365 自助操作指引</small>
+        </span>
+      </a>
+      <a class="header-link" href={`${base}/#categories`}>浏览全部分类</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>公开自助指引 · 页面不会要求您提交密码或验证码</p>
+      <p>Microsoft 365 是 Microsoft Corporation 的产品。本网站为独立操作指引。</p>
+    </footer>
+  </body>
+</html>
