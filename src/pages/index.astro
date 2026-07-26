@@ -1,20 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { guides, categoryOrder } from "../data/guides";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const popular = [
   ["收不到验证电话", `${base}/guides/security-info/#phone-troubleshooting`],
   ["苹果手机怎么设置验证器", `${base}/guides/security-info/#iphone`],
-  ["安卓手机怎么扫描二维码", `${base}/guides/security-info/#android`],
-  ["如何修改 Microsoft 365 密码", `${base}/guides/security-info/#password`],
+  ["忘记密码怎么办", `${base}/guides/password-reset/`],
+  ["新电脑怎么设置", `${base}/guides/autopilot-new-pc/`],
 ];
-const categories = [
-  { icon: "◎", title: "账号与安全", count: "1 篇指引", href: `${base}/guides/security-info/`, active: true },
-  { icon: "✉", title: "Outlook 邮箱", count: "准备中" },
-  { icon: "◫", title: "Office 安装", count: "准备中" },
-  { icon: "☁", title: "OneDrive", count: "准备中" },
-  { icon: "T", title: "Teams", count: "准备中" },
-  { icon: "S", title: "SharePoint", count: "准备中" },
+const iconByCategory = {
+  "账号与安全": "◎",
+  "Office 应用": "◫",
+  "Outlook 邮箱": "✉",
+  "Teams": "T",
+  "OneDrive 与 SharePoint": "☁",
+  "设备与工具": "⌘",
+};
+const countByCategory = Object.fromEntries(categoryOrder.map((category) => [
+  category,
+  guides.filter((guide) => guide.category === category).length + (category === "账号与安全" ? 1 : 0),
+]));
+const categories = categoryOrder.map((category) => ({
+  icon: iconByCategory[category],
+  title: category,
+  count: `${countByCategory[category]} 篇指引`,
+  href: `#category-${category.replace(/\s+/g, "-")}`,
+}));
+const allGuides = [
+  {
+    slug: "security-info",
+    title: "添加账号验证方式",
+    subtitle: "电话、苹果验证器、安卓验证器与修改密码",
+    category: "账号与安全",
+  },
+  ...guides,
 ];
 ---
 
@@ -45,17 +65,12 @@ const categories = [
       <p>第一批指引正在陆续整理，搜索会自动覆盖所有已上线内容。</p>
     </div>
     <div class="category-grid">
-      {categories.map((item) => item.active ? (
+      {categories.map((item) => (
         <a class="category-card active" href={item.href}>
           <span class="category-icon">{item.icon}</span>
           <span><strong>{item.title}</strong><small>{item.count}</small></span>
           <b>→</b>
         </a>
-      ) : (
-        <div class="category-card muted" aria-disabled="true">
-          <span class="category-icon">{item.icon}</span>
-          <span><strong>{item.title}</strong><small>{item.count}</small></span>
-        </div>
       ))}
     </div>
   </section>
@@ -76,6 +91,30 @@ const categories = [
       </div>
       <div class="map-end">完成安全信息设置</div>
     </div>
+  </section>
+
+  <section class="container all-guides" id="guides">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">全部指引</p>
+        <h2 class="section-title">11 篇可搜索操作指南</h2>
+      </div>
+      <p>按主题浏览，或返回页面顶部直接描述您遇到的问题。</p>
+    </div>
+    {categoryOrder.map((category) => (
+      <div class="guide-category" id={`category-${category.replace(/\s+/g, "-")}`}>
+        <h3>{category}<span>{countByCategory[category]}</span></h3>
+        <div class="guide-card-grid">
+          {allGuides.filter((guide) => guide.category === category).map((guide) => (
+            <a class="guide-card" href={`${base}/guides/${guide.slug}/`}>
+              <strong>{guide.title}</strong>
+              <span>{guide.subtitle}</span>
+              <b>阅读指引 →</b>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
   </section>
 
   <link href={`${base}/pagefind/pagefind-ui.css`} rel="stylesheet" />
@@ -150,14 +189,26 @@ const categories = [
   .map-branches::before,.map-branches::after { content:""; position:absolute; left:50%; width:1px; height:28px; background:#aeb8c5; }
   .map-branches::before { top:-35px; }.map-branches::after { bottom:-35px; }
   .map-branches span { padding:16px 10px; border:1px solid var(--line); border-radius:13px; color:var(--navy); text-align:center; font-weight:700; }
+  .all-guides { padding-top:84px; }
+  .guide-category { scroll-margin-top:100px; margin-top:44px; }
+  .guide-category h3 { display:flex; gap:10px; align-items:center; margin:0 0 16px; color:var(--navy); font-size:22px; }
+  .guide-category h3 span { display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--blue-soft); color:var(--blue); font-size:12px; }
+  .guide-card-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .guide-card { display:flex; min-height:150px; flex-direction:column; padding:22px; border:1px solid var(--line); border-radius:18px; background:#fff; text-decoration:none; transition:.2s ease; }
+  .guide-card:hover { border-color:#b9d3ef; box-shadow:var(--shadow); transform:translateY(-2px); }
+  .guide-card strong { color:var(--navy); font-size:17px; }
+  .guide-card span { margin-top:8px; color:var(--muted); font-size:13px; line-height:1.6; }
+  .guide-card b { margin-top:auto; padding-top:18px; color:var(--blue); font-size:13px; }
   @media (max-width:800px) {
     .hero { padding-top:58px; }
     .section-heading { display:block; }.section-heading > p { margin-top:14px; }
     .category-grid { grid-template-columns:1fr 1fr; }
     .featured { grid-template-columns:1fr; padding:32px; }
+    .guide-card-grid { grid-template-columns:1fr 1fr; }
   }
   @media (max-width:540px) {
     .category-grid { grid-template-columns:1fr; }
+    .guide-card-grid { grid-template-columns:1fr; }
     .featured { width:calc(100% - 28px); padding:24px; }
     .map-branches { grid-template-columns:1fr; margin:30px 0; }
     .map-branches::before,.map-branches::after { display:none; }
