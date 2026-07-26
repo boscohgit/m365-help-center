@@ -4,3 +4,4 @@ dist/
 .DS_Store
 scripts/.bin/
 scripts/.image-review/
+__pycache__/
