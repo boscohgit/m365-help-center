@@ -42,7 +42,7 @@ export const guides: Guide[] = [
     completion: "可以进入 Microsoft“我的账户”，并能使用验证器或电话完成身份验证。",
     prepare: [
       { label: "公司账号", text: "欢迎邮件中提供的公司邮箱地址" },
-      { label: "临时密码", text: "仅使用欢迎邮件或 IT 单独提供的临时密码" },
+      { label: "临时密码", text: "仅使用 HR 单独提供的临时密码" },
       { label: "手机", text: "苹果安装 Microsoft Authenticator；安卓按公司要求安装指定验证器" },
     ],
     sections: [
@@ -53,7 +53,7 @@ export const guides: Guide[] = [
         steps: [
           { title: "打开“我的账户”", body: "在电脑浏览器访问 https://myaccount.microsoft.com/。" },
           { title: "输入公司账号", body: "输入欢迎邮件中的公司邮箱地址，点击“下一步”。" },
-          { title: "输入临时密码", body: "输入欢迎邮件或 IT 单独提供的临时密码。不要使用公开文档、聊天记录或他人的密码。" },
+          { title: "输入临时密码", body: "输入 HR 单独提供的临时密码。不要使用公开文档、聊天记录或他人的密码。" },
           { title: "完成当前验证", body: "如果页面要求输入验证码，请使用公司指定且只发给您本人的验证方式。无法获取时请联系 IT，不要反复猜测。" },
         ],
       },
