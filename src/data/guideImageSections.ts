@@ -1,74 +1,187 @@
 import { guideImagesBySlug, type GuideImage } from "./guideImages";
 
-type SectionRanges = Record<string, [number, number]>;
+export type InstructionKind = "step" | "point";
 
-const rangesByGuide: Record<string, SectionRanges> = {
+type Placement = {
+  kind: InstructionKind;
+  index: number;
+  images: number[];
+};
+
+type GuidePlacements = Record<string, Placement[]>;
+
+const placementsByGuide: Record<string, GuidePlacements> = {
   "first-sign-in": {
-    "sign-in": [1, 1],
-    authenticator: [2, 10],
+    "sign-in": [
+      { kind: "step", index: 1, images: [1] },
+    ],
+    authenticator: [
+      { kind: "step", index: 0, images: [3, 4, 5, 6, 7] },
+      { kind: "step", index: 1, images: [2, 8, 9, 10] },
+    ],
   },
   "install-m365": {
-    download: [1, 2],
-    install: [3, 4],
-    "teams-startup": [5, 8],
+    download: [
+      { kind: "step", index: 0, images: [1] },
+      { kind: "step", index: 1, images: [2] },
+    ],
+    install: [
+      { kind: "step", index: 1, images: [3, 4] },
+    ],
+    "teams-startup": [
+      { kind: "step", index: 0, images: [5] },
+      { kind: "step", index: 1, images: [6, 7] },
+      { kind: "step", index: 2, images: [8] },
+    ],
   },
   "office-sign-in": {
-    open: [1, 1],
-    "sign-in": [2, 2],
+    open: [
+      { kind: "step", index: 0, images: [1] },
+    ],
+    "sign-in": [
+      { kind: "step", index: 0, images: [2] },
+    ],
   },
   outlook: {
-    setup: [1, 5],
-    "shared-mailbox": [6, 10],
-    compose: [11, 12],
-    inbox: [13, 13],
-    calendar: [14, 15],
-    recall: [16, 17],
-    contacts: [18, 18],
+    setup: [
+      { kind: "step", index: 0, images: [1] },
+      { kind: "step", index: 1, images: [2, 4] },
+      { kind: "step", index: 2, images: [3] },
+      { kind: "step", index: 3, images: [5] },
+    ],
+    "shared-mailbox": [
+      { kind: "point", index: 2, images: [6, 7] },
+      { kind: "point", index: 3, images: [8, 9, 10] },
+    ],
+    compose: [
+      { kind: "point", index: 1, images: [11] },
+      { kind: "point", index: 2, images: [12] },
+    ],
+    inbox: [
+      { kind: "point", index: 1, images: [13] },
+    ],
+    calendar: [
+      { kind: "point", index: 0, images: [14] },
+      { kind: "point", index: 2, images: [15] },
+    ],
+    recall: [
+      { kind: "step", index: 0, images: [16] },
+      { kind: "step", index: 1, images: [17] },
+    ],
+    contacts: [
+      { kind: "point", index: 1, images: [18] },
+    ],
   },
   teams: {
-    "sign-in": [1, 1],
-    chat: [2, 13],
-    "teams-channels": [14, 15],
-    meetings: [16, 21],
+    "sign-in": [
+      { kind: "step", index: 2, images: [1] },
+    ],
+    chat: [
+      { kind: "point", index: 0, images: [2, 3] },
+      { kind: "point", index: 1, images: [6, 7] },
+      { kind: "point", index: 2, images: [4] },
+      { kind: "point", index: 3, images: [5] },
+      { kind: "point", index: 4, images: [12, 13] },
+      { kind: "point", index: 5, images: [8, 9, 10, 11] },
+    ],
+    "teams-channels": [
+      { kind: "point", index: 0, images: [14] },
+      { kind: "point", index: 2, images: [15] },
+    ],
+    meetings: [
+      { kind: "point", index: 0, images: [16, 17] },
+      { kind: "point", index: 1, images: [18, 19] },
+      { kind: "point", index: 2, images: [20, 21] },
+    ],
   },
   onedrive: {
-    "sign-in": [1, 1],
-    upload: [2, 3],
-    share: [4, 5],
-    status: [6, 6],
-    "shared-save": [7, 8],
+    "sign-in": [
+      { kind: "point", index: 2, images: [1] },
+    ],
+    upload: [
+      { kind: "point", index: 1, images: [2] },
+      { kind: "point", index: 3, images: [3] },
+    ],
+    share: [
+      { kind: "step", index: 1, images: [4] },
+      { kind: "step", index: 3, images: [5] },
+    ],
+    status: [
+      { kind: "point", index: 3, images: [6] },
+    ],
+    "shared-save": [
+      { kind: "step", index: 0, images: [7] },
+      { kind: "step", index: 1, images: [8] },
+    ],
   },
   sharepoint: {
-    visit: [1, 1],
-    sync: [2, 3],
-    collaborate: [4, 7],
+    visit: [
+      { kind: "step", index: 1, images: [1] },
+    ],
+    sync: [
+      { kind: "step", index: 1, images: [2] },
+      { kind: "step", index: 2, images: [3] },
+    ],
+    collaborate: [
+      { kind: "point", index: 2, images: [4, 5, 6, 7] },
+    ],
   },
   "scan-documents": {
-    huawei: [1, 1],
+    huawei: [
+      { kind: "point", index: 1, images: [1] },
+    ],
   },
   "password-reset": {
-    open: [1, 3],
-    verify: [4, 4],
+    open: [
+      { kind: "step", index: 0, images: [1, 2] },
+      { kind: "step", index: 1, images: [3] },
+    ],
+    verify: [
+      { kind: "point", index: 3, images: [4] },
+    ],
   },
   "security-info": {
-    start: [1, 1],
-    phone: [2, 4],
-    iphone: [5, 10],
-    android: [11, 16],
-    password: [17, 18],
+    start: [
+      { kind: "step", index: 1, images: [1] },
+    ],
+    phone: [
+      { kind: "step", index: 0, images: [2] },
+      { kind: "step", index: 1, images: [3] },
+      { kind: "step", index: 3, images: [4] },
+    ],
+    iphone: [
+      { kind: "step", index: 0, images: [5] },
+      { kind: "step", index: 1, images: [6] },
+      { kind: "step", index: 2, images: [7] },
+      { kind: "step", index: 3, images: [8, 9, 10] },
+    ],
+    android: [
+      { kind: "step", index: 1, images: [11, 12] },
+      { kind: "step", index: 2, images: [13, 14] },
+      { kind: "step", index: 3, images: [15, 16] },
+    ],
+    password: [
+      { kind: "step", index: 0, images: [17] },
+      { kind: "step", index: 1, images: [18] },
+    ],
   },
 };
 
-export function getGuideSectionImages(slug: string, sectionId: string): GuideImage[] {
-  const range = rangesByGuide[slug]?.[sectionId];
-  if (!range) return [];
-  const [start, end] = range;
-  return (guideImagesBySlug[slug] ?? []).slice(start - 1, end);
+export function getInstructionImages(
+  slug: string,
+  sectionId: string,
+  kind: InstructionKind,
+  index: number,
+): GuideImage[] {
+  const placement = placementsByGuide[slug]?.[sectionId]?.find(
+    (item) => item.kind === kind && item.index === index,
+  );
+  const allImages = guideImagesBySlug[slug] ?? [];
+  return (placement?.images ?? []).map((imageNumber) => allImages[imageNumber - 1]);
 }
 
-export function countPlacedImages(slug: string): number {
-  return Object.keys(rangesByGuide[slug] ?? {}).reduce(
-    (total, sectionId) => total + getGuideSectionImages(slug, sectionId).length,
-    0,
-  );
+export function getPlacedImageNumbers(slug: string): number[] {
+  return Object.values(placementsByGuide[slug] ?? {})
+    .flatMap((placements) => placements)
+    .flatMap((placement) => placement.images);
 }

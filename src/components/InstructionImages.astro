@@ -1,0 +1,23 @@
+---
+import Figure from "./Figure.astro";
+import type { GuideImage } from "../data/guideImages";
+
+interface Props {
+  images: GuideImage[];
+}
+
+const { images } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+{images.length > 0 && (
+  <div class="instruction-images" aria-label="本步骤对应截图">
+    {images.map((image, index) => (
+      <Figure
+        src={`${base}${image.src}`}
+        alt={image.alt}
+        caption={`${images.length > 1 ? `本步骤 ${index + 1}/${images.length} · ` : ""}${image.caption}`}
+      />
+    ))}
+  </div>
+)}

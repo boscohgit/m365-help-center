@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
-import Figure from "../../components/Figure.astro";
-import { getGuideSectionImages } from "../../data/guideImageSections";
+import InstructionImages from "../../components/InstructionImages.astro";
+import { getInstructionImages } from "../../data/guideImageSections";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const sectionImages = (sectionId: string) => getGuideSectionImages("security-info", sectionId);
+const stepImages = (sectionId: string, index: number) =>
+  getInstructionImages("security-info", sectionId, "step", index);
 ---
 
 <BaseLayout
@@ -65,16 +66,11 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
           </Step>
           <Step number="2" title="进入“安全信息”">
             在主页找到“安全信息”，点击“更新信息”。如果主页没有显示卡片，可从左侧菜单进入。
+            <InstructionImages images={stepImages("start", 1)} />
           </Step>
           <div class="choice-card">
             <strong>接下来请选择一种方式</strong>
             <div><a href="#phone">电话验证</a><a href="#iphone">苹果验证器</a><a href="#android">安卓验证器</a></div>
-          </div>
-          <div class="section-screenshots">
-            <h3>对应操作截图</h3>
-            <div class="screenshot-gallery">
-              {sectionImages("start").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
-            </div>
           </div>
         </section>
 
@@ -83,23 +79,20 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
           <h2>使用电话验证</h2>
           <Step number="3" title="选择“电话”">
             点击“添加登录方法”，在弹出的窗口中选择“电话”。
+            <InstructionImages images={stepImages("phone", 0)} />
           </Step>
           <Step number="4" title="填写手机号码">
             选择号码所属国家或地区，输入手机号码，确认选择“呼叫我”，然后点击“下一步”。
             <div class="inline-note">常用区号：中国 +86 · 香港 +852 · 新加坡 +65</div>
+            <InstructionImages images={stepImages("phone", 1)} />
           </Step>
           <Step number="5" title="接听电话并按“#”键">
             接听验证电话，按照语音提示按下“#”键。听到 “Your sign in is successful” 后即可挂断。
           </Step>
           <Step number="6" title="点击“完成”">
             浏览器显示电话号码已成功注册后，点击“完成”。
+            <InstructionImages images={stepImages("phone", 3)} />
           </Step>
-          <div class="section-screenshots">
-            <h3>对应操作截图</h3>
-            <div class="screenshot-gallery">
-              {sectionImages("phone").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
-            </div>
-          </div>
           <div class="callout success"><strong>电话验证完成</strong><p>返回“安全信息”页面，应能看到刚刚登记的电话号码。</p></div>
         </section>
 
@@ -108,22 +101,20 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
           <h2>Microsoft Authenticator</h2>
           <Step number="A1" title="安装 Microsoft Authenticator">
             在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。
+            <InstructionImages images={stepImages("iphone", 0)} />
           </Step>
           <Step number="A2" title="添加“工作或学校账户”">
             打开 Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。
+            <InstructionImages images={stepImages("iphone", 1)} />
           </Step>
           <Step number="A3" title="扫描电脑上的二维码">
             浏览器再次点击“下一步”后会显示二维码。用手机扫描，然后回到电脑点击“下一步”。二维码是一次性设置凭据，请不要截图分享。
+            <InstructionImages images={stepImages("iphone", 2)} />
           </Step>
           <Step number="A4" title="在手机中确认数字">
             电脑网页会显示一个数字，手机同时弹出批准窗口。在手机中输入网页数字，再点击“是”。
+            <InstructionImages images={stepImages("iphone", 3)} />
           </Step>
-          <div class="section-screenshots">
-            <h3>对应操作截图</h3>
-            <div class="screenshot-gallery">
-              {sectionImages("iphone").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
-            </div>
-          </div>
           <div class="callout success"><strong>苹果验证器完成</strong><p>浏览器显示配置成功后点击“完成”，并确认安全信息中出现 Microsoft Authenticator。</p></div>
         </section>
 
@@ -136,19 +127,16 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
           </Step>
           <Step number="B2" title="选择其他身份验证器">
             在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。
+            <InstructionImages images={stepImages("android", 1)} />
           </Step>
           <Step number="B3" title="扫描二维码">
             在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。成功后，手机会显示 6 位动态数字。
+            <InstructionImages images={stepImages("android", 2)} />
           </Step>
           <Step number="B4" title="输入 6 位验证码">
             回到电脑点击“下一步”，输入手机中当前显示的 6 位数字，然后再次点击“下一步”。
+            <InstructionImages images={stepImages("android", 3)} />
           </Step>
-          <div class="section-screenshots">
-            <h3>对应操作截图</h3>
-            <div class="screenshot-gallery">
-              {sectionImages("android").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
-            </div>
-          </div>
           <div class="callout success"><strong>安卓验证器完成</strong><p>浏览器显示“成功”后点击“完成”，并确认安全信息中出现验证器应用。</p></div>
         </section>
 
@@ -168,16 +156,12 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
           <div class="callout info"><strong>不需要修改？</strong><p>如果您只需要添加验证方式，可以跳过本节。</p></div>
           <Step number="1" title="打开“密码”页面">
             返回 <a href="https://myaccount.microsoft.com">Microsoft“我的账户”</a>，在“密码”卡片中点击“更改密码”。
+            <InstructionImages images={stepImages("password", 0)} />
           </Step>
           <Step number="2" title="输入并提交新密码">
             在“新密码”和“确认新密码”中输入同一个密码。满足页面显示的要求后点击“提交”。
+            <InstructionImages images={stepImages("password", 1)} />
           </Step>
-          <div class="section-screenshots">
-            <h3>对应操作截图</h3>
-            <div class="screenshot-gallery">
-              {sectionImages("password").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
-            </div>
-          </div>
           <div class="callout success"><strong>修改完成</strong><p>以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。</p></div>
         </section>
       </div>
@@ -226,12 +210,10 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
   .figure-link { display:block; }
   figcaption { display:flex; flex-direction:column; gap:4px; margin-top:11px; color:var(--muted); font-size:12px; text-align:center; }
   figcaption span { color:var(--blue); font-size:11px; }
-  .section-screenshots { margin:28px 0 20px; padding:20px; border:1px solid #d8e4ef; border-radius:18px; background:#f7fafc; }
-  .guide-content .section-screenshots h3 { margin:0 0 16px; color:var(--navy); font-size:16px; }
-  .screenshot-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-  .screenshot-gallery figure { display:flex; flex-direction:column; margin:0; padding:12px; }
-  .screenshot-gallery .figure-link { display:grid; place-items:center; min-height:180px; overflow:hidden; border-radius:10px; background:#f4f6f8; }
-  .screenshot-gallery img { display:block; width:100%; max-height:430px; object-fit:contain; }
+  .instruction-images { display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px; }
+  .instruction-images figure { display:flex; flex-direction:column; margin:0; padding:11px; background:#f7fafc; }
+  .instruction-images .figure-link { display:grid; place-items:center; min-height:160px; overflow:hidden; border-radius:9px; background:#fff; }
+  .instruction-images img { display:block; width:100%; max-height:410px; object-fit:contain; }
   .inline-note { margin-top:14px; padding:12px 14px; border-radius:11px; background:var(--blue-soft); color:#315c7e; font-size:13px; }
   details { margin:10px 0; border:1px solid var(--line); border-radius:14px; background:#fff; }
   summary { padding:17px 19px; cursor:pointer; color:var(--navy); font-weight:750; }
@@ -246,6 +228,5 @@ const sectionImages = (sectionId: string) => getGuideSectionImages("security-inf
     .guide-hero { padding-top:38px; }
     .prep-grid,.toc { grid-template-columns:1fr; }
     .step { padding-left:0; padding-top:56px; }
-    .screenshot-gallery { grid-template-columns:1fr; }
   }
 </style>

@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
-import Figure from "../../components/Figure.astro";
+import InstructionImages from "../../components/InstructionImages.astro";
 import { guides, type Guide } from "../../data/guides";
-import { getGuideSectionImages } from "../../data/guideImageSections";
+import { getInstructionImages } from "../../data/guideImageSections";
 
 export function getStaticPaths() {
   return guides.map((guide) => ({
@@ -72,28 +72,20 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
                 <p>{step.body}</p>
                 {step.note && <div class="inline-note">{step.note}</div>}
                 {step.warning && <div class="inline-warning">{step.warning}</div>}
+                <InstructionImages images={getInstructionImages(guide.slug, section.id, "step", index)} />
               </Step>
             ))}
             {section.points && (
               <ul class="point-list">
-                {section.points.map((point) => <li>{point}</li>)}
+                {section.points.map((point, index) => (
+                  <li>
+                    <span>{point}</span>
+                    <InstructionImages images={getInstructionImages(guide.slug, section.id, "point", index)} />
+                  </li>
+                ))}
               </ul>
             )}
             {section.success && <div class="callout success"><strong>检查结果</strong><p>{section.success}</p></div>}
-            {getGuideSectionImages(guide.slug, section.id).length > 0 && (
-              <div class="section-screenshots">
-                <h3>对应操作截图</h3>
-                <div class="screenshot-gallery">
-                  {getGuideSectionImages(guide.slug, section.id).map((image) => (
-                    <Figure
-                      src={`${base}${image.src}`}
-                      alt={image.alt}
-                      caption={image.caption}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
           </section>
         ))}
 
@@ -148,14 +140,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .point-list { display:grid; gap:12px; margin:12px 0 0; padding:0; list-style:none; }
   .point-list li { position:relative; padding:16px 18px 16px 46px; border:1px solid var(--line); border-radius:14px; background:#fff; color:#3b4654; line-height:1.75; }
   .point-list li::before { content:"✓"; position:absolute; left:17px; top:16px; display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--green-soft); color:var(--green); font-size:12px; font-weight:900; }
-  .section-screenshots { margin-top:28px; padding:20px; border:1px solid #d8e4ef; border-radius:18px; background:#f7fafc; }
-  .standard-content .section-screenshots h3 { margin:0 0 16px; color:var(--navy); font-size:16px; }
-  .screenshot-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-  .screenshot-gallery figure { display:flex; flex-direction:column; margin:0; padding:12px; border:1px solid var(--line); border-radius:16px; background:#fff; }
-  .screenshot-gallery .figure-link { display:grid; place-items:center; min-height:180px; overflow:hidden; border-radius:10px; background:#f4f6f8; }
-  .screenshot-gallery img { display:block; width:100%; height:auto; max-height:430px; object-fit:contain; }
-  .screenshot-gallery figcaption { display:flex; flex-direction:column; gap:4px; margin-top:10px; color:var(--muted); font-size:12px; line-height:1.55; text-align:center; }
-  .screenshot-gallery figcaption span { color:var(--blue); font-size:11px; }
+  .instruction-images { display:grid; grid-template-columns:1fr; gap:14px; margin-top:18px; }
+  .instruction-images figure { display:flex; flex-direction:column; margin:0; padding:11px; border:1px solid #d8e4ef; border-radius:15px; background:#f7fafc; }
+  .instruction-images .figure-link { display:grid; place-items:center; min-height:160px; overflow:hidden; border-radius:9px; background:#fff; }
+  .instruction-images img { display:block; width:100%; height:auto; max-height:410px; object-fit:contain; }
+  .instruction-images figcaption { display:flex; flex-direction:column; gap:4px; margin-top:9px; color:var(--muted); font-size:12px; line-height:1.55; text-align:center; }
+  .instruction-images figcaption span { color:var(--blue); font-size:11px; }
+  .point-list .instruction-images { margin-left:-28px; }
   .related-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .related-grid a { padding:20px; border:1px solid var(--line); border-radius:15px; background:#fff; text-decoration:none; }
   .related-grid strong,.related-grid span { display:block; }.related-grid strong { color:var(--navy); }.related-grid span { margin-top:7px; color:var(--muted); font-size:13px; }
@@ -169,6 +160,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     .standard-hero { padding-top:38px; }
     .prep-grid,.standard-toc,.related-grid { grid-template-columns:1fr; }
     .step { padding-left:0; padding-top:56px; }
-    .screenshot-gallery { grid-template-columns:1fr; }
   }
 </style>
