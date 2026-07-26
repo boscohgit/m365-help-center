@@ -2,10 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
 import Figure from "../../components/Figure.astro";
-import { guideImagesBySlug } from "../../data/guideImages";
+import { getGuideSectionImages } from "../../data/guideImageSections";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const asset = `${base}/assets/security`;
-const guideImages = guideImagesBySlug["security-info"] ?? [];
+const sectionImages = (sectionId: string) => getGuideSectionImages("security-info", sectionId);
 ---
 
 <BaseLayout
@@ -44,7 +43,6 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
         <a href="#android">安卓验证器</a>
         <a href="#troubleshooting">遇到问题</a>
         <a href="#password">修改密码</a>
-        <a href="#screenshots">全部操作截图</a>
       </aside>
 
       <div class="guide-content">
@@ -72,6 +70,12 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
             <strong>接下来请选择一种方式</strong>
             <div><a href="#phone">电话验证</a><a href="#iphone">苹果验证器</a><a href="#android">安卓验证器</a></div>
           </div>
+          <div class="section-screenshots">
+            <h3>对应操作截图</h3>
+            <div class="screenshot-gallery">
+              {sectionImages("start").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
+            </div>
+          </div>
         </section>
 
         <section id="phone" data-pagefind-meta="keywords: 收不到电话, 国际电话, 手机验证, 呼叫我, MFA">
@@ -79,7 +83,6 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
           <h2>使用电话验证</h2>
           <Step number="3" title="选择“电话”">
             点击“添加登录方法”，在弹出的窗口中选择“电话”。
-            <Figure src={`${asset}/phone/select-phone.png`} alt="添加登录方法窗口中选择电话" caption="选择“电话”作为登录验证方式" />
           </Step>
           <Step number="4" title="填写手机号码">
             选择号码所属国家或地区，输入手机号码，确认选择“呼叫我”，然后点击“下一步”。
@@ -90,8 +93,13 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
           </Step>
           <Step number="6" title="点击“完成”">
             浏览器显示电话号码已成功注册后，点击“完成”。
-            <Figure src={`${asset}/phone/success.png`} alt="电话号码成功注册及完成按钮" caption="看到绿色对勾后点击“完成”" narrow />
           </Step>
+          <div class="section-screenshots">
+            <h3>对应操作截图</h3>
+            <div class="screenshot-gallery">
+              {sectionImages("phone").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
+            </div>
+          </div>
           <div class="callout success"><strong>电话验证完成</strong><p>返回“安全信息”页面，应能看到刚刚登记的电话号码。</p></div>
         </section>
 
@@ -100,19 +108,22 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
           <h2>Microsoft Authenticator</h2>
           <Step number="A1" title="安装 Microsoft Authenticator">
             在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。
-            <Figure src={`${asset}/ios/setup.png`} alt="Microsoft Authenticator 设置页面" caption="安装应用后点击“下一步”" />
           </Step>
           <Step number="A2" title="添加“工作或学校账户”">
             打开 Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。
-            <Figure src={`${asset}/ios/add-account.png`} alt="苹果 Microsoft Authenticator 中添加工作或学校账户" caption="依次选择“+”→“工作或学校账户”→“扫描 QR 码”" />
           </Step>
           <Step number="A3" title="扫描电脑上的二维码">
             浏览器再次点击“下一步”后会显示二维码。用手机扫描，然后回到电脑点击“下一步”。二维码是一次性设置凭据，请不要截图分享。
           </Step>
           <Step number="A4" title="在手机中确认数字">
             电脑网页会显示一个数字，手机同时弹出批准窗口。在手机中输入网页数字，再点击“是”。
-            <Figure src={`${asset}/ios/number-match.png`} alt="Microsoft Authenticator 苹果手机数字匹配窗口" caption="输入电脑网页显示的数字并批准" narrow />
           </Step>
+          <div class="section-screenshots">
+            <h3>对应操作截图</h3>
+            <div class="screenshot-gallery">
+              {sectionImages("iphone").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
+            </div>
+          </div>
           <div class="callout success"><strong>苹果验证器完成</strong><p>浏览器显示配置成功后点击“完成”，并确认安全信息中出现 Microsoft Authenticator。</p></div>
         </section>
 
@@ -125,16 +136,19 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
           </Step>
           <Step number="B2" title="选择其他身份验证器">
             在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。
-            <Figure src={`${asset}/android/other-app.png`} alt="我想要使用其他身份验证器选项" caption="安卓流程需要选择“其他身份验证器”" />
           </Step>
           <Step number="B3" title="扫描二维码">
             在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。成功后，手机会显示 6 位动态数字。
-            <Figure src={`${asset}/android/token.png`} alt="腾讯身份验证器显示六位动态验证码" caption="验证码会定时更新" narrow />
           </Step>
           <Step number="B4" title="输入 6 位验证码">
             回到电脑点击“下一步”，输入手机中当前显示的 6 位数字，然后再次点击“下一步”。
-            <Figure src={`${asset}/android/enter-code.png`} alt="浏览器中输入验证器六位验证码" caption="请在数字失效前完成输入" />
           </Step>
+          <div class="section-screenshots">
+            <h3>对应操作截图</h3>
+            <div class="screenshot-gallery">
+              {sectionImages("android").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
+            </div>
+          </div>
           <div class="callout success"><strong>安卓验证器完成</strong><p>浏览器显示“成功”后点击“完成”，并确认安全信息中出现验证器应用。</p></div>
         </section>
 
@@ -158,22 +172,13 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
           <Step number="2" title="输入并提交新密码">
             在“新密码”和“确认新密码”中输入同一个密码。满足页面显示的要求后点击“提交”。
           </Step>
-          <div class="callout success"><strong>修改完成</strong><p>以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。</p></div>
-        </section>
-
-        <section id="screenshots">
-          <p class="eyebrow">原 SOP 操作图</p>
-          <h2>完整脱敏截图</h2>
-          <p class="gallery-intro">以下图片按原文顺序排列；姓名、邮箱、电话、验证码和二维码均已遮挡。点击图片可查看大图。</p>
-          <div class="screenshot-gallery">
-            {guideImages.map((image) => (
-              <Figure
-                src={`${base}${image.src}`}
-                alt={image.alt}
-                caption={image.caption}
-              />
-            ))}
+          <div class="section-screenshots">
+            <h3>对应操作截图</h3>
+            <div class="screenshot-gallery">
+              {sectionImages("password").map((image) => <Figure src={`${base}${image.src}`} alt={image.alt} caption={image.caption} />)}
+            </div>
           </div>
+          <div class="callout success"><strong>修改完成</strong><p>以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。</p></div>
         </section>
       </div>
     </div>
@@ -221,7 +226,8 @@ const guideImages = guideImagesBySlug["security-info"] ?? [];
   .figure-link { display:block; }
   figcaption { display:flex; flex-direction:column; gap:4px; margin-top:11px; color:var(--muted); font-size:12px; text-align:center; }
   figcaption span { color:var(--blue); font-size:11px; }
-  .gallery-intro { margin:-6px 0 22px; color:var(--muted); line-height:1.75; }
+  .section-screenshots { margin:28px 0 20px; padding:20px; border:1px solid #d8e4ef; border-radius:18px; background:#f7fafc; }
+  .guide-content .section-screenshots h3 { margin:0 0 16px; color:var(--navy); font-size:16px; }
   .screenshot-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
   .screenshot-gallery figure { display:flex; flex-direction:column; margin:0; padding:12px; }
   .screenshot-gallery .figure-link { display:grid; place-items:center; min-height:180px; overflow:hidden; border-radius:10px; background:#f4f6f8; }

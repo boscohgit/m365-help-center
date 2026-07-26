@@ -250,6 +250,16 @@ export const guides: Guide[] = [
         success: "撤回只可能在对方尚未阅读且对方同样使用 Microsoft 365 时成功；不能把撤回当成保证。",
       },
       {
+        id: "contacts",
+        kicker: "联系人",
+        title: "搜索公司内部联系人",
+        points: [
+          "在新邮件的收件人栏输入姓名的一部分，Outlook 会显示匹配建议。",
+          "也可点击“收件人”打开通讯簿，再按姓名搜索。",
+          "选择正确联系人后再发送，避免误发给同名人员。",
+        ],
+      },
+      {
         id: "mobile",
         kicker: "手机",
         title: "在手机上添加 Outlook",

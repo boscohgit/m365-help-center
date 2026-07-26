@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
 import Figure from "../../components/Figure.astro";
 import { guides, type Guide } from "../../data/guides";
-import { guideImagesBySlug } from "../../data/guideImages";
+import { getGuideSectionImages } from "../../data/guideImageSections";
 
 export function getStaticPaths() {
   return guides.map((guide) => ({
@@ -18,7 +18,6 @@ interface Props {
 
 const { guide } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const guideImages = guideImagesBySlug[guide.slug] ?? [];
 ---
 
 <BaseLayout
@@ -51,7 +50,6 @@ const guideImages = guideImagesBySlug[guide.slug] ?? [];
         <strong>本页内容</strong>
         <a href="#prepare">开始前准备</a>
         {guide.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
-        {guideImages.length > 0 && <a href="#screenshots">全部操作截图</a>}
       </aside>
 
       <div class="standard-content">
@@ -82,25 +80,22 @@ const guideImages = guideImagesBySlug[guide.slug] ?? [];
               </ul>
             )}
             {section.success && <div class="callout success"><strong>检查结果</strong><p>{section.success}</p></div>}
+            {getGuideSectionImages(guide.slug, section.id).length > 0 && (
+              <div class="section-screenshots">
+                <h3>对应操作截图</h3>
+                <div class="screenshot-gallery">
+                  {getGuideSectionImages(guide.slug, section.id).map((image) => (
+                    <Figure
+                      src={`${base}${image.src}`}
+                      alt={image.alt}
+                      caption={image.caption}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
         ))}
-
-        {guideImages.length > 0 && (
-          <section id="screenshots" class="screenshots-section">
-            <p class="eyebrow">原 SOP 操作图</p>
-            <h2>按原文顺序查看全部截图</h2>
-            <p class="section-intro">图片中的姓名、邮箱、电话、账号、验证码和二维码已做不透明遮挡。点击任意图片可查看大图。</p>
-            <div class="screenshot-gallery">
-              {guideImages.map((image) => (
-                <Figure
-                  src={`${base}${image.src}`}
-                  alt={image.alt}
-                  caption={image.caption}
-                />
-              ))}
-            </div>
-          </section>
-        )}
 
         <section class="related">
           <p class="eyebrow">继续查找</p>
@@ -153,6 +148,8 @@ const guideImages = guideImagesBySlug[guide.slug] ?? [];
   .point-list { display:grid; gap:12px; margin:12px 0 0; padding:0; list-style:none; }
   .point-list li { position:relative; padding:16px 18px 16px 46px; border:1px solid var(--line); border-radius:14px; background:#fff; color:#3b4654; line-height:1.75; }
   .point-list li::before { content:"✓"; position:absolute; left:17px; top:16px; display:grid; place-items:center; width:20px; height:20px; border-radius:50%; background:var(--green-soft); color:var(--green); font-size:12px; font-weight:900; }
+  .section-screenshots { margin-top:28px; padding:20px; border:1px solid #d8e4ef; border-radius:18px; background:#f7fafc; }
+  .standard-content .section-screenshots h3 { margin:0 0 16px; color:var(--navy); font-size:16px; }
   .screenshot-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
   .screenshot-gallery figure { display:flex; flex-direction:column; margin:0; padding:12px; border:1px solid var(--line); border-radius:16px; background:#fff; }
   .screenshot-gallery .figure-link { display:grid; place-items:center; min-height:180px; overflow:hidden; border-radius:10px; background:#f4f6f8; }
