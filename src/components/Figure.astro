@@ -8,6 +8,8 @@ interface Props {
 const { src, alt, caption, narrow = false } = Astro.props;
 ---
 <figure class:list={{ narrow }}>
-  <img src={src} alt={alt} loading="lazy" />
-  <figcaption>{caption}</figcaption>
+  <a class="figure-link" href={src} target="_blank" rel="noopener" aria-label={`${caption}（打开原图）`}>
+    <img src={src} alt={alt} loading="lazy" />
+  </a>
+  <figcaption>{caption}<span>点击图片查看大图</span></figcaption>
 </figure>

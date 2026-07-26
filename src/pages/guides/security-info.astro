@@ -2,8 +2,10 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
 import Figure from "../../components/Figure.astro";
+import { guideImagesBySlug } from "../../data/guideImages";
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const asset = `${base}/assets/security`;
+const guideImages = guideImagesBySlug["security-info"] ?? [];
 ---
 
 <BaseLayout
@@ -42,6 +44,7 @@ const asset = `${base}/assets/security`;
         <a href="#android">安卓验证器</a>
         <a href="#troubleshooting">遇到问题</a>
         <a href="#password">修改密码</a>
+        <a href="#screenshots">全部操作截图</a>
       </aside>
 
       <div class="guide-content">
@@ -157,6 +160,21 @@ const asset = `${base}/assets/security`;
           </Step>
           <div class="callout success"><strong>修改完成</strong><p>以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。</p></div>
         </section>
+
+        <section id="screenshots">
+          <p class="eyebrow">原 SOP 操作图</p>
+          <h2>完整脱敏截图</h2>
+          <p class="gallery-intro">以下图片按原文顺序排列；姓名、邮箱、电话、验证码和二维码均已遮挡。点击图片可查看大图。</p>
+          <div class="screenshot-gallery">
+            {guideImages.map((image) => (
+              <Figure
+                src={`${base}${image.src}`}
+                alt={image.alt}
+                caption={image.caption}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   </article>
@@ -200,7 +218,14 @@ const asset = `${base}/assets/security`;
   figure { margin:18px 0 0; padding:16px; border:1px solid var(--line); border-radius:18px; background:#fff; box-shadow:0 10px 35px rgba(34,51,75,.05); }
   figure.narrow { max-width:500px; }
   figure img { width:100%; height:auto; border-radius:10px; }
-  figcaption { margin-top:11px; color:var(--muted); font-size:12px; text-align:center; }
+  .figure-link { display:block; }
+  figcaption { display:flex; flex-direction:column; gap:4px; margin-top:11px; color:var(--muted); font-size:12px; text-align:center; }
+  figcaption span { color:var(--blue); font-size:11px; }
+  .gallery-intro { margin:-6px 0 22px; color:var(--muted); line-height:1.75; }
+  .screenshot-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+  .screenshot-gallery figure { display:flex; flex-direction:column; margin:0; padding:12px; }
+  .screenshot-gallery .figure-link { display:grid; place-items:center; min-height:180px; overflow:hidden; border-radius:10px; background:#f4f6f8; }
+  .screenshot-gallery img { display:block; width:100%; max-height:430px; object-fit:contain; }
   .inline-note { margin-top:14px; padding:12px 14px; border-radius:11px; background:var(--blue-soft); color:#315c7e; font-size:13px; }
   details { margin:10px 0; border:1px solid var(--line); border-radius:14px; background:#fff; }
   summary { padding:17px 19px; cursor:pointer; color:var(--navy); font-weight:750; }
@@ -215,5 +240,6 @@ const asset = `${base}/assets/security`;
     .guide-hero { padding-top:38px; }
     .prep-grid,.toc { grid-template-columns:1fr; }
     .step { padding-left:0; padding-top:56px; }
+    .screenshot-gallery { grid-template-columns:1fr; }
   }
 </style>
