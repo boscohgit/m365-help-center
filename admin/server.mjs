@@ -13,8 +13,8 @@ const root = path.resolve(adminDir, "..");
 const contentDir = path.join(root, "src", "data", "guides-json");
 const publicDir = path.join(root, "public");
 const host = "127.0.0.1";
-const port = Number(process.env.M365_ADMIN_PORT || 4322);
-const previewPort = Number(process.env.M365_PREVIEW_PORT || 4321);
+const port = Number(process.env.M365_ADMIN_PORT || 15986);
+const previewPort = Number(process.env.M365_PREVIEW_PORT || 15987);
 const adminOrigin = `http://${host}:${port}`;
 const previewOrigin = `http://${host}:${previewPort}`;
 const publicSite = "https://boscohgit.github.io/m365-help-center/";
@@ -191,7 +191,7 @@ async function serveFile(res, baseDir, relativePath, cache = false) {
       "Content-Length": stat.size,
       "Cache-Control": cache ? "public, max-age=3600" : "no-store",
       "Content-Security-Policy":
-        "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src http://127.0.0.1:4321; base-uri 'none'; form-action 'self'",
+        `default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src ${previewOrigin}; base-uri 'none'; form-action 'self'`,
       "X-Content-Type-Options": "nosniff",
       "X-Frame-Options": "SAMEORIGIN",
     });
