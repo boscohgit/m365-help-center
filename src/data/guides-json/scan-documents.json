@@ -1,0 +1,154 @@
+{
+  "slug": "scan-documents",
+  "title": "使用手机扫描文档",
+  "subtitle": "iPhone · 华为 · 小米",
+  "category": "设备与工具",
+  "description": "使用手机自带功能扫描纸质文件，并保存或分享为图片或 PDF。",
+  "duration": "约 2–5 分钟",
+  "device": "iPhone、华为或小米手机",
+  "keywords": [
+    "手机扫描",
+    "手机扫描PDF",
+    "扫描文档",
+    "扫描PDF",
+    "iPhone扫描文稿",
+    "华为文档矫正",
+    "小米文档扫描",
+    "Scan文件夹"
+  ],
+  "completion": "文档边缘清晰、方向正确，并已保存成图片或 PDF。",
+  "prepare": [
+    {
+      "label": "环境",
+      "text": "光线充足、桌面平整"
+    },
+    {
+      "label": "文档",
+      "text": "纸张完整放在取景范围内"
+    },
+    {
+      "label": "检查",
+      "text": "分享前确认文字清晰且没有遗漏页面"
+    }
+  ],
+  "sections": [
+    {
+      "id": "iphone",
+      "kicker": "iPhone",
+      "title": "使用“文件”App 扫描",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开扫描文稿",
+          "body": "打开“文件”App，点击右上角“更多”，选择“扫描文稿”。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "拍摄",
+          "body": "自动模式会自动扫描；手动模式可按快门或音量键。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "调整边缘",
+          "body": "拖动四角，使扫描范围与页面一致，然后选择“继续扫描”。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "4",
+          "title": "保存和分享",
+          "body": "完成所有页面后点击“存储”。长按文件选择“共享”，通过允许的方式发送。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "huawei",
+      "kicker": "华为",
+      "title": "使用文档矫正模式",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "打开相机→“更多”→“文档矫正”。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "找不到时，在“更多”中下载文档矫正模式。",
+          "images": [
+            {
+              "src": "/assets/sop/scan-documents/scan-documents-3a4bad4-01.webp",
+              "alt": "如您在更多中没有找到文档矫正，请在更多中点击，下载文档矫正。",
+              "caption": "如您在更多中没有找到文档矫正，请在更多中点击，下载文档矫正。"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "对准文档并拍照，系统会识别文字区域、矫正角度并减少阴影。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "检查结果后保存或分享。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "xiaomi",
+      "kicker": "小米",
+      "title": "使用文档扫描模式",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "打开相机→“更多”→“文档扫描”。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "找不到时，在“更多”中下载文档扫描模式。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "对准文档拍照，系统会尝试裁剪边缘。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "完成后可保存为 PDF，再通过允许的方式分享。",
+          "images": []
+        }
+      ]
+    }
+  ]
+}

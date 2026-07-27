@@ -2,8 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Step from "../../components/Step.astro";
 import InstructionImages from "../../components/InstructionImages.astro";
-import { guides, type Guide } from "../../data/guides";
-import { getInstructionImages } from "../../data/guideImageSections";
+import { guides, type Guide } from "../../data/guideContent";
 
 export function getStaticPaths() {
   return guides.map((guide) => ({
@@ -67,25 +66,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             <p class="eyebrow">{section.kicker ?? "操作指引"}</p>
             <h2>{section.title}</h2>
             {section.intro && <p class="section-intro">{section.intro}</p>}
-            {section.steps?.map((step, index) => (
-              <Step number={String(index + 1)} title={step.title}>
-                <p>{step.body}</p>
-                {step.note && <div class="inline-note">{step.note}</div>}
-                {step.warning && <div class="inline-warning">{step.warning}</div>}
-                <InstructionImages images={getInstructionImages(guide.slug, section.id, "step", index)} />
-              </Step>
-            ))}
-            {section.points && (
-              <ul class="point-list">
-                {section.points.map((point, index) => (
+            {section.blocks.map((block) => (
+              block.type === "step" ? (
+                <Step number={block.number} title={block.title}>
+                  <p>{block.body}</p>
+                  {block.note && <div class="inline-note">{block.note}</div>}
+                  {block.warning && <div class="inline-warning">{block.warning}</div>}
+                  <InstructionImages images={block.images ?? []} />
+                </Step>
+              ) : block.type === "point" ? (
+                <ul class="point-list">
                   <li>
-                    <span>{point}</span>
-                    <InstructionImages images={getInstructionImages(guide.slug, section.id, "point", index)} />
+                    <span>{block.text}</span>
+                    <InstructionImages images={block.images ?? []} />
                   </li>
-                ))}
-              </ul>
-            )}
-            {section.success && <div class="callout success"><strong>检查结果</strong><p>{section.success}</p></div>}
+                </ul>
+              ) : block.type === "details" ? (
+                <details>
+                  <summary>{block.title}</summary>
+                  <p>{block.body}</p>
+                </details>
+              ) : (
+                <div class:list={["callout", block.tone]}>
+                  <strong>{block.title}</strong>
+                  <p>{block.body}</p>
+                </div>
+              )
+            ))}
           </section>
         ))}
 
@@ -131,6 +138,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .callout strong { display:block; }.callout p { margin:5px 0 0; line-height:1.75; }
   .callout.warning { border-color:var(--red); background:var(--red-soft); }.callout.warning strong { color:var(--red); }
   .callout.success { border-color:var(--green); background:var(--green-soft); }.callout.success strong { color:var(--green); }
+  .callout.info { border-color:var(--blue); background:var(--blue-soft); }.callout.info strong { color:var(--blue); }
   .step { position:relative; margin:24px 0 36px; padding-left:64px; }
   .step-number { position:absolute; left:0; top:0; display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:var(--navy); color:#fff; font-size:14px; font-weight:800; }
   .step h3 { margin:0; color:var(--navy); font-size:21px; }.step-body { margin-top:8px; color:#3b4654; line-height:1.9; }
@@ -147,6 +155,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .instruction-images figcaption { display:flex; flex-direction:column; gap:4px; margin-top:9px; color:var(--muted); font-size:12px; line-height:1.55; text-align:center; }
   .instruction-images figcaption span { color:var(--blue); font-size:11px; }
   .point-list .instruction-images { margin-left:-28px; }
+  details { margin:10px 0; border:1px solid var(--line); border-radius:14px; background:#fff; }
+  summary { padding:17px 19px; cursor:pointer; color:var(--navy); font-weight:750; }
+  details p { margin:0; padding:0 19px 18px; color:var(--muted); line-height:1.75; }
   .related-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .related-grid a { padding:20px; border:1px solid var(--line); border-radius:15px; background:#fff; text-decoration:none; }
   .related-grid strong,.related-grid span { display:block; }.related-grid strong { color:var(--navy); }.related-grid span { margin-top:7px; color:var(--muted); font-size:13px; }

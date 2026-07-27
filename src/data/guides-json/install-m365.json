@@ -1,0 +1,202 @@
+{
+  "slug": "install-m365",
+  "title": "安装 Microsoft 365 应用",
+  "subtitle": "Word · Excel · PowerPoint · Outlook · Teams",
+  "category": "Office 应用",
+  "description": "下载并安装公司提供的 Microsoft 365 应用套件，并按需关闭 Teams 开机启动。",
+  "duration": "约 15–40 分钟",
+  "device": "Windows 电脑",
+  "keywords": [
+    "安装Office",
+    "安装M365",
+    "Word下载",
+    "Excel下载",
+    "Office安装包",
+    "Teams开机启动",
+    "安装套件"
+  ],
+  "completion": "开始菜单中可以打开 Word、Excel、PowerPoint 和 Outlook，应用没有持续显示安装错误。",
+  "prepare": [
+    {
+      "label": "安装包",
+      "text": "公司提供的 M365 安装包或下载链接"
+    },
+    {
+      "label": "账号",
+      "text": "已经激活的公司 Microsoft 365 账号"
+    },
+    {
+      "label": "环境",
+      "text": "稳定网络、足够磁盘空间，并保持电脑接电"
+    }
+  ],
+  "sections": [
+    {
+      "id": "download",
+      "kicker": "步骤一",
+      "title": "下载安装包",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开公司提供的安装包链接",
+          "body": "访问公司分享的 M365 安装包。页面要求登录时，使用已经激活的公司账号。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-01.webp",
+              "alt": "点击左上角下载按钮，等待下载完成",
+              "caption": "点击左上角下载按钮，等待下载完成"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "下载压缩包",
+          "body": "点击页面左上角的“下载”，等待文件完全下载。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-02.webp",
+              "alt": "解压缩获得应用安装包：",
+              "caption": "解压缩获得应用安装包："
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "解压缩",
+          "body": "在下载文件上右键，选择“全部解压缩”或使用系统解压功能。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "kicker": "步骤二",
+      "title": "安装所需语言版本",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "选择正确的语言安装包",
+          "body": "根据实际需要选择中文、英文或公司指定的 Office 语言版本。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "运行安装程序",
+          "body": "双击安装程序并允许系统运行。安装期间不要关机或断网。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-03.webp",
+              "alt": "分别直接运行安装包，并等待完成即可。",
+              "caption": "分别直接运行安装包，并等待完成即可。"
+            },
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-04.webp",
+              "alt": "分别直接运行安装包，并等待完成即可。",
+              "caption": "分别直接运行安装包，并等待完成即可。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "等待完成",
+          "body": "安装窗口关闭或显示完成后，从开始菜单打开任一 Office 应用确认。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "检查结果",
+          "body": "Word、Excel 或 PowerPoint 能正常启动。首次启动仍需使用公司账号登录。"
+        }
+      ]
+    },
+    {
+      "id": "teams-startup",
+      "kicker": "可选",
+      "title": "关闭 Teams 开机自动启动",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开 Windows 设置",
+          "body": "进入“设置”→“应用”→“已安装的应用”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-05.webp",
+              "alt": "（可选）若不需要Microsoft Teams开机自动启动，请进入“设置”",
+              "caption": "（可选）若不需要Microsoft Teams开机自动启动，请进入“设置”"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "搜索 Teams",
+          "body": "找到 Microsoft Teams，进入“高级选项”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-06.webp",
+              "alt": "找到“应用”",
+              "caption": "找到“应用”"
+            },
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-07.webp",
+              "alt": "搜索Teams并进入“高级选项”",
+              "caption": "搜索Teams并进入“高级选项”"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "关闭登录后运行",
+          "body": "将“登录后运行”或开机启动选项关闭。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/install-m365/install-m365-86b832f-08.webp",
+              "alt": "找到“登陆后运行”关闭即可",
+              "caption": "找到“登陆后运行”关闭即可"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

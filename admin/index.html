@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M365 本地内容后台</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">M</span>
+        <div><strong>M365 内容后台</strong><small>仅在本机运行</small></div>
+      </div>
+      <div class="top-actions">
+        <span id="save-state" class="state-pill">正在载入…</span>
+        <button id="save-button" class="button secondary">保存草稿</button>
+        <button id="preview-button" class="button secondary">刷新预览</button>
+        <button id="publish-button" class="button primary">发布到 GitHub</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="guide-sidebar">
+        <div class="sidebar-head">
+          <label for="guide-search">指引列表</label>
+          <input id="guide-search" type="search" placeholder="搜索标题…" />
+        </div>
+        <nav id="guide-list" aria-label="指引列表"></nav>
+      </aside>
+
+      <main class="editor-shell">
+        <div id="editor-empty" class="empty-state">请选择一篇指引。</div>
+        <form id="editor" hidden></form>
+      </main>
+
+      <aside class="preview-shell">
+        <div class="preview-head">
+          <div><strong>实时预览</strong><small>保存后自动更新</small></div>
+          <a id="open-preview" href="#" target="_blank" rel="noopener">新窗口打开</a>
+        </div>
+        <iframe id="preview-frame" title="网站实时预览"></iframe>
+      </aside>
+    </div>
+
+    <div id="toast-region" class="toast-region" aria-live="polite"></div>
+
+    <dialog id="redact-dialog">
+      <div class="dialog-head">
+        <div><strong>上传前脱敏</strong><small>在姓名、邮箱、电话、密码、验证码和二维码上拖动画框</small></div>
+        <button id="redact-close" class="icon-button" aria-label="关闭">×</button>
+      </div>
+      <div class="canvas-wrap"><canvas id="redact-canvas"></canvas></div>
+      <div class="dialog-actions">
+        <span id="redact-count">尚未添加遮挡区域</span>
+        <button id="redact-undo" class="button secondary">撤销一个框</button>
+        <button id="redact-clear" class="button secondary">清除全部</button>
+        <button id="redact-save" class="button primary">完成并添加图片</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

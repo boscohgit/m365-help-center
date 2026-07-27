@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { guides, categoryOrder } from "../data/guides";
+import { guides, categoryOrder } from "../data/guideContent";
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const popular = [
@@ -19,7 +19,7 @@ const iconByCategory = {
 };
 const countByCategory = Object.fromEntries(categoryOrder.map((category) => [
   category,
-  guides.filter((guide) => guide.category === category).length + (category === "账号与安全" ? 1 : 0),
+  guides.filter((guide) => guide.category === category).length,
 ]));
 const categories = categoryOrder.map((category) => ({
   icon: iconByCategory[category],
@@ -27,15 +27,7 @@ const categories = categoryOrder.map((category) => ({
   count: `${countByCategory[category]} 篇指引`,
   href: `#category-${category.replace(/\s+/g, "-")}`,
 }));
-const allGuides = [
-  {
-    slug: "security-info",
-    title: "添加账号验证方式",
-    subtitle: "电话、苹果验证器、安卓验证器与修改密码",
-    category: "账号与安全",
-  },
-  ...guides,
-];
+const allGuides = guides;
 ---
 
 <BaseLayout

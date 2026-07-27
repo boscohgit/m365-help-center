@@ -1,0 +1,430 @@
+#!/usr/bin/env node
+
+import crypto from "node:crypto";
+import fs from "node:fs";
+import fsp from "node:fs/promises";
+import http from "node:http";
+import path from "node:path";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+
+const adminDir = path.dirname(fileURLToPath(import.meta.url));
+const root = path.resolve(adminDir, "..");
+const contentDir = path.join(root, "src", "data", "guides-json");
+const publicDir = path.join(root, "public");
+const host = "127.0.0.1";
+const port = Number(process.env.M365_ADMIN_PORT || 4322);
+const previewPort = Number(process.env.M365_PREVIEW_PORT || 4321);
+const adminOrigin = `http://${host}:${port}`;
+const previewOrigin = `http://${host}:${previewPort}`;
+const publicSite = "https://boscohgit.github.io/m365-help-center/";
+const adminToken = crypto.randomBytes(24).toString("hex");
+const pnpmBin = process.env.M365_PNPM_BIN || "pnpm";
+const runtimeEnv = {
+  ...process.env,
+  PATH: `${path.dirname(process.execPath)}:${process.env.PATH || ""}`,
+};
+const maxBodyBytes = 25 * 1024 * 1024;
+let previewProcess;
+
+const mimeTypes = {
+  ".html": "text/html; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".svg": "image/svg+xml",
+};
+
+function json(res, status, value) {
+  const body = JSON.stringify(value);
+  res.writeHead(status, {
+    "Content-Type": "application/json; charset=utf-8",
+    "Content-Length": Buffer.byteLength(body),
+    "Cache-Control": "no-store",
+  });
+  res.end(body);
+}
+
+function safeSlug(value) {
+  return /^[a-z0-9][a-z0-9-]{0,80}$/.test(value) ? value : null;
+}
+
+function safeAssetName(value) {
+  const base = path
+    .basename(value || "screenshot")
+    .replace(/\.[^.]+$/, "")
+    .normalize("NFKD")
+    .replace(/[^\w.-]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 70);
+  return base || "screenshot";
+}
+
+function isMutationAllowed(req) {
+  const origin = req.headers.origin;
+  const token = req.headers["x-admin-token"];
+  return (!origin || origin === adminOrigin) && token === adminToken;
+}
+
+async function readJsonBody(req) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of req) {
+    size += chunk.length;
+    if (size > maxBodyBytes) throw new Error("上传内容超过 25MB 限制。");
+    chunks.push(chunk);
+  }
+  const raw = Buffer.concat(chunks).toString("utf8");
+  return raw ? JSON.parse(raw) : {};
+}
+
+function validateGuide(guide, expectedSlug) {
+  if (!guide || guide.slug !== expectedSlug) throw new Error("指引标识不匹配。");
+  const requiredStrings = [
+    "title",
+    "subtitle",
+    "category",
+    "description",
+    "duration",
+    "device",
+    "completion",
+  ];
+  for (const key of requiredStrings) {
+    if (typeof guide[key] !== "string" || guide[key].length > 10000) {
+      throw new Error(`字段 ${key} 无效。`);
+    }
+  }
+  if (!Array.isArray(guide.sections) || guide.sections.length > 100) {
+    throw new Error("章节数据无效。");
+  }
+  const ids = new Set();
+  for (const section of guide.sections) {
+    if (!safeSlug(section.id) || ids.has(section.id)) {
+      throw new Error(`章节 ID 无效或重复：${section.id}`);
+    }
+    ids.add(section.id);
+    if (!Array.isArray(section.blocks) || section.blocks.length > 200) {
+      throw new Error(`章节 ${section.title} 的内容块无效。`);
+    }
+    for (const block of section.blocks) {
+      if (!["step", "point", "details", "callout"].includes(block.type)) {
+        throw new Error(`不支持的内容类型：${block.type}`);
+      }
+      if (Array.isArray(block.images)) {
+        for (const image of block.images) {
+          if (
+            typeof image.src !== "string" ||
+            !image.src.startsWith("/assets/sop/") ||
+            image.src.includes("..")
+          ) {
+            throw new Error("图片路径不安全。");
+          }
+        }
+      }
+    }
+  }
+}
+
+async function atomicWriteJson(filePath, value) {
+  const tempPath = `${filePath}.${process.pid}.tmp`;
+  await fsp.writeFile(tempPath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+  await fsp.rename(tempPath, filePath);
+}
+
+function run(command, args, options = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd: root,
+      env: runtimeEnv,
+      shell: false,
+      ...options,
+    });
+    let output = "";
+    child.stdout?.on("data", (chunk) => {
+      output += chunk.toString();
+      if (output.length > 200000) output = output.slice(-200000);
+    });
+    child.stderr?.on("data", (chunk) => {
+      output += chunk.toString();
+      if (output.length > 200000) output = output.slice(-200000);
+    });
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code === 0) resolve(output.trim());
+      else reject(new Error(output.trim() || `${command} 执行失败（${code}）。`));
+    });
+  });
+}
+
+async function gitStatus() {
+  const raw = await run("git", ["status", "--porcelain=v1"]);
+  const files = raw
+    ? raw.split("\n").map((line) => ({
+        status: line.slice(0, 2),
+        path: line.slice(3).trim(),
+      }))
+    : [];
+  const allowed = files.every(
+    (file) =>
+      file.path.startsWith("src/data/guides-json/") ||
+      file.path.startsWith("public/assets/sop/"),
+  );
+  return { files, allowed };
+}
+
+async function serveFile(res, baseDir, relativePath, cache = false) {
+  const decoded = decodeURIComponent(relativePath);
+  const candidate = path.resolve(baseDir, `.${decoded.startsWith("/") ? decoded : `/${decoded}`}`);
+  if (!candidate.startsWith(`${path.resolve(baseDir)}${path.sep}`)) {
+    json(res, 403, { error: "路径不安全。" });
+    return;
+  }
+  try {
+    const stat = await fsp.stat(candidate);
+    if (!stat.isFile()) throw new Error("not file");
+    res.writeHead(200, {
+      "Content-Type": mimeTypes[path.extname(candidate).toLowerCase()] || "application/octet-stream",
+      "Content-Length": stat.size,
+      "Cache-Control": cache ? "public, max-age=3600" : "no-store",
+      "Content-Security-Policy":
+        "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; frame-src http://127.0.0.1:4321; base-uri 'none'; form-action 'self'",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "SAMEORIGIN",
+    });
+    fs.createReadStream(candidate).pipe(res);
+  } catch {
+    json(res, 404, { error: "文件不存在。" });
+  }
+}
+
+function isValidImage(buffer, extension) {
+  if (extension === "png") {
+    return buffer.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  }
+  if (extension === "jpeg") {
+    return buffer[0] === 0xff && buffer[1] === 0xd8;
+  }
+  if (extension === "webp") {
+    return (
+      buffer.subarray(0, 4).toString("ascii") === "RIFF" &&
+      buffer.subarray(8, 12).toString("ascii") === "WEBP"
+    );
+  }
+  return false;
+}
+
+async function handleApi(req, res, url) {
+  if (url.pathname === "/api/config" && req.method === "GET") {
+    json(res, 200, {
+      token: adminToken,
+      previewOrigin,
+      previewBase: `${previewOrigin}/m365-help-center`,
+      publicSite,
+    });
+    return;
+  }
+
+  if (url.pathname === "/api/guides" && req.method === "GET") {
+    const files = (await fsp.readdir(contentDir))
+      .filter((name) => name.endsWith(".json"))
+      .sort();
+    const guides = await Promise.all(
+      files.map(async (name) => {
+        const guide = JSON.parse(await fsp.readFile(path.join(contentDir, name), "utf8"));
+        return {
+          slug: guide.slug,
+          title: guide.title,
+          subtitle: guide.subtitle,
+          category: guide.category,
+        };
+      }),
+    );
+    json(res, 200, { guides });
+    return;
+  }
+
+  const guideMatch = url.pathname.match(/^\/api\/guides\/([a-z0-9-]+)$/);
+  if (guideMatch && req.method === "GET") {
+    const slug = safeSlug(guideMatch[1]);
+    if (!slug) return json(res, 400, { error: "指引标识无效。" });
+    try {
+      const guide = JSON.parse(
+        await fsp.readFile(path.join(contentDir, `${slug}.json`), "utf8"),
+      );
+      json(res, 200, guide);
+    } catch {
+      json(res, 404, { error: "没有找到这篇指引。" });
+    }
+    return;
+  }
+
+  if (url.pathname === "/api/status" && req.method === "GET") {
+    try {
+      json(res, 200, await gitStatus());
+    } catch (error) {
+      json(res, 500, { error: error.message });
+    }
+    return;
+  }
+
+  if (!isMutationAllowed(req)) {
+    json(res, 403, { error: "本地编辑令牌无效，请刷新后台。" });
+    return;
+  }
+
+  if (guideMatch && req.method === "PUT") {
+    const slug = safeSlug(guideMatch[1]);
+    if (!slug) return json(res, 400, { error: "指引标识无效。" });
+    try {
+      const guide = await readJsonBody(req);
+      validateGuide(guide, slug);
+      await atomicWriteJson(path.join(contentDir, `${slug}.json`), guide);
+      json(res, 200, { ok: true, savedAt: new Date().toISOString() });
+    } catch (error) {
+      json(res, 400, { error: error.message });
+    }
+    return;
+  }
+
+  if (url.pathname === "/api/upload" && req.method === "POST") {
+    try {
+      const { slug: rawSlug, filename, dataUrl } = await readJsonBody(req);
+      const slug = safeSlug(rawSlug);
+      if (!slug) throw new Error("图片所属指引无效。");
+      const match = /^data:image\/(png|jpeg|webp);base64,([A-Za-z0-9+/=]+)$/.exec(dataUrl || "");
+      if (!match) throw new Error("仅支持 PNG、JPEG 或 WebP 图片。");
+      const extension = match[1];
+      const buffer = Buffer.from(match[2], "base64");
+      if (!buffer.length || buffer.length > 15 * 1024 * 1024) {
+        throw new Error("图片为空或超过 15MB。");
+      }
+      if (!isValidImage(buffer, extension)) throw new Error("图片文件校验失败。");
+      const directory = path.join(publicDir, "assets", "sop", slug);
+      await fsp.mkdir(directory, { recursive: true });
+      const finalName = `${Date.now()}-${crypto.randomBytes(3).toString("hex")}-${safeAssetName(filename)}.${extension === "jpeg" ? "jpg" : extension}`;
+      await fsp.writeFile(path.join(directory, finalName), buffer);
+      json(res, 200, {
+        src: `/assets/sop/${slug}/${finalName}`,
+      });
+    } catch (error) {
+      json(res, 400, { error: error.message });
+    }
+    return;
+  }
+
+  if (url.pathname === "/api/build" && req.method === "POST") {
+    try {
+      const output = await run(pnpmBin, ["build"]);
+      json(res, 200, { ok: true, output });
+    } catch (error) {
+      json(res, 500, { error: error.message });
+    }
+    return;
+  }
+
+  if (url.pathname === "/api/publish" && req.method === "POST") {
+    try {
+      const { message = "Update help center content" } = await readJsonBody(req);
+      const status = await gitStatus();
+      if (!status.files.length) {
+        return json(res, 200, { ok: true, unchanged: true });
+      }
+      if (!status.allowed) {
+        throw new Error(
+          `发现后台范围外的改动，已停止发布：${status.files
+            .filter(
+              (file) =>
+                !file.path.startsWith("src/data/guides-json/") &&
+                !file.path.startsWith("public/assets/sop/"),
+            )
+            .map((file) => file.path)
+            .join("、")}`,
+        );
+      }
+      const buildOutput = await run(pnpmBin, ["build"]);
+      await run("git", ["add", "--", "src/data/guides-json", "public/assets/sop"]);
+      await run("git", ["commit", "-m", String(message).slice(0, 120)]);
+      await run("git", ["push", "origin", "main"]);
+      const commit = await run("git", ["rev-parse", "HEAD"]);
+      json(res, 200, { ok: true, commit, buildOutput });
+    } catch (error) {
+      json(res, 500, { error: error.message });
+    }
+    return;
+  }
+
+  json(res, 404, { error: "接口不存在。" });
+}
+
+function startPreview() {
+  previewProcess = spawn(
+    pnpmBin,
+    ["dev", "--host", host, "--port", String(previewPort)],
+    {
+      cwd: root,
+      env: { ...runtimeEnv, BROWSER: "none" },
+      stdio: ["ignore", "pipe", "pipe"],
+      shell: false,
+    },
+  );
+  previewProcess.stdout.on("data", (chunk) => {
+    process.stdout.write(`[预览] ${chunk}`);
+  });
+  previewProcess.stderr.on("data", (chunk) => {
+    process.stderr.write(`[预览] ${chunk}`);
+  });
+  previewProcess.on("exit", (code) => {
+    if (code && code !== 0) console.error(`预览服务已停止（${code}）。`);
+  });
+}
+
+const server = http.createServer(async (req, res) => {
+  const url = new URL(req.url || "/", adminOrigin);
+  try {
+    if (url.pathname.startsWith("/api/")) {
+      await handleApi(req, res, url);
+      return;
+    }
+    if (url.pathname.startsWith("/assets/")) {
+      await serveFile(res, publicDir, url.pathname, true);
+      return;
+    }
+    const staticPath = url.pathname === "/" ? "/index.html" : url.pathname;
+    await serveFile(res, adminDir, staticPath);
+  } catch (error) {
+    json(res, 500, { error: error.message || "本地后台发生错误。" });
+  }
+});
+
+function shutdown() {
+  previewProcess?.kill("SIGTERM");
+  server.close(() => process.exit(0));
+  setTimeout(() => process.exit(0), 1000).unref();
+}
+
+process.on("SIGINT", shutdown);
+process.on("SIGTERM", shutdown);
+
+server.on("error", (error) => {
+  if (error.code === "EADDRINUSE") {
+    console.error(`端口 ${port} 已被占用。后台可能已经打开，请先关闭旧窗口后重试。`);
+  } else {
+    console.error(`本地后台启动失败：${error.message}`);
+  }
+  process.exit(1);
+});
+
+server.listen(port, host, () => {
+  startPreview();
+  console.log(`\nM365 本地内容后台：${adminOrigin}`);
+  console.log(`网站实时预览：${previewOrigin}/m365-help-center/`);
+  console.log("关闭此终端窗口即可停止后台。\n");
+  if (process.env.M365_NO_OPEN !== "1") {
+    const opener = spawn("open", [adminOrigin], { stdio: "ignore" });
+    opener.unref();
+  }
+});

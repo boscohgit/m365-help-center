@@ -1,0 +1,268 @@
+{
+  "slug": "onedrive",
+  "title": "OneDrive 使用指引",
+  "subtitle": "登录 · 同步 · 上传 · 下载 · 共享",
+  "category": "OneDrive 与 SharePoint",
+  "description": "在浏览器和电脑上使用 OneDrive，同步、上传、下载和共享公司文件。",
+  "duration": "按需阅读",
+  "device": "电脑或浏览器",
+  "keywords": [
+    "OneDrive登录",
+    "OneDrive不同步",
+    "OneDrive 不同步",
+    "文件不同步",
+    "蓝色小云",
+    "绿色小勾",
+    "上传文件",
+    "下载文件",
+    "共享链接",
+    "同步共享文件"
+  ],
+  "completion": "OneDrive 云朵图标状态正常，测试文件可上传并在网页端看到。",
+  "prepare": [
+    {
+      "label": "账号",
+      "text": "公司 Microsoft 365 账号"
+    },
+    {
+      "label": "客户端",
+      "text": "Windows 11 通常已安装 OneDrive"
+    },
+    {
+      "label": "网络",
+      "text": "稳定互联网，首次同步可能耗时较长"
+    }
+  ],
+  "sections": [
+    {
+      "id": "sign-in",
+      "kicker": "登录",
+      "title": "在网页或电脑上打开 OneDrive",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "网页版：登录 microsoft365.com，在应用启动器中选择 OneDrive；也可访问 onedrive.com。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "桌面端：在开始菜单搜索 OneDrive，输入公司账号并登录。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "首次登录时可选择需要同步的文件夹；不确定时保留默认设置。",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-01.webp",
+              "alt": "建议勾选“让我使用OneDrive获取我电脑上的文件”（方便备份桌面/文档）。",
+              "caption": "建议勾选“让我使用OneDrive获取我电脑上的文件”（方便备份桌面/文档）。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upload",
+      "kicker": "文件操作",
+      "title": "上传和下载文件",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "网页版上传：选择“上传”，再选择文件或文件夹。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "电脑上传：把文件拖入文件资源管理器左侧的 OneDrive 文件夹。",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-02.webp",
+              "alt": "电脑本地：\n直接拖拽文件到“OneDrive”文件夹（路径：文件资源管理器左侧导航栏）。",
+              "caption": "电脑本地：\n直接拖拽文件到“OneDrive”文件夹（路径：文件资源管理器左侧导航栏）。"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "蓝色小云变成绿色小勾，通常表示文件已经下载到本地并完成同步。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "网页版下载：右键文件选择“下载”。",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-03.webp",
+              "alt": "右键点击文件 → 选择“下载”（网页版）或“始终保留在此设备上”（本地同步）。",
+              "caption": "右键点击文件 → 选择“下载”（网页版）或“始终保留在此设备上”（本地同步）。"
+            }
+          ]
+        },
+        {
+          "id": "point-5",
+          "type": "point",
+          "text": "桌面端长期保留：右键文件选择“始终保留在此设备上”。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "share",
+      "kicker": "协作",
+      "title": "共享文件或文件夹",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开共享",
+          "body": "右键文件或文件夹，选择“共享”。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "选择人员和权限",
+          "body": "输入同事邮箱，并根据需要选择可编辑或仅查看。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-04.webp",
+              "alt": "键点击文件 → 选择“共享” → 输入同事邮箱或选择“公司内部可编辑/仅查看” → 点击“发送”。",
+              "caption": "键点击文件 → 选择“共享” → 输入同事邮箱或选择“公司内部可编辑/仅查看” → 点击“发送”。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "发送或复制链接",
+          "body": "点击“发送”，或复制链接后通过 Teams、Outlook 等方式发送。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "4",
+          "title": "高级设置",
+          "body": "如果租户允许，可在链接设置中配置过期时间或其他限制。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-05.webp",
+              "alt": "高级设置：可设置密码/过期时间。点击复制链接旁的齿轮按钮",
+              "caption": "高级设置：可设置密码/过期时间。点击复制链接旁的齿轮按钮"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "status",
+      "kicker": "故障排查",
+      "title": "看懂同步状态",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "正常云朵图标：OneDrive 正在运行。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "红色叉号：点击 OneDrive 图标查看具体错误并修复。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "存储空间不足：删除不需要的文件或联系 IT。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "Attachments 文件夹通常保存 Teams 聊天附件；Recordings 通常保存由您发起的 Teams 会议录制。",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-06.webp",
+              "alt": "OneDrive中自动生成文件夹：OneDrive会根据您的使用自动生成不同的文件夹最为常见的如下",
+              "caption": "OneDrive中自动生成文件夹：OneDrive会根据您的使用自动生成不同的文件夹最为常见的如下"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shared-save",
+      "kicker": "共享内容",
+      "title": "把别人分享的文件同步到电脑",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开分享邮件",
+          "body": "确认发件人与内容可信后，点击邮件中的“Open”打开共享位置。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-07.webp",
+              "alt": "点击邮件中的Open：",
+              "caption": "点击邮件中的Open："
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "选择同步",
+          "body": "在网页顶部点击“同步 / Sync”，允许浏览器打开 OneDrive。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/onedrive/onedrive-672744b-08.webp",
+              "alt": "进入页面后选择点击同步（Sync）即可将文件保留在本地",
+              "caption": "进入页面后选择点击同步（Sync）即可将文件保留在本地"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "等待完成",
+          "body": "同步完成后，共享文件会出现在文件资源管理器中。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    }
+  ]
+}

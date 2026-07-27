@@ -1,0 +1,426 @@
+{
+  "slug": "outlook",
+  "title": "Outlook 邮箱使用指引",
+  "subtitle": "登录 · 发信 · 共享邮箱 · 日历 · 撤回 · 文件夹",
+  "category": "Outlook 邮箱",
+  "description": "配置 Outlook Classic，并掌握公司邮箱、共享邮箱、日历和邮件整理的常用操作。",
+  "duration": "按需阅读",
+  "device": "电脑或手机",
+  "keywords": [
+    "Outlook登录",
+    "添加账户",
+    "共享邮箱",
+    "共享邮箱发件人",
+    "分所邮箱",
+    "分所邮箱发件人",
+    "发件人",
+    "重点收件箱",
+    "撤回邮件",
+    "日历",
+    "联系人",
+    "文件夹",
+    "手机Outlook"
+  ],
+  "completion": "可以收发公司邮件、查看授权的共享邮箱，并完成日历和文件夹等常用操作。",
+  "prepare": [
+    {
+      "label": "软件",
+      "text": "推荐使用 Outlook Classic；手机可安装 Outlook"
+    },
+    {
+      "label": "账号",
+      "text": "公司邮箱、当前密码和可用验证方式"
+    },
+    {
+      "label": "共享邮箱",
+      "text": "由管理员授权后自动显示，不需要单独密码"
+    }
+  ],
+  "sections": [
+    {
+      "id": "setup",
+      "kicker": "首次使用",
+      "title": "登录或添加 Outlook 账户",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开 Outlook Classic",
+          "body": "从开始菜单搜索 Outlook (Classic) 并打开。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-85b8ba0-01.webp",
+              "alt": "等待Office产品安装完成后，打开“开始菜单”，找到Outlook(Classic)点击运行",
+              "caption": "等待Office产品安装完成后，打开“开始菜单”，找到Outlook(Classic)点击运行"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "首次使用",
+          "body": "输入公司邮箱，点击“连接”，在弹出的 Microsoft 登录窗口中输入密码并完成验证。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-85b8ba0-02.webp",
+              "alt": "若您没有使用过Outlook, 请根据以下指引配置。输入账号并点击“连接”",
+              "caption": "若您没有使用过Outlook, 请根据以下指引配置。输入账号并点击“连接”"
+            },
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-01.webp",
+              "alt": "选择“完成”。",
+              "caption": "选择“完成”。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "已经登录过其他账号",
+          "body": "点击“文件”→“添加账户”，输入公司邮箱并点击“连接”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-85b8ba0-03.webp",
+              "alt": "若您此前已经登陆过Outlook，打开outlook后点击右上角“文件”> “添加账户”",
+              "caption": "若您此前已经登陆过Outlook，打开outlook后点击右上角“文件”> “添加账户”"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "4",
+          "title": "完成设置",
+          "body": "等待 Outlook 完成配置，看到收件箱后即可使用。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-02.webp",
+              "alt": "登录完成后，您即可在导航栏右侧看到您的个人邮箱及分所邮箱。",
+              "caption": "登录完成后，您即可在导航栏右侧看到您的个人邮箱及分所邮箱。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shared-mailbox",
+      "kicker": "共享邮箱",
+      "title": "查看和使用分所邮箱",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "个人邮箱和已经授权的分所邮箱会显示在左侧文件夹区域。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "点击不同邮箱下的“收件箱”即可查看邮件。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "发送邮件时，打开“新建电子邮件”→“选项”→“…”→“发件人”。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-03.webp",
+              "alt": "点击左上角“新建电子邮件”",
+              "caption": "点击左上角“新建电子邮件”"
+            },
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-04.webp",
+              "alt": "找到“选项” > “…” > “发件人”",
+              "caption": "找到“选项” > “…” > “发件人”"
+            }
+          ]
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "点击“发件人”→“其他电子邮件地址”，选择允许使用的分所邮箱。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-05.webp",
+              "alt": "可以看到新增了“发件人”选项",
+              "caption": "可以看到新增了“发件人”选项"
+            },
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-06.webp",
+              "alt": "点击“发件人” > “其他电子邮件地址”>“发件人”，并找到分所邮件地址",
+              "caption": "点击“发件人” > “其他电子邮件地址”>“发件人”，并找到分所邮件地址"
+            },
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-07.webp",
+              "alt": "点击“确定”回到发送邮件窗口，即可选择其他邮箱地址发送邮件",
+              "caption": "点击“确定”回到发送邮件窗口，即可选择其他邮箱地址发送邮件"
+            }
+          ]
+        },
+        {
+          "id": "point-5",
+          "type": "point",
+          "text": "共享邮箱不需要单独登录或输入密码；看不到时应联系 IT 检查权限。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "compose",
+      "kicker": "邮件",
+      "title": "创建、发送和提及联系人",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "选择“新建电子邮件”，填写收件人、抄送、密件抄送和主题。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "输入正文并检查附件后，选择“发送”。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-08.webp",
+              "alt": "键入邮件后，选择“发送”。",
+              "caption": "键入邮件后，选择“发送”。"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "在正文中输入 @ 加联系人姓名，可提醒对方并自动将其加入收件人。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-09.webp",
+              "alt": "提及的联系人将添加到电子邮件或会议邀请的“收件人”行。",
+              "caption": "提及的联系人将添加到电子邮件或会议邀请的“收件人”行。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inbox",
+      "kicker": "收件箱",
+      "title": "重点收件箱与邮件整理",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "“重点”和“其他”选项卡用于区分重要程度。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "右键邮件可选择“移动到其他收件箱”或“移动到重点收件箱”。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-10.webp",
+              "alt": "重点收件箱",
+              "caption": "重点收件箱"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "通过“视图”→“显示重点收件箱”可开关此功能。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "右键邮箱名称或收件箱，选择“新建文件夹”；邮件可直接拖入文件夹。",
+          "images": []
+        },
+        {
+          "id": "point-5",
+          "type": "point",
+          "text": "右键常用文件夹并选择“添加到收藏夹”。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "calendar",
+      "kicker": "日历",
+      "title": "安排会议和使用日程安排助理",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "在日历中选择“新建约会”，填写主题、地点、开始和结束时间。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-11.webp",
+              "alt": "选择“保存并关闭”完成操作；如果是会议，则选择“发送”。",
+              "caption": "选择“保存并关闭”完成操作；如果是会议，则选择“发送”。"
+            }
+          ]
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "选择“邀请与会者”可将约会变为会议，也可添加 Teams 在线会议。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "使用“日程安排助理”查看参与者和会议室的空闲时间。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-12.webp",
+              "alt": "网格显示与会者有空的时间。 在会议请求的右侧，Outlook 将显示建议时间和冲突人数。",
+              "caption": "网格显示与会者有空的时间。 在会议请求的右侧，Outlook 将显示建议时间和冲突人数。"
+            }
+          ]
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "会议完成后选择“发送”；个人约会选择“保存并关闭”。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "recall",
+      "kicker": "补救操作",
+      "title": "尝试撤回邮件",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开已发送邮件",
+          "body": "进入“已发送邮件”，双击需要撤回的邮件，在独立窗口中打开。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-13.webp",
+              "alt": "进入发件箱，找到你想要撤回的邮件双击打开",
+              "caption": "进入发件箱，找到你想要撤回的邮件双击打开"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "找到撤回选项",
+          "body": "点击左上角“文件”，选择撤回或重新发送相关选项。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-14.webp",
+              "alt": "弹出单独邮件的窗口左上角点击“文件”，即可看到撤回选项。",
+              "caption": "弹出单独邮件的窗口左上角点击“文件”，即可看到撤回选项。"
+            }
+          ]
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "检查结果",
+          "body": "撤回只可能在对方尚未阅读且对方同样使用 Microsoft 365 时成功；不能把撤回当成保证。"
+        }
+      ]
+    },
+    {
+      "id": "contacts",
+      "kicker": "联系人",
+      "title": "搜索公司内部联系人",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "在新邮件的收件人栏输入姓名的一部分，Outlook 会显示匹配建议。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "也可点击“收件人”打开通讯簿，再按姓名搜索。",
+          "images": [
+            {
+              "src": "/assets/sop/outlook/outlook-1c42b14-15.webp",
+              "alt": "公司内部的用户联系人都已经保存，您可以直接输入部分或全部名字进行搜索。",
+              "caption": "公司内部的用户联系人都已经保存，您可以直接输入部分或全部名字进行搜索。"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "选择正确联系人后再发送，避免误发给同名人员。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "mobile",
+      "kicker": "手机",
+      "title": "在手机上添加 Outlook",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "安装 Outlook",
+          "body": "在 App Store 或手机应用商店安装 Microsoft Outlook。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "添加账户",
+          "body": "选择“添加账户”，输入公司邮箱并继续。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "完成验证",
+          "body": "输入密码并按照提示完成多重身份验证。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    }
+  ]
+}

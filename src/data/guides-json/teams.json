@@ -1,0 +1,359 @@
+{
+  "slug": "teams",
+  "title": "Microsoft Teams 使用指引",
+  "subtitle": "安装 · 聊天 · 团队 · 会议 · 文件",
+  "category": "Teams",
+  "description": "安装并登录 Teams，使用聊天、频道、日历、会议和文件功能。",
+  "duration": "按需阅读",
+  "device": "电脑、手机或浏览器",
+  "keywords": [
+    "Teams下载",
+    "Teams登录",
+    "聊天",
+    "频道",
+    "开会",
+    "日程安排助理",
+    "共享屏幕",
+    "录制会议",
+    "翻译消息",
+    "延时发送"
+  ],
+  "completion": "可以登录 Teams、发送消息、查看所属团队并加入或安排会议。",
+  "prepare": [
+    {
+      "label": "账号",
+      "text": "公司 Microsoft 365 邮箱和密码"
+    },
+    {
+      "label": "验证",
+      "text": "电话、Microsoft Authenticator 或公司指定验证器"
+    },
+    {
+      "label": "设备",
+      "text": "电脑建议安装桌面客户端；也可使用网页端"
+    }
+  ],
+  "sections": [
+    {
+      "id": "install",
+      "kicker": "开始使用",
+      "title": "安装或打开 Teams",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "电脑端：访问 microsoft.com/microsoft-teams/download-app，下载 Windows 或 macOS 版本。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "移动端：在 App Store 或手机应用商店搜索 Microsoft Teams。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "网页端：访问 teams.microsoft.com，无需安装。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "鸿蒙系统不在 Microsoft 官方支持范围内，旧版本兼容安装可能出现无声音或无画面。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "sign-in",
+      "kicker": "登录",
+      "title": "使用公司账号登录",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "输入公司邮箱",
+          "body": "打开 Teams，输入公司 Microsoft 365 账号。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "输入密码并验证",
+          "body": "输入当前密码，使用电话或验证器完成多重身份验证。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "进入主界面",
+          "body": "确认左侧可以看到活动、聊天、团队、日历、通话和 OneDrive 等入口。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-01.webp",
+              "alt": "OneDrive：访问最近使用的文件和 OneDrive 内容。",
+              "caption": "OneDrive：访问最近使用的文件和 OneDrive 内容。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chat",
+      "kicker": "聊天",
+      "title": "发送消息和使用常用功能",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "点击“聊天”→“新消息”，输入联系人姓名开始一对一或群组聊天。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-02.webp",
+              "alt": "点击“聊天”>“新消息”。",
+              "caption": "点击“聊天”>“新消息”。"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-03.webp",
+              "alt": "输入联系人姓名，开始对话。",
+              "caption": "输入联系人姓名，开始对话。"
+            }
+          ]
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "消息支持文字、表情、GIF、文件、语音和视频。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-06.webp",
+              "alt": "反应：对消息添加表情反馈。鼠标悬浮在消息上即可选择表情",
+              "caption": "反应：对消息添加表情反馈。鼠标悬浮在消息上即可选择表情"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-07.webp",
+              "alt": "反应：对消息添加表情反馈。鼠标悬浮在消息上即可选择表情",
+              "caption": "反应：对消息添加表情反馈。鼠标悬浮在消息上即可选择表情"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "输入 @用户名 可以提醒指定人员。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-04.webp",
+              "alt": "@提及：使用 @用户名 提醒对方。",
+              "caption": "@提及：使用 @用户名 提醒对方。"
+            }
+          ]
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "格式按钮可添加标题、列表和重点样式。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-05.webp",
+              "alt": "文字格式：点击“格式”图标可添加标题、项目符号等。",
+              "caption": "文字格式：点击“格式”图标可添加标题、项目符号等。"
+            }
+          ]
+        },
+        {
+          "id": "point-5",
+          "type": "point",
+          "text": "右键或打开消息更多菜单，可使用转发、引用、固定和翻译。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-12.webp",
+              "alt": "更多功能：右键选择消息即可看到更多功能（转发，引用，固定，翻译等）",
+              "caption": "更多功能：右键选择消息即可看到更多功能（转发，引用，固定，翻译等）"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-13.webp",
+              "alt": "选择翻译后即可看到消息被直接翻译为中文了。",
+              "caption": "选择翻译后即可看到消息被直接翻译为中文了。"
+            }
+          ]
+        },
+        {
+          "id": "point-6",
+          "type": "point",
+          "text": "可设置重要消息或延时发送；延时发送时 Teams 应保持运行。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-08.webp",
+              "alt": "重要消息：发送一次消息可以持续提醒对方",
+              "caption": "重要消息：发送一次消息可以持续提醒对方"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-09.webp",
+              "alt": "重要消息：发送一次消息可以持续提醒对方",
+              "caption": "重要消息：发送一次消息可以持续提醒对方"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-10.webp",
+              "alt": "延时发送：可以设定定时发送指定消息（此功能需要Teams应用运行）",
+              "caption": "延时发送：可以设定定时发送指定消息（此功能需要Teams应用运行）"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-11.webp",
+              "alt": "延时发送：可以设定定时发送指定消息（此功能需要Teams应用运行）",
+              "caption": "延时发送：可以设定定时发送指定消息（此功能需要Teams应用运行）"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teams-channels",
+      "kicker": "团队与频道",
+      "title": "查找部门内容和共享文件",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "“团队”中会显示您所属的分所或部门。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-14.webp",
+              "alt": "登录进入后可从“团队“看到自己所在的分所/部门团队",
+              "caption": "登录进入后可从“团队“看到自己所在的分所/部门团队"
+            }
+          ]
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "每个团队可包含“常规”“项目讨论”等多个频道。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "频道可发布帖子并共享文件。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-15.webp",
+              "alt": "各个分所的所有服务器文件均在此处可见",
+              "caption": "各个分所的所有服务器文件均在此处可见"
+            }
+          ]
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "是否能看到服务器或部门文件取决于管理员配置的权限。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "meetings",
+      "kicker": "会议",
+      "title": "安排和加入 Teams 会议",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "在“日历”中点击“新事件”，填写主题、时间和参与者。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-16.webp",
+              "alt": "在“日历”中点击“新事件”> “事件”。",
+              "caption": "在“日历”中点击“新事件”> “事件”。"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-17.webp",
+              "alt": "填写会议主题、时间、参与者等信息。可选择是否添加 Teams 会议链接。",
+              "caption": "填写会议主题、时间、参与者等信息。可选择是否添加 Teams 会议链接。"
+            }
+          ]
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "输入参与者后，可查看时间冲突；“日程安排助理”可显示更详细的空闲时间。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-18.webp",
+              "alt": "输入参会人员后，可以查阅参会人员该时间段是否有其他Teams会议。",
+              "caption": "输入参会人员后，可以查阅参会人员该时间段是否有其他Teams会议。"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-19.webp",
+              "alt": "此处可见在该时间段，对方有其他会议。进一步点击“日程安排助理”即可看到对方具体的会议时间，以便修改会议时间",
+              "caption": "此处可见在该时间段，对方有其他会议。进一步点击“日程安排助理”即可看到对方具体的会议时间，以便修改会议时间"
+            }
+          ]
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "打开会议条目并选择“加入”，加入前可设置麦克风、摄像头和背景。",
+          "images": [
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-20.webp",
+              "alt": "在“日历”中点击会议条目，选择“加入”。或根据自己的具体安排选择接受、拒绝、待定。",
+              "caption": "在“日历”中点击会议条目，选择“加入”。或根据自己的具体安排选择接受、拒绝、待定。"
+            },
+            {
+              "src": "/assets/sop/teams/teams-cb793a8-21.webp",
+              "alt": "加入前可选择使用音频、视频、背景模糊等设置。",
+              "caption": "加入前可选择使用音频、视频、背景模糊等设置。"
+            }
+          ]
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "会议中可共享屏幕、聊天、举手、回应、录制和转录。",
+          "images": []
+        },
+        {
+          "id": "point-5",
+          "type": "point",
+          "text": "录制文件通常保存在会议组织者的 OneDrive 中。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "learn",
+      "kicker": "官方资源",
+      "title": "继续学习",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "Microsoft Teams 培训中心：https://learn.microsoft.com/zh-cn/training/teams/",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "Teams 功能导航：https://learn.microsoft.com/zh-cn/microsoftteams/navigate-teams",
+          "images": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "slug": "autopilot-new-pc",
+  "title": "新公司电脑首次登录",
+  "subtitle": "Autopilot · ESP · Windows PIN · 公司门户",
+  "category": "设备与工具",
+  "description": "在已注册 Autopilot 的全新 Windows 公司电脑上完成首次登录、设备配置和应用安装。",
+  "duration": "约 30–60 分钟",
+  "device": "全新 Windows 公司电脑",
+  "keywords": [
+    "新电脑",
+    "Autopilot",
+    "ESP",
+    "正在为组织设置设备",
+    "Company Portal",
+    "公司门户",
+    "Windows PIN",
+    "应用安装失败"
+  ],
+  "completion": "可以使用公司账号和 PIN 登录，ESP 已完成，公司门户和 Office、Teams、OneDrive 可正常使用。",
+  "prepare": [
+    {
+      "label": "电源",
+      "text": "全程连接电源适配器"
+    },
+    {
+      "label": "网络",
+      "text": "稳定 Wi-Fi 或网线，避免需网页二次认证的网络"
+    },
+    {
+      "label": "账号",
+      "text": "公司账号、密码和可用验证器"
+    }
+  ],
+  "sections": [
+    {
+      "id": "network",
+      "kicker": "步骤一",
+      "title": "启动并连接稳定网络",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "启动电脑",
+          "body": "按电源键，按照屏幕提示选择国家、地区和键盘布局。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "连接网络",
+          "body": "连接稳定 Wi-Fi 或插入网线，确认可以访问互联网。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "account",
+      "kicker": "步骤二",
+      "title": "使用公司账号登录",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "输入工作或学校账号",
+          "body": "在组织登录页面输入公司邮箱和密码。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "完成验证",
+          "body": "根据页面提示使用 Microsoft Authenticator、腾讯身份验证器或其他已登记方式。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "esp",
+      "kicker": "步骤三",
+      "title": "等待 ESP 完成设备配置",
+      "intro": "系统通常显示“正在为你的组织设置设备 / Setting up your device for work or school”。",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "系统会自动下发安全策略、Office、Edge、Defender、VPN 或业务应用。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "电脑可能自动重启一次或多次，属于正常现象。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "保持接电和联网，不要强制关机、恢复出厂设置或跳过组织页面。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "系统进入 Windows 登录界面或桌面，且没有持续错误代码，通常表示 ESP 已完成。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "pin",
+      "kicker": "步骤四",
+      "title": "设置 Windows Hello PIN",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "点击“设置 PIN”，必要时再次完成账号和验证器确认。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "PIN 只用于当前电脑本地登录，不等于公司账号密码。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "不要使用生日、手机号、123456 或容易猜到的组合。",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "portal",
+      "kicker": "步骤五",
+      "title": "通过公司门户安装所需应用",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "等待后台同步",
+          "body": "进入桌面后先等待约 10–15 分钟。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "打开公司门户",
+          "body": "从开始菜单搜索“公司门户 / Company Portal”，使用公司账号登录。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "3",
+          "title": "安装工作应用",
+          "body": "进入“应用 / Apps”，只安装当前工作需要的软件，等待状态变为“已安装”。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "kicker": "异常处理",
+      "title": "什么时候联系 IT",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "point-1",
+          "type": "point",
+          "text": "ESP 连续 60 分钟没有任何进度变化。",
+          "images": []
+        },
+        {
+          "id": "point-2",
+          "type": "point",
+          "text": "页面显示应用安装失败、红色错误页或明确错误代码。",
+          "images": []
+        },
+        {
+          "id": "point-3",
+          "type": "point",
+          "text": "联系 IT 时提供完整截图、准确时间、设备名称或序列号、账号、网络环境和已重启次数。",
+          "images": []
+        },
+        {
+          "id": "point-4",
+          "type": "point",
+          "text": "Company Portal 应用失败时，提供应用名称和错误截图。",
+          "images": []
+        }
+      ]
+    }
+  ]
+}

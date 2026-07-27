@@ -1,0 +1,423 @@
+{
+  "slug": "security-info",
+  "title": "添加账号验证方式",
+  "subtitle": "电话 / 验证器 · 并按需修改密码",
+  "category": "账号与安全",
+  "description": "为 Microsoft 365 账号添加电话验证、苹果 Microsoft Authenticator 或安卓腾讯身份验证器，并按需修改密码。",
+  "duration": "约 5–10 分钟",
+  "device": "电脑 + 手机",
+  "keywords": [
+    "验证电话",
+    "国际电话",
+    "手机验证",
+    "呼叫我",
+    "苹果",
+    "iPhone",
+    "Authenticator",
+    "安卓",
+    "腾讯身份验证器",
+    "六位验证码",
+    "二维码",
+    "修改密码"
+  ],
+  "completion": "“安全信息”页面中能看到已登记的电话号码或验证器应用。",
+  "prepare": [
+    {
+      "label": "账号",
+      "text": "公司 Microsoft 365 邮箱和当前密码"
+    },
+    {
+      "label": "手机",
+      "text": "可接听国际电话，或可安装验证器应用"
+    },
+    {
+      "label": "浏览器",
+      "text": "Microsoft Edge 或 Google Chrome"
+    }
+  ],
+  "sections": [
+    {
+      "id": "start",
+      "kicker": "共同步骤",
+      "title": "进入 Microsoft“安全信息”",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开“我的账户”",
+          "body": "在浏览器中打开 https://myaccount.microsoft.com，使用公司账号登录。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "进入“安全信息”",
+          "body": "在主页找到“安全信息”，点击“更新信息”。如果主页没有显示卡片，可从左侧菜单进入。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-01.webp",
+              "alt": "在主页找到“安全信息”，点击卡片中的“更新信息”。",
+              "caption": "在主页找到“安全信息”，点击卡片中的“更新信息”。"
+            }
+          ]
+        },
+        {
+          "id": "choice",
+          "type": "callout",
+          "tone": "info",
+          "title": "接下来请选择一种方式",
+          "body": "电话验证、苹果 Microsoft Authenticator 或安卓腾讯身份验证器。"
+        }
+      ]
+    },
+    {
+      "id": "phone",
+      "kicker": "方式一",
+      "title": "使用电话验证",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "3",
+          "title": "选择“电话”",
+          "body": "点击“添加登录方法”，在弹出的窗口中选择“电话”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-02.webp",
+              "alt": "点击“添加登录方法”，在弹出的窗口中选择“电话”。",
+              "caption": "点击“添加登录方法”，在弹出的窗口中选择“电话”。"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "4",
+          "title": "填写手机号码",
+          "body": "选择号码所属国家或地区，输入手机号码，确认选择“呼叫我”，然后点击“下一步”。",
+          "note": "常用区号：中国 +86 · 香港 +852 · 新加坡 +65",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-03.webp",
+              "alt": "先选择号码所属国家或地区，再输入手机号码；确认已选择“呼叫我”，然后点击“下一步”。",
+              "caption": "先选择号码所属国家或地区，再输入手机号码；确认已选择“呼叫我”，然后点击“下一步”。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "5",
+          "title": "接听电话并按“#”键",
+          "body": "接听验证电话，按照语音提示按下“#”键。听到“Your sign in is successful”后即可挂断。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "6",
+          "title": "点击“完成”",
+          "body": "浏览器显示电话号码已成功注册后，点击“完成”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-04.webp",
+              "alt": "浏览器显示“呼叫已应答，你的电话号码已成功注册”后，点击“完成”。",
+              "caption": "浏览器显示“呼叫已应答，你的电话号码已成功注册”后，点击“完成”。"
+            }
+          ]
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "电话验证完成",
+          "body": "返回“安全信息”页面，应能看到刚刚登记的电话号码。"
+        }
+      ]
+    },
+    {
+      "id": "iphone",
+      "kicker": "方式二 · 苹果手机",
+      "title": "Microsoft Authenticator",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "A1",
+          "title": "安装 Microsoft Authenticator",
+          "body": "在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-05.webp",
+              "alt": "在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并完成安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。",
+              "caption": "在 App Store 搜索“Microsoft Authenticator”或“微软验证器”并完成安装。回到浏览器，选择 Microsoft Authenticator，然后点击“下一步”。"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "A2",
+          "title": "添加“工作或学校账户”",
+          "body": "打开 Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-06.webp",
+              "alt": "打开 Microsoft Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。",
+              "caption": "打开 Microsoft Authenticator，点击右上角“+”，选择“工作或学校账户”，再选择“扫描 QR 码”。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "A3",
+          "title": "扫描电脑上的二维码",
+          "body": "浏览器再次点击“下一步”后会显示二维码。用手机扫描，然后回到电脑点击“下一步”。二维码是一次性设置凭据，请不要截图分享。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-07.webp",
+              "alt": "浏览器再次点击“下一步”后会显示二维码。使用手机中的 Microsoft Authenticator 扫描该二维码，然后回到电脑点击“下一步”。",
+              "caption": "浏览器再次点击“下一步”后会显示二维码。使用手机中的 Microsoft Authenticator 扫描该二维码，然后回到电脑点击“下一步”。"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "A4",
+          "title": "在手机中确认数字",
+          "body": "电脑网页会显示一个数字，手机同时弹出批准窗口。在手机中输入网页数字，再点击“是”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-08.webp",
+              "alt": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。",
+              "caption": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。"
+            },
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-09.webp",
+              "alt": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。",
+              "caption": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。"
+            },
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-10.webp",
+              "alt": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。",
+              "caption": "电脑网页会显示一个数字；手机同时弹出批准登录的窗口。在手机中输入网页上的数字，再点击“是”或批准。"
+            }
+          ]
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "苹果验证器完成",
+          "body": "浏览器显示配置成功后点击“完成”，并确认安全信息中出现 Microsoft Authenticator。"
+        }
+      ]
+    },
+    {
+      "id": "android",
+      "kicker": "方式二 · 安卓手机",
+      "title": "腾讯身份验证器",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "B1",
+          "title": "安装腾讯身份验证器",
+          "body": "按照公司现有安卓指引，通过腾讯应用宝安装“腾讯身份验证器”。",
+          "note": "下载地址：https://sj.qq.com/appdetail/com.tencent.authenticator",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "B2",
+          "title": "选择其他身份验证器",
+          "body": "在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-11.webp",
+              "alt": "在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。",
+              "caption": "在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。"
+            },
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-12.webp",
+              "alt": "在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。",
+              "caption": "在 Microsoft Authenticator 设置页面点击“我想要使用其他身份验证器”，再点击“下一步”。"
+            }
+          ]
+        },
+        {
+          "id": "step-3",
+          "type": "step",
+          "number": "B3",
+          "title": "扫描二维码",
+          "body": "在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。成功后，手机会显示 6 位动态数字。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-13.webp",
+              "alt": "在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。扫描成功后，手机会显示 6 位动态数字。",
+              "caption": "在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。扫描成功后，手机会显示 6 位动态数字。"
+            },
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-14.webp",
+              "alt": "在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。扫描成功后，手机会显示 6 位动态数字。",
+              "caption": "在腾讯身份验证器中选择扫描二维码，扫描电脑上显示的二维码。扫描成功后，手机会显示 6 位动态数字。"
+            }
+          ]
+        },
+        {
+          "id": "step-4",
+          "type": "step",
+          "number": "B4",
+          "title": "输入 6 位验证码",
+          "body": "回到电脑点击“下一步”，输入手机中当前显示的 6 位数字，然后再次点击“下一步”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-15.webp",
+              "alt": "回到电脑点击“下一步”，输入手机验证器中当前显示的 6 位数字，再点击“下一步”。数字会定时更新，请输入仍在有效期内的数字。",
+              "caption": "回到电脑点击“下一步”，输入手机验证器中当前显示的 6 位数字，再点击“下一步”。数字会定时更新，请输入仍在有效期内的数字。"
+            },
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-16.webp",
+              "alt": "回到电脑点击“下一步”，输入手机验证器中当前显示的 6 位数字，再点击“下一步”。数字会定时更新，请输入仍在有效期内的数字。",
+              "caption": "回到电脑点击“下一步”，输入手机验证器中当前显示的 6 位数字，再点击“下一步”。数字会定时更新，请输入仍在有效期内的数字。"
+            }
+          ]
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "安卓验证器完成",
+          "body": "浏览器显示“成功”后点击“完成”，并确认安全信息中出现验证器应用。"
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "kicker": "故障排查",
+      "title": "遇到问题怎么办",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "detail-1",
+          "type": "details",
+          "title": "一直收不到验证电话",
+          "body": "检查手机信号、国家区号和号码；关闭国际电话或陌生号码拦截后重试。"
+        },
+        {
+          "id": "detail-2",
+          "type": "details",
+          "title": "验证器扫码失败",
+          "body": "调高电脑屏幕亮度，确认手机相机权限已开启，并完整扫描二维码。"
+        },
+        {
+          "id": "detail-3",
+          "type": "details",
+          "title": "6 位数字提示错误",
+          "body": "等待验证器生成一组新数字后立即输入，并确认手机日期和时间为自动设置。"
+        },
+        {
+          "id": "detail-4",
+          "type": "details",
+          "title": "苹果手机没有确认窗口",
+          "body": "打开 Microsoft Authenticator 查看待处理请求，并确认应用通知权限已开启。"
+        },
+        {
+          "id": "detail-5",
+          "type": "details",
+          "title": "页面卡住或显示失败",
+          "body": "不要连续点击。刷新页面并重新进入“安全信息”后再操作一次。"
+        }
+      ]
+    },
+    {
+      "id": "password",
+      "kicker": "可选操作",
+      "title": "修改账号密码",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "info",
+          "type": "callout",
+          "tone": "info",
+          "title": "不需要修改？",
+          "body": "如果您只需要添加验证方式，可以跳过本节。"
+        },
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开“密码”页面",
+          "body": "返回 https://myaccount.microsoft.com，在“密码”卡片中点击“更改密码”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-17.webp",
+              "alt": "https://myaccount.microsoft.com",
+              "caption": "https://myaccount.microsoft.com"
+            }
+          ]
+        },
+        {
+          "id": "step-2",
+          "type": "step",
+          "number": "2",
+          "title": "输入并提交新密码",
+          "body": "在“新密码”和“确认新密码”中输入同一个密码。满足页面显示的要求后点击“提交”。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/security-info/security-info-896edd9-18.webp",
+              "alt": "在“新密码”和“确认新密码”中输入同一个新密码。满足页面显示的密码要求后，点击“提交”。",
+              "caption": "在“新密码”和“确认新密码”中输入同一个新密码。满足页面显示的密码要求后，点击“提交”。"
+            }
+          ]
+        },
+        {
+          "id": "success",
+          "type": "callout",
+          "tone": "success",
+          "title": "修改完成",
+          "body": "以后使用新密码登录。Outlook、Teams 或手机提示密码错误时，也应改用新密码。"
+        }
+      ]
+    }
+  ]
+}
