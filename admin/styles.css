@@ -168,12 +168,34 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+.sidebar-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
 .sidebar-head label {
   display: block;
-  margin-bottom: 9px;
   color: var(--navy);
   font-size: 13px;
   font-weight: 760;
+}
+
+.sidebar-title-row button {
+  padding: 4px 7px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 760;
+}
+
+.sidebar-title-row button:hover {
+  background: #dbeaf9;
 }
 
 .sidebar-head input {
@@ -667,6 +689,28 @@ dialog {
 
 dialog::backdrop {
   background: rgba(11, 24, 41, 0.68);
+}
+
+.new-guide-dialog {
+  width: min(620px, calc(100vw - 40px));
+}
+
+.new-guide-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+  padding: 18px;
+}
+
+.new-guide-fields .full {
+  grid-column: 1 / -1;
+}
+
+.new-guide-fields .field > small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
 }
 
 .dialog-head,

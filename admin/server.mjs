@@ -26,6 +26,14 @@ const runtimeEnv = {
 };
 const maxBodyBytes = 25 * 1024 * 1024;
 let previewProcess;
+const guideCategories = new Set([
+  "账号与安全",
+  "Office 应用",
+  "Outlook 邮箱",
+  "Teams",
+  "OneDrive 与 SharePoint",
+  "设备与工具",
+]);
 
 const mimeTypes = {
   ".html": "text/html; charset=utf-8",
@@ -94,9 +102,19 @@ function validateGuide(guide, expectedSlug) {
     "completion",
   ];
   for (const key of requiredStrings) {
-    if (typeof guide[key] !== "string" || guide[key].length > 10000) {
+    if (
+      typeof guide[key] !== "string" ||
+      !guide[key].trim() ||
+      guide[key].length > 10000
+    ) {
       throw new Error(`字段 ${key} 无效。`);
     }
+  }
+  if (!guideCategories.has(guide.category)) {
+    throw new Error("指引分类无效。");
+  }
+  if (!Array.isArray(guide.keywords) || !Array.isArray(guide.prepare)) {
+    throw new Error("关键词或准备事项无效。");
   }
   if (!Array.isArray(guide.sections) || guide.sections.length > 100) {
     throw new Error("章节数据无效。");
@@ -273,6 +291,30 @@ async function handleApi(req, res, url) {
 
   if (!isMutationAllowed(req)) {
     json(res, 403, { error: "本地编辑令牌无效，请刷新后台。" });
+    return;
+  }
+
+  if (url.pathname === "/api/guides" && req.method === "POST") {
+    try {
+      const guide = await readJsonBody(req);
+      const slug = safeSlug(guide?.slug);
+      if (!slug) {
+        throw new Error("网址标识只能使用小写英文字母、数字和连字符。");
+      }
+      validateGuide(guide, slug);
+      const filePath = path.join(contentDir, `${slug}.json`);
+      await fsp.writeFile(filePath, `${JSON.stringify(guide, null, 2)}\n`, {
+        encoding: "utf8",
+        flag: "wx",
+      });
+      json(res, 201, { ok: true, guide });
+    } catch (error) {
+      if (error.code === "EEXIST") {
+        json(res, 409, { error: "这个网址标识已经存在，请换一个。" });
+      } else {
+        json(res, 400, { error: error.message });
+      }
+    }
     return;
   }
 

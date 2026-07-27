@@ -86,11 +86,6 @@ const slugOrder = [
   "password-reset",
 ];
 
-export const guides = Object.values(modules).sort(
-  (a, b) =>
-    slugOrder.indexOf((a as Guide).slug) - slugOrder.indexOf((b as Guide).slug),
-) as Guide[];
-
 export const categoryOrder: Guide["category"][] = [
   "账号与安全",
   "Office 应用",
@@ -99,3 +94,15 @@ export const categoryOrder: Guide["category"][] = [
   "OneDrive 与 SharePoint",
   "设备与工具",
 ];
+
+export const guides = (Object.values(modules) as Guide[]).sort((a, b) => {
+  const aKnown = slugOrder.indexOf(a.slug);
+  const bKnown = slugOrder.indexOf(b.slug);
+  if (aKnown >= 0 && bKnown >= 0) return aKnown - bKnown;
+  if (aKnown >= 0) return -1;
+  if (bKnown >= 0) return 1;
+
+  const categoryDifference =
+    categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category);
+  return categoryDifference || a.title.localeCompare(b.title, "zh-CN");
+});

@@ -35,6 +35,10 @@ const publishButton = document.querySelector("#publish-button");
 const previewFrame = document.querySelector("#preview-frame");
 const openPreview = document.querySelector("#open-preview");
 const toastRegion = document.querySelector("#toast-region");
+const newGuideButton = document.querySelector("#new-guide-button");
+const newGuideDialog = document.querySelector("#new-guide-dialog");
+const newGuideForm = document.querySelector("#new-guide-form");
+const newGuideSubmit = document.querySelector("#new-guide-submit");
 
 function escapeHtml(value = "") {
   return String(value)
@@ -47,6 +51,12 @@ function escapeHtml(value = "") {
 
 function uid(prefix) {
   return `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+}
+
+function suggestedGuideSlug() {
+  const now = new Date();
+  const part = (value) => String(value).padStart(2, "0");
+  return `sop-${now.getFullYear()}${part(now.getMonth() + 1)}${part(now.getDate())}-${part(now.getHours())}${part(now.getMinutes())}`;
 }
 
 function setByPath(object, path, value) {
@@ -375,6 +385,99 @@ async function publishGuide() {
   }
 }
 
+async function openNewGuideDialog() {
+  if (state.dirty && !(await saveGuide({ quiet: true }))) return;
+  newGuideForm.reset();
+  newGuideForm.elements.slug.value = suggestedGuideSlug();
+  newGuideDialog.showModal();
+  newGuideForm.elements.title.focus();
+}
+
+function newGuideFromForm() {
+  const form = new FormData(newGuideForm);
+  const title = String(form.get("title") || "").trim();
+  const slug = String(form.get("slug") || "").trim().toLowerCase();
+  const subtitle =
+    String(form.get("subtitle") || "").trim() || "Microsoft 365 操作指引";
+  const description =
+    String(form.get("description") || "").trim() ||
+    `按照步骤完成“${title}”相关操作。`;
+
+  return {
+    slug,
+    title,
+    subtitle,
+    category: String(form.get("category") || categoryOptions[0]),
+    description,
+    duration: "约 5–10 分钟",
+    device: String(form.get("device") || "").trim() || "电脑或手机",
+    keywords: [title],
+    completion: "按照页面步骤完成操作，并确认结果正常。",
+    prepare: [
+      {
+        label: "开始前",
+        text: "准备好操作所需的公司账号、设备和稳定网络。",
+      },
+    ],
+    sections: [
+      {
+        id: "steps",
+        kicker: "操作指引",
+        title: "操作步骤",
+        intro: "",
+        blocks: [
+          {
+            id: "step-1",
+            type: "step",
+            number: "1",
+            title: "第一步",
+            body: "在这里填写具体操作。",
+            note: "",
+            warning: "",
+            images: [],
+          },
+        ],
+      },
+    ],
+  };
+}
+
+async function createGuide(event) {
+  event.preventDefault();
+  if (!newGuideForm.reportValidity()) return;
+  const guide = newGuideFromForm();
+  try {
+    newGuideSubmit.disabled = true;
+    setBusy(true, "正在创建 SOP…");
+    const result = await api("/api/guides", {
+      method: "POST",
+      body: JSON.stringify(guide),
+    });
+    state.guides.push({
+      slug: guide.slug,
+      title: guide.title,
+      subtitle: guide.subtitle,
+      category: guide.category,
+    });
+    state.guides.sort((a, b) => a.slug.localeCompare(b.slug));
+    state.guide = result.guide;
+    state.selectedSlug = guide.slug;
+    state.dirty = false;
+    guideSearch.value = "";
+    newGuideDialog.close();
+    renderGuideList();
+    renderEditor();
+    updatePreviewUrl(true);
+    markSaved("新 SOP 已创建");
+    toast("新 SOP 已创建。完善内容后可直接预览和发布。", "normal", 6500);
+  } catch (error) {
+    toast(error.message, "error", 7000);
+  } finally {
+    newGuideSubmit.disabled = false;
+    setBusy(false);
+  }
+}
+
 function makeBlock(type, section) {
   if (type === "step") {
     const stepCount = section.blocks.filter((block) => block.type === "step").length;
@@ -495,6 +598,14 @@ guideSearch.addEventListener("input", renderGuideList);
 saveButton.addEventListener("click", () => saveGuide());
 previewButton.addEventListener("click", refreshPreview);
 publishButton.addEventListener("click", publishGuide);
+newGuideButton.addEventListener("click", openNewGuideDialog);
+newGuideForm.addEventListener("submit", createGuide);
+document
+  .querySelector("#new-guide-close")
+  .addEventListener("click", () => newGuideDialog.close());
+document
+  .querySelector("#new-guide-cancel")
+  .addEventListener("click", () => newGuideDialog.close());
 
 function moveArrayItem(array, from, to) {
   const [item] = array.splice(from, 1);

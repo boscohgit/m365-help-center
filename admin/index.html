@@ -23,7 +23,10 @@
     <div class="workspace">
       <aside class="guide-sidebar">
         <div class="sidebar-head">
-          <label for="guide-search">指引列表</label>
+          <div class="sidebar-title-row">
+            <label for="guide-search">指引列表</label>
+            <button id="new-guide-button" type="button">+ 新建 SOP</button>
+          </div>
           <input id="guide-search" type="search" placeholder="搜索标题…" />
         </div>
         <nav id="guide-list" aria-label="指引列表"></nav>
@@ -44,6 +47,56 @@
     </div>
 
     <div id="toast-region" class="toast-region" aria-live="polite"></div>
+
+    <dialog id="new-guide-dialog" class="new-guide-dialog">
+      <form id="new-guide-form">
+        <div class="dialog-head">
+          <div>
+            <strong>新建 SOP</strong>
+            <small>创建后会自动进入网站列表和搜索，发布前可以继续完善内容。</small>
+          </div>
+          <button id="new-guide-close" type="button" class="icon-button" aria-label="关闭">×</button>
+        </div>
+        <div class="new-guide-fields">
+          <label class="field full">
+            <span>SOP 标题</span>
+            <input name="title" required maxlength="120" placeholder="例如：连接公司 VPN" />
+          </label>
+          <label class="field full">
+            <span>网址标识（小写英文）</span>
+            <input name="slug" required maxlength="80" pattern="[a-z0-9][a-z0-9-]*" placeholder="例如：connect-vpn" />
+            <small>创建后不能修改；网页地址会使用这个标识。</small>
+          </label>
+          <label class="field">
+            <span>分类</span>
+            <select name="category">
+              <option>账号与安全</option>
+              <option>Office 应用</option>
+              <option>Outlook 邮箱</option>
+              <option>Teams</option>
+              <option>OneDrive 与 SharePoint</option>
+              <option>设备与工具</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>适用设备</span>
+            <input name="device" value="电脑或手机" />
+          </label>
+          <label class="field full">
+            <span>副标题</span>
+            <input name="subtitle" placeholder="用几个关键词说明这篇 SOP" />
+          </label>
+          <label class="field full">
+            <span>页面介绍</span>
+            <textarea name="description" rows="3" placeholder="用户看完这篇 SOP 可以解决什么问题？"></textarea>
+          </label>
+        </div>
+        <div class="dialog-actions">
+          <button id="new-guide-cancel" type="button" class="button secondary">取消</button>
+          <button id="new-guide-submit" type="submit" class="button primary">创建并开始编辑</button>
+        </div>
+      </form>
+    </dialog>
 
     <dialog id="redact-dialog">
       <div class="dialog-head">
