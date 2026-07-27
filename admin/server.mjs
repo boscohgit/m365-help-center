@@ -21,9 +21,12 @@ const previewOrigin = `http://${host}:${previewPort}`;
 const publicSite = "https://boscohgit.github.io/m365-help-center/";
 const adminToken = crypto.randomBytes(24).toString("hex");
 const pnpmBin = process.env.M365_PNPM_BIN || "pnpm";
+const runtimePathKey =
+  Object.keys(process.env).find((key) => key.toLowerCase() === "path") ||
+  "PATH";
 const runtimeEnv = {
   ...process.env,
-  PATH: `${path.dirname(process.execPath)}:${process.env.PATH || ""}`,
+  [runtimePathKey]: `${path.dirname(process.execPath)}${path.delimiter}${process.env[runtimePathKey] || ""}`,
 };
 const maxBodyBytes = 25 * 1024 * 1024;
 let previewProcess;
@@ -159,7 +162,7 @@ function run(command, args, options = {}) {
     const child = spawn(command, args, {
       cwd: root,
       env: runtimeEnv,
-      shell: false,
+      shell: process.platform === "win32" && command === pnpmBin,
       ...options,
     });
     let output = "";
@@ -545,7 +548,7 @@ function startPreview() {
       cwd: root,
       env: { ...runtimeEnv, BROWSER: "none" },
       stdio: ["ignore", "pipe", "pipe"],
-      shell: false,
+      shell: process.platform === "win32",
     },
   );
   previewProcess.stdout.on("data", (chunk) => {
@@ -557,6 +560,24 @@ function startPreview() {
   previewProcess.on("exit", (code) => {
     if (code && code !== 0) console.error(`预览服务已停止（${code}）。`);
   });
+}
+
+function openAdminBrowser() {
+  let command = "open";
+  let args = [adminOrigin];
+  if (process.platform === "win32") {
+    command = process.env.ComSpec || "cmd.exe";
+    args = ["/d", "/s", "/c", "start", "", adminOrigin];
+  } else if (process.platform !== "darwin") {
+    command = "xdg-open";
+  }
+  const opener = spawn(command, args, {
+    detached: true,
+    stdio: "ignore",
+    windowsHide: true,
+  });
+  opener.on("error", () => {});
+  opener.unref();
 }
 
 const server = http.createServer(async (req, res) => {
@@ -601,7 +622,6 @@ server.listen(port, host, () => {
   console.log(`网站实时预览：${previewOrigin}/m365-help-center/`);
   console.log("关闭此终端窗口即可停止后台。\n");
   if (process.env.M365_NO_OPEN !== "1") {
-    const opener = spawn("open", [adminOrigin], { stdio: "ignore" });
-    opener.unref();
+    openAdminBrowser();
   }
 });
