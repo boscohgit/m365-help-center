@@ -39,6 +39,13 @@ const newGuideButton = document.querySelector("#new-guide-button");
 const newGuideDialog = document.querySelector("#new-guide-dialog");
 const newGuideForm = document.querySelector("#new-guide-form");
 const newGuideSubmit = document.querySelector("#new-guide-submit");
+const homepageButton = document.querySelector("#homepage-button");
+const homepageDialog = document.querySelector("#homepage-dialog");
+const homepageCategories = document.querySelector("#homepage-categories");
+const homepageState = document.querySelector("#homepage-state");
+const homepageSave = document.querySelector("#homepage-save");
+let homepageDraft = null;
+let homepageDrag = null;
 
 function escapeHtml(value = "") {
   return String(value)
@@ -385,6 +392,112 @@ async function publishGuide() {
   }
 }
 
+function renderHomepageOrganizer() {
+  if (!homepageDraft) return;
+  homepageCategories.innerHTML = homepageDraft.categoryOrder
+    .map((category, categoryIndex) => {
+      const items = state.guides.filter(
+        (guide) => homepageDraft.guideCategories[guide.slug] === category,
+      );
+      return `
+        <section class="homepage-category" data-home-category="${escapeHtml(category)}" data-category-index="${categoryIndex}">
+          <div class="homepage-category-head">
+            <span class="drag-handle" draggable="true" data-home-kind="category" data-category="${escapeHtml(category)}" title="拖动类目">⋮⋮</span>
+            <strong>${escapeHtml(category)}</strong>
+            <small>${items.length} 篇 SOP</small>
+          </div>
+          <div class="homepage-guide-list">
+            ${items
+              .map(
+                (guide) => `
+                  <button type="button" class="homepage-guide-item" draggable="true" data-home-kind="guide" data-slug="${escapeHtml(guide.slug)}" title="拖到其他类目">
+                    ${escapeHtml(guide.title)}
+                  </button>`,
+              )
+              .join("")}
+          </div>
+        </section>`;
+    })
+    .join("");
+}
+
+function markHomepageDirty() {
+  if (!homepageDraft) return;
+  homepageDraft.dirty = true;
+  homepageState.textContent = "有未保存的首页调整";
+  homepageState.className = "dirty";
+}
+
+async function openHomepageOrganizer() {
+  if (state.dirty && !(await saveGuide({ quiet: true }))) return;
+  try {
+    setBusy(true, "载入首页分类…");
+    const config = await api("/api/homepage");
+    homepageDraft = {
+      categoryOrder: [...config.categoryOrder],
+      guideCategories: Object.fromEntries(
+        state.guides.map((guide) => [guide.slug, guide.category]),
+      ),
+      dirty: false,
+    };
+    homepageState.textContent = "尚未修改";
+    homepageState.className = "";
+    renderHomepageOrganizer();
+    homepageDialog.showModal();
+  } catch (error) {
+    toast(error.message, "error", 7000);
+  } finally {
+    setBusy(false);
+  }
+}
+
+function closeHomepageOrganizer() {
+  if (
+    homepageDraft?.dirty &&
+    !confirm("首页整理尚未保存，确定放弃这些调整吗？")
+  ) {
+    return;
+  }
+  homepageDraft = null;
+  homepageDrag = null;
+  homepageDialog.close();
+}
+
+async function saveHomepageOrganizer() {
+  if (!homepageDraft) return;
+  try {
+    homepageSave.disabled = true;
+    setBusy(true, "正在保存首页整理…");
+    await api("/api/homepage", {
+      method: "PUT",
+      body: JSON.stringify({
+        categoryOrder: homepageDraft.categoryOrder,
+        guideCategories: homepageDraft.guideCategories,
+      }),
+    });
+    for (const guide of state.guides) {
+      guide.category = homepageDraft.guideCategories[guide.slug];
+    }
+    if (state.guide) {
+      state.guide.category = homepageDraft.guideCategories[state.guide.slug];
+    }
+    renderGuideList();
+    renderEditor();
+    const homepageUrl = `${state.config.previewBase}/?t=${Date.now()}`;
+    previewFrame.src = homepageUrl;
+    openPreview.href = homepageUrl;
+    homepageDraft.dirty = false;
+    closeHomepageOrganizer();
+    markSaved("首页整理已保存");
+    toast("首页归类和类目顺序已保存，预览已切换到首页。", "normal", 6500);
+  } catch (error) {
+    toast(error.message, "error", 8000);
+  } finally {
+    homepageSave.disabled = false;
+    setBusy(false);
+  }
+}
+
 async function openNewGuideDialog() {
   if (state.dirty && !(await saveGuide({ quiet: true }))) return;
   newGuideForm.reset();
@@ -600,12 +713,87 @@ previewButton.addEventListener("click", refreshPreview);
 publishButton.addEventListener("click", publishGuide);
 newGuideButton.addEventListener("click", openNewGuideDialog);
 newGuideForm.addEventListener("submit", createGuide);
+homepageButton.addEventListener("click", openHomepageOrganizer);
+homepageSave.addEventListener("click", saveHomepageOrganizer);
+document
+  .querySelector("#homepage-close")
+  .addEventListener("click", closeHomepageOrganizer);
+document
+  .querySelector("#homepage-cancel")
+  .addEventListener("click", closeHomepageOrganizer);
+homepageDialog.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeHomepageOrganizer();
+});
 document
   .querySelector("#new-guide-close")
   .addEventListener("click", () => newGuideDialog.close());
 document
   .querySelector("#new-guide-cancel")
   .addEventListener("click", () => newGuideDialog.close());
+
+homepageCategories.addEventListener("dragstart", (event) => {
+  const source = event.target.closest("[data-home-kind]");
+  if (!source || !homepageDraft) return;
+  homepageDrag =
+    source.dataset.homeKind === "category"
+      ? { kind: "category", category: source.dataset.category }
+      : { kind: "guide", slug: source.dataset.slug };
+  const visual =
+    homepageDrag.kind === "category"
+      ? source.closest(".homepage-category")
+      : source;
+  visual?.classList.add("dragging");
+  event.dataTransfer.effectAllowed = "move";
+  event.dataTransfer.setData("text/plain", JSON.stringify(homepageDrag));
+});
+
+homepageCategories.addEventListener("dragover", (event) => {
+  if (!homepageDrag) return;
+  const target = event.target.closest(".homepage-category");
+  if (!target) return;
+  event.preventDefault();
+  homepageCategories
+    .querySelectorAll(".drop-active")
+    .forEach((item) => item.classList.remove("drop-active"));
+  target.classList.add("drop-active");
+});
+
+homepageCategories.addEventListener("drop", (event) => {
+  event.preventDefault();
+  const target = event.target.closest(".homepage-category");
+  if (!target || !homepageDraft || !homepageDrag) return;
+  const targetCategory = target.dataset.homeCategory;
+
+  if (homepageDrag.kind === "guide") {
+    if (homepageDraft.guideCategories[homepageDrag.slug] !== targetCategory) {
+      homepageDraft.guideCategories[homepageDrag.slug] = targetCategory;
+      markHomepageDirty();
+      renderHomepageOrganizer();
+    }
+  } else if (homepageDrag.category !== targetCategory) {
+    const fromIndex = homepageDraft.categoryOrder.indexOf(
+      homepageDrag.category,
+    );
+    const targetIndex = homepageDraft.categoryOrder.indexOf(targetCategory);
+    const targetRect = target.getBoundingClientRect();
+    const insertAfter = event.clientY > targetRect.top + targetRect.height / 2;
+    const [category] = homepageDraft.categoryOrder.splice(fromIndex, 1);
+    let insertIndex = targetIndex + (insertAfter ? 1 : 0);
+    if (fromIndex < insertIndex) insertIndex -= 1;
+    homepageDraft.categoryOrder.splice(insertIndex, 0, category);
+    markHomepageDirty();
+    renderHomepageOrganizer();
+  }
+  homepageDrag = null;
+});
+
+homepageCategories.addEventListener("dragend", () => {
+  homepageCategories
+    .querySelectorAll(".dragging,.drop-active")
+    .forEach((item) => item.classList.remove("dragging", "drop-active"));
+  homepageDrag = null;
+});
 
 function moveArrayItem(array, from, to) {
   const [item] = array.splice(from, 1);

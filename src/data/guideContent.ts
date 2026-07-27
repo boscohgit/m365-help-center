@@ -1,3 +1,5 @@
+import siteConfig from "./site-config.json";
+
 export type GuideImage = {
   src: string;
   alt: string;
@@ -86,13 +88,22 @@ const slugOrder = [
   "password-reset",
 ];
 
-export const categoryOrder: Guide["category"][] = [
+const defaultCategoryOrder: Guide["category"][] = [
   "账号与安全",
   "Office 应用",
   "Outlook 邮箱",
   "Teams",
   "OneDrive 与 SharePoint",
   "设备与工具",
+];
+
+export const categoryOrder = [
+  ...(siteConfig.categoryOrder as Guide["category"][]).filter((category) =>
+    defaultCategoryOrder.includes(category),
+  ),
+  ...defaultCategoryOrder.filter(
+    (category) => !siteConfig.categoryOrder.includes(category),
+  ),
 ];
 
 export const guides = (Object.values(modules) as Guide[]).sort((a, b) => {

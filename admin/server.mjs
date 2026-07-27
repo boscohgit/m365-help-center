@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 const adminDir = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(adminDir, "..");
 const contentDir = path.join(root, "src", "data", "guides-json");
+const siteConfigPath = path.join(root, "src", "data", "site-config.json");
 const publicDir = path.join(root, "public");
 const host = "127.0.0.1";
 const port = Number(process.env.M365_ADMIN_PORT || 15986);
@@ -189,9 +190,21 @@ async function gitStatus() {
   const allowed = files.every(
     (file) =>
       file.path.startsWith("src/data/guides-json/") ||
-      file.path.startsWith("public/assets/sop/"),
+      file.path.startsWith("public/assets/sop/") ||
+      file.path === "src/data/site-config.json",
   );
   return { files, allowed };
+}
+
+function validateCategoryOrder(categoryOrder) {
+  if (
+    !Array.isArray(categoryOrder) ||
+    categoryOrder.length !== guideCategories.size ||
+    new Set(categoryOrder).size !== guideCategories.size ||
+    !categoryOrder.every((category) => guideCategories.has(category))
+  ) {
+    throw new Error("类目显示顺序无效。");
+  }
 }
 
 async function serveFile(res, baseDir, relativePath, cache = false) {
@@ -289,8 +302,77 @@ async function handleApi(req, res, url) {
     return;
   }
 
+  if (url.pathname === "/api/homepage" && req.method === "GET") {
+    try {
+      const config = JSON.parse(await fsp.readFile(siteConfigPath, "utf8"));
+      validateCategoryOrder(config.categoryOrder);
+      json(res, 200, config);
+    } catch (error) {
+      json(res, 500, { error: error.message });
+    }
+    return;
+  }
+
   if (!isMutationAllowed(req)) {
     json(res, 403, { error: "本地编辑令牌无效，请刷新后台。" });
+    return;
+  }
+
+  if (url.pathname === "/api/homepage" && req.method === "PUT") {
+    try {
+      const { categoryOrder, guideCategories: categoryAssignments } =
+        await readJsonBody(req);
+      validateCategoryOrder(categoryOrder);
+      if (
+        !categoryAssignments ||
+        typeof categoryAssignments !== "object" ||
+        Array.isArray(categoryAssignments)
+      ) {
+        throw new Error("SOP 归类数据无效。");
+      }
+
+      const files = (await fsp.readdir(contentDir))
+        .filter((name) => name.endsWith(".json"))
+        .sort();
+      const guides = await Promise.all(
+        files.map(async (name) => ({
+          name,
+          guide: JSON.parse(
+            await fsp.readFile(path.join(contentDir, name), "utf8"),
+          ),
+        })),
+      );
+      const knownSlugs = new Set(guides.map(({ guide }) => guide.slug));
+      if (
+        Object.keys(categoryAssignments).some((slug) => !knownSlugs.has(slug))
+      ) {
+        throw new Error("归类数据中包含不存在的 SOP。");
+      }
+
+      const guideUpdates = [];
+      for (const { name, guide } of guides) {
+        const category = categoryAssignments[guide.slug];
+        if (!guideCategories.has(category)) {
+          throw new Error(`SOP“${guide.title}”的类目无效。`);
+        }
+        if (guide.category !== category) {
+          guide.category = category;
+          validateGuide(guide, guide.slug);
+          guideUpdates.push({ name, guide });
+        }
+      }
+      for (const { name, guide } of guideUpdates) {
+        await atomicWriteJson(path.join(contentDir, name), guide);
+      }
+      await atomicWriteJson(siteConfigPath, { categoryOrder });
+      json(res, 200, {
+        ok: true,
+        changedGuides: guideUpdates.length,
+        categoryOrder,
+      });
+    } catch (error) {
+      json(res, 400, { error: error.message });
+    }
     return;
   }
 
@@ -381,14 +463,21 @@ async function handleApi(req, res, url) {
             .filter(
               (file) =>
                 !file.path.startsWith("src/data/guides-json/") &&
-                !file.path.startsWith("public/assets/sop/"),
+                !file.path.startsWith("public/assets/sop/") &&
+                file.path !== "src/data/site-config.json",
             )
             .map((file) => file.path)
             .join("、")}`,
         );
       }
       const buildOutput = await run(pnpmBin, ["build"]);
-      await run("git", ["add", "--", "src/data/guides-json", "public/assets/sop"]);
+      await run("git", [
+        "add",
+        "--",
+        "src/data/guides-json",
+        "src/data/site-config.json",
+        "public/assets/sop",
+      ]);
       await run("git", ["commit", "-m", String(message).slice(0, 120)]);
       await run("git", ["push", "origin", "main"]);
       const commit = await run("git", ["rev-parse", "HEAD"]);
