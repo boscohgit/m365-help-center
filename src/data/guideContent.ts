@@ -107,6 +107,12 @@ export const categoryOrder = [
 ];
 
 export const guides = (Object.values(modules) as Guide[]).sort((a, b) => {
+  const aConfigured = siteConfig.guideOrder.indexOf(a.slug);
+  const bConfigured = siteConfig.guideOrder.indexOf(b.slug);
+  if (aConfigured >= 0 && bConfigured >= 0) return aConfigured - bConfigured;
+  if (aConfigured >= 0) return -1;
+  if (bConfigured >= 0) return 1;
+
   const aKnown = slugOrder.indexOf(a.slug);
   const bKnown = slugOrder.indexOf(b.slug);
   if (aKnown >= 0 && bKnown >= 0) return aKnown - bKnown;

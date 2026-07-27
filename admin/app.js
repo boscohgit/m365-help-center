@@ -396,9 +396,18 @@ function renderHomepageOrganizer() {
   if (!homepageDraft) return;
   homepageCategories.innerHTML = homepageDraft.categoryOrder
     .map((category, categoryIndex) => {
-      const items = state.guides.filter(
-        (guide) => homepageDraft.guideCategories[guide.slug] === category,
+      const orderIndex = new Map(
+        homepageDraft.guideOrder.map((slug, index) => [slug, index]),
       );
+      const items = state.guides
+        .filter(
+          (guide) => homepageDraft.guideCategories[guide.slug] === category,
+        )
+        .sort(
+          (a, b) =>
+            (orderIndex.get(a.slug) ?? Number.MAX_SAFE_INTEGER) -
+            (orderIndex.get(b.slug) ?? Number.MAX_SAFE_INTEGER),
+        );
       return `
         <section class="homepage-category" data-home-category="${escapeHtml(category)}" data-category-index="${categoryIndex}">
           <div class="homepage-category-head">
@@ -410,7 +419,7 @@ function renderHomepageOrganizer() {
             ${items
               .map(
                 (guide) => `
-                  <button type="button" class="homepage-guide-item" draggable="true" data-home-kind="guide" data-slug="${escapeHtml(guide.slug)}" title="拖到其他类目">
+                  <button type="button" class="homepage-guide-item" draggable="true" data-home-kind="guide" data-slug="${escapeHtml(guide.slug)}" title="拖动调整顺序或移到其他类目">
                     ${escapeHtml(guide.title)}
                   </button>`,
               )
@@ -435,6 +444,7 @@ async function openHomepageOrganizer() {
     const config = await api("/api/homepage");
     homepageDraft = {
       categoryOrder: [...config.categoryOrder],
+      guideOrder: [...config.guideOrder],
       guideCategories: Object.fromEntries(
         state.guides.map((guide) => [guide.slug, guide.category]),
       ),
@@ -472,6 +482,7 @@ async function saveHomepageOrganizer() {
       method: "PUT",
       body: JSON.stringify({
         categoryOrder: homepageDraft.categoryOrder,
+        guideOrder: homepageDraft.guideOrder,
         guideCategories: homepageDraft.guideCategories,
       }),
     });
@@ -754,9 +765,16 @@ homepageCategories.addEventListener("dragover", (event) => {
   if (!target) return;
   event.preventDefault();
   homepageCategories
-    .querySelectorAll(".drop-active")
-    .forEach((item) => item.classList.remove("drop-active"));
+    .querySelectorAll(".drop-active,.guide-drop-active")
+    .forEach((item) =>
+      item.classList.remove("drop-active", "guide-drop-active"),
+    );
   target.classList.add("drop-active");
+  if (homepageDrag.kind === "guide") {
+    event.target
+      .closest(".homepage-guide-item")
+      ?.classList.add("guide-drop-active");
+  }
 });
 
 homepageCategories.addEventListener("drop", (event) => {
@@ -766,11 +784,43 @@ homepageCategories.addEventListener("drop", (event) => {
   const targetCategory = target.dataset.homeCategory;
 
   if (homepageDrag.kind === "guide") {
-    if (homepageDraft.guideCategories[homepageDrag.slug] !== targetCategory) {
-      homepageDraft.guideCategories[homepageDrag.slug] = targetCategory;
-      markHomepageDirty();
-      renderHomepageOrganizer();
+    const sourceSlug = homepageDrag.slug;
+    const targetGuide = event.target.closest(".homepage-guide-item");
+    const targetSlug = targetGuide?.dataset.slug;
+    if (
+      targetSlug === sourceSlug &&
+      homepageDraft.guideCategories[sourceSlug] === targetCategory
+    ) {
+      homepageDrag = null;
+      return;
     }
+    homepageDraft.guideCategories[sourceSlug] = targetCategory;
+
+    const sourceIndex = homepageDraft.guideOrder.indexOf(sourceSlug);
+    if (sourceIndex >= 0) homepageDraft.guideOrder.splice(sourceIndex, 1);
+
+    if (targetSlug && targetSlug !== sourceSlug) {
+      const targetIndex = homepageDraft.guideOrder.indexOf(targetSlug);
+      const targetRect = targetGuide.getBoundingClientRect();
+      const insertAfter =
+        event.clientX > targetRect.left + targetRect.width / 2;
+      homepageDraft.guideOrder.splice(
+        targetIndex + (insertAfter ? 1 : 0),
+        0,
+        sourceSlug,
+      );
+    } else {
+      const targetSlugs = homepageDraft.guideOrder.filter(
+        (slug) => homepageDraft.guideCategories[slug] === targetCategory,
+      );
+      const lastTargetSlug = targetSlugs.at(-1);
+      const insertIndex = lastTargetSlug
+        ? homepageDraft.guideOrder.indexOf(lastTargetSlug) + 1
+        : homepageDraft.guideOrder.length;
+      homepageDraft.guideOrder.splice(insertIndex, 0, sourceSlug);
+    }
+    markHomepageDirty();
+    renderHomepageOrganizer();
   } else if (homepageDrag.category !== targetCategory) {
     const fromIndex = homepageDraft.categoryOrder.indexOf(
       homepageDrag.category,
@@ -790,8 +840,14 @@ homepageCategories.addEventListener("drop", (event) => {
 
 homepageCategories.addEventListener("dragend", () => {
   homepageCategories
-    .querySelectorAll(".dragging,.drop-active")
-    .forEach((item) => item.classList.remove("dragging", "drop-active"));
+    .querySelectorAll(".dragging,.drop-active,.guide-drop-active")
+    .forEach((item) =>
+      item.classList.remove(
+        "dragging",
+        "drop-active",
+        "guide-drop-active",
+      ),
+    );
   homepageDrag = null;
 });
 

@@ -207,6 +207,32 @@ function validateCategoryOrder(categoryOrder) {
   }
 }
 
+function normalizeGuideOrder(guideOrder, guideSlugs) {
+  const knownSlugs = new Set(guideSlugs);
+  const configured = Array.isArray(guideOrder)
+    ? guideOrder.filter(
+        (slug, index) =>
+          knownSlugs.has(slug) && guideOrder.indexOf(slug) === index,
+      )
+    : [];
+  return [
+    ...configured,
+    ...guideSlugs.filter((slug) => !configured.includes(slug)),
+  ];
+}
+
+function validateGuideOrder(guideOrder, guideSlugs) {
+  const normalized = normalizeGuideOrder(guideOrder, guideSlugs);
+  if (
+    !Array.isArray(guideOrder) ||
+    guideOrder.length !== guideSlugs.length ||
+    normalized.length !== guideOrder.length ||
+    normalized.some((slug, index) => slug !== guideOrder[index])
+  ) {
+    throw new Error("SOP 显示顺序无效。");
+  }
+}
+
 async function serveFile(res, baseDir, relativePath, cache = false) {
   const decoded = decodeURIComponent(relativePath);
   const candidate = path.resolve(baseDir, `.${decoded.startsWith("/") ? decoded : `/${decoded}`}`);
@@ -306,7 +332,21 @@ async function handleApi(req, res, url) {
     try {
       const config = JSON.parse(await fsp.readFile(siteConfigPath, "utf8"));
       validateCategoryOrder(config.categoryOrder);
-      json(res, 200, config);
+      const files = (await fsp.readdir(contentDir))
+        .filter((name) => name.endsWith(".json"))
+        .sort();
+      const guideSlugs = await Promise.all(
+        files.map(async (name) => {
+          const guide = JSON.parse(
+            await fsp.readFile(path.join(contentDir, name), "utf8"),
+          );
+          return guide.slug;
+        }),
+      );
+      json(res, 200, {
+        ...config,
+        guideOrder: normalizeGuideOrder(config.guideOrder, guideSlugs),
+      });
     } catch (error) {
       json(res, 500, { error: error.message });
     }
@@ -320,8 +360,11 @@ async function handleApi(req, res, url) {
 
   if (url.pathname === "/api/homepage" && req.method === "PUT") {
     try {
-      const { categoryOrder, guideCategories: categoryAssignments } =
-        await readJsonBody(req);
+      const {
+        categoryOrder,
+        guideOrder,
+        guideCategories: categoryAssignments,
+      } = await readJsonBody(req);
       validateCategoryOrder(categoryOrder);
       if (
         !categoryAssignments ||
@@ -343,6 +386,8 @@ async function handleApi(req, res, url) {
         })),
       );
       const knownSlugs = new Set(guides.map(({ guide }) => guide.slug));
+      const guideSlugs = guides.map(({ guide }) => guide.slug);
+      validateGuideOrder(guideOrder, guideSlugs);
       if (
         Object.keys(categoryAssignments).some((slug) => !knownSlugs.has(slug))
       ) {
@@ -364,11 +409,12 @@ async function handleApi(req, res, url) {
       for (const { name, guide } of guideUpdates) {
         await atomicWriteJson(path.join(contentDir, name), guide);
       }
-      await atomicWriteJson(siteConfigPath, { categoryOrder });
+      await atomicWriteJson(siteConfigPath, { categoryOrder, guideOrder });
       json(res, 200, {
         ok: true,
         changedGuides: guideUpdates.length,
         categoryOrder,
+        guideOrder,
       });
     } catch (error) {
       json(res, 400, { error: error.message });

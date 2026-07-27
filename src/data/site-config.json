@@ -6,5 +6,18 @@
     "Teams",
     "OneDrive 与 SharePoint",
     "设备与工具"
+  ],
+  "guideOrder": [
+    "first-sign-in",
+    "security-info",
+    "password-reset",
+    "install-m365",
+    "office-sign-in",
+    "outlook",
+    "teams",
+    "onedrive",
+    "sharepoint",
+    "autopilot-new-pc",
+    "scan-documents"
   ]
 }
