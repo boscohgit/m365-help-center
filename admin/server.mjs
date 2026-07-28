@@ -18,7 +18,7 @@ const port = Number(process.env.M365_ADMIN_PORT || 15986);
 const previewPort = Number(process.env.M365_PREVIEW_PORT || 15987);
 const adminOrigin = `http://${host}:${port}`;
 const previewOrigin = `http://${host}:${previewPort}`;
-const publicSite = "https://boscohgit.github.io/m365-help-center/";
+const publicSite = "https://help.incorp-int.com/";
 const adminToken = crypto.randomBytes(24).toString("hex");
 const pnpmBin = process.env.M365_PNPM_BIN || "pnpm";
 const runtimePathKey =
@@ -309,7 +309,7 @@ async function handleApi(req, res, url) {
     json(res, 200, {
       token: adminToken,
       previewOrigin,
-      previewBase: `${previewOrigin}/m365-help-center`,
+      previewBase: previewOrigin,
       publicSite,
     });
     return;
@@ -698,7 +698,7 @@ server.on("error", (error) => {
 server.listen(port, host, () => {
   startPreview();
   console.log(`\nM365 本地内容后台：${adminOrigin}`);
-  console.log(`网站实时预览：${previewOrigin}/m365-help-center/`);
+  console.log(`网站实时预览：${previewOrigin}/`);
   console.log("关闭此终端窗口即可停止后台。\n");
   if (process.env.M365_NO_OPEN !== "1") {
     openAdminBrowser();
