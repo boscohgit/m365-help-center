@@ -238,7 +238,7 @@ function sectionHtml(section, sectionIndex) {
       </div>
       <div class="section-body">
         <div class="field-grid section-fields">
-          ${field("章节 ID", `${base}.id`, section.id || "")}
+          ${field("章节 ID（字母、数字和连字符）", `${base}.id`, section.id || "")}
           ${field("小标题", `${base}.kicker`, section.kicker || "")}
           ${field("章节标题", `${base}.title`, section.title || "", { full: true })}
           ${field("章节介绍", `${base}.intro`, section.intro || "", { type: "textarea", full: true, rows: 2 })}

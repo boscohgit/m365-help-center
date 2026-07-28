@@ -65,6 +65,10 @@ function safeSlug(value) {
   return /^[a-z0-9][a-z0-9-]{0,80}$/.test(value) ? value : null;
 }
 
+function safeSectionId(value) {
+  return /^[A-Za-z][A-Za-z0-9-]{0,80}$/.test(value) ? value : null;
+}
+
 function safeAssetName(value) {
   const base = path
     .basename(value || "screenshot")
@@ -125,8 +129,11 @@ function validateGuide(guide, expectedSlug) {
   }
   const ids = new Set();
   for (const section of guide.sections) {
-    if (!safeSlug(section.id) || ids.has(section.id)) {
-      throw new Error(`章节 ID 无效或重复：${section.id}`);
+    if (!safeSectionId(section.id)) {
+      throw new Error(`章节 ID 无效：${section.id}`);
+    }
+    if (ids.has(section.id)) {
+      throw new Error(`章节 ID 重复：${section.id}`);
     }
     ids.add(section.id);
     if (!Array.isArray(section.blocks) || section.blocks.length > 200) {
