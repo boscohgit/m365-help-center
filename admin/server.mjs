@@ -221,6 +221,11 @@ async function gitStatus() {
   return { files, allowed };
 }
 
+async function gitAheadCount() {
+  const raw = await run("git", ["rev-list", "--count", "origin/main..HEAD"]);
+  return Number.parseInt(raw, 10) || 0;
+}
+
 function validateCategoryOrder(categoryOrder) {
   if (
     !Array.isArray(categoryOrder) ||
@@ -525,9 +530,6 @@ async function handleApi(req, res, url) {
     try {
       const { message = "Update help center content" } = await readJsonBody(req);
       const status = await gitStatus();
-      if (!status.files.length) {
-        return json(res, 200, { ok: true, unchanged: true });
-      }
       if (!status.allowed) {
         throw new Error(
           `发现后台范围外的改动，已停止发布：${status.files
@@ -541,15 +543,43 @@ async function handleApi(req, res, url) {
             .join("、")}`,
         );
       }
-      const buildOutput = await run(pnpmBin, ["build"]);
-      await run("git", [
-        "add",
-        "--",
-        "src/data/guides-json",
-        "src/data/site-config.json",
-        "public/assets/sop",
-      ]);
-      await run("git", ["commit", "-m", String(message).slice(0, 120)]);
+
+      // 其他电脑可能刚刚推送了内容。先用 rebase + autostash 同步，
+      // 保留本机正在编辑的 SOP、图片和首页排序，避免直接 push 被拒绝。
+      await run("git", ["pull", "--rebase", "--autostash", "origin", "main"]);
+
+      let buildOutput = "";
+      const currentStatus = await gitStatus();
+      if (!currentStatus.allowed) {
+        throw new Error(
+          `同步后发现后台范围外的改动，已停止发布：${currentStatus.files
+            .filter(
+              (file) =>
+                !file.path.startsWith("src/data/guides-json/") &&
+                !file.path.startsWith("public/assets/sop/") &&
+                file.path !== "src/data/site-config.json",
+            )
+            .map((file) => file.path)
+            .join("、")}`,
+        );
+      }
+
+      if (currentStatus.files.length) {
+        buildOutput = await run(pnpmBin, ["build"]);
+        await run("git", [
+          "add",
+          "--",
+          "src/data/guides-json",
+          "src/data/site-config.json",
+          "public/assets/sop",
+        ]);
+        await run("git", ["commit", "-m", String(message).slice(0, 120)]);
+      }
+
+      const aheadCount = await gitAheadCount();
+      if (!aheadCount) {
+        return json(res, 200, { ok: true, unchanged: true });
+      }
       await run("git", ["push", "origin", "main"]);
       const commit = await run("git", ["rev-parse", "HEAD"]);
       json(res, 200, { ok: true, commit, buildOutput });
