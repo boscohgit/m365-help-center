@@ -64,7 +64,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
         {guide.sections.map((section) => (
           <section id={section.id}>
             <p class="eyebrow">{section.kicker ?? "操作指引"}</p>
-            <h2>{section.title}</h2>
+            <h2 class="section-heading">
+              <a href={`#${section.id}`} title={`获取“${section.title}”章节链接`} aria-label={`获取“${section.title}”章节链接`}>
+                <span>{section.title}</span><span class="section-anchor-icon" aria-hidden="true">#</span>
+              </a>
+            </h2>
             {section.intro && <p class="section-intro">{section.intro}</p>}
             {section.blocks.map((block) => (
               block.type === "step" ? (
@@ -130,6 +134,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .standard-content section { scroll-margin-top:100px; padding:28px 0 50px; border-bottom:1px solid var(--line); }
   .standard-content section:first-child { padding-top:0; }
   .standard-content h2 { margin:0 0 20px; color:var(--navy); font-size:clamp(28px,4vw,38px); letter-spacing:-.035em; }
+  .standard-content .section-heading a { display:inline-flex; align-items:center; gap:10px; color:inherit; text-decoration:none; }
+  .standard-content .section-heading a:hover { color:var(--blue); }
+  .standard-content .section-heading a:focus-visible { outline:3px solid rgba(9,105,218,.25); outline-offset:5px; border-radius:5px; }
+  .section-anchor-icon { color:var(--blue); font-size:.68em; font-weight:700; opacity:0; transition:opacity .16s ease; }
+  .section-heading:hover .section-anchor-icon, .section-heading a:focus-visible .section-anchor-icon { opacity:1; }
   .section-intro { margin:-5px 0 24px; color:var(--muted); line-height:1.8; }
   .prep-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
   .prep-grid div { padding:18px; border:1px solid var(--line); border-radius:15px; background:#fff; }
