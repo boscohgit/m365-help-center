@@ -158,12 +158,13 @@ async function atomicWriteJson(filePath, value) {
 }
 
 function run(command, args, options = {}) {
+  const { trimOutput = true, ...spawnOptions } = options;
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
       cwd: root,
       env: runtimeEnv,
       shell: process.platform === "win32" && command === pnpmBin,
-      ...options,
+      ...spawnOptions,
     });
     let output = "";
     child.stdout?.on("data", (chunk) => {
@@ -176,15 +177,19 @@ function run(command, args, options = {}) {
     });
     child.on("error", reject);
     child.on("close", (code) => {
-      if (code === 0) resolve(output.trim());
-      else reject(new Error(output.trim() || `${command} 执行失败（${code}）。`));
+      const result = trimOutput ? output.trim() : output;
+      if (code === 0) resolve(result);
+      else reject(new Error(result.trim() || `${command} 执行失败（${code}）。`));
     });
   });
 }
 
 async function gitStatus() {
+  // 保留状态码前的空格；否则 trim() 会把未暂存修改的路径首字母截掉。
   // NUL 分隔格式不会因 Windows 换行、文件名空格或 Git 的引号转义而丢失路径字符。
-  const raw = await run("git", ["status", "--porcelain=v1", "-z"]);
+  const raw = await run("git", ["status", "--porcelain=v1", "-z"], {
+    trimOutput: false,
+  });
   const entries = raw ? raw.split("\0").filter(Boolean) : [];
   const files = [];
   for (let index = 0; index < entries.length; index += 1) {
