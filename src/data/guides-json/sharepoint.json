@@ -43,7 +43,7 @@
           "number": "1",
           "title": "打开站点链接",
           "body": "在浏览器中打开站点负责人提供的 SharePoint 地址。",
-          "note": "",
+          "note": "若需要秘书处共享盘地址，请联系秘书处同事。\n如需要分所共享盘地址，请联系分所行政同事。",
           "warning": "",
           "images": []
         },
@@ -57,9 +57,9 @@
           "warning": "",
           "images": [
             {
-              "src": "/assets/sop/sharepoint/sharepoint-b1e2321-01.webp",
-              "alt": "登录后，您将看到 SharePoint 起始页：",
-              "caption": "登录后，您将看到 SharePoint 起始页："
+              "src": "/assets/sop/sharepoint/1785207392470-057bf8-sharepoint-b1e2321-01.webp",
+              "caption": "登录后，您将看到 SharePoint 起始页：",
+              "alt": "登录后，您将看到 SharePoint 起始页："
             }
           ]
         },
@@ -101,9 +101,9 @@
           "warning": "",
           "images": [
             {
-              "src": "/assets/sop/sharepoint/sharepoint-b1e2321-02.webp",
-              "alt": "如果浏览器弹出提示，允许 OneDrive 打开，请点击允许。",
-              "caption": "如果浏览器弹出提示，允许 OneDrive 打开，请点击允许。"
+              "src": "/assets/sop/sharepoint/1785207410143-700284-sharepoint-b1e2321-02.webp",
+              "caption": "如果浏览器弹出提示，允许 OneDrive 打开，请点击允许。",
+              "alt": "如果浏览器弹出提示，允许 OneDrive 打开，请点击允许。"
             }
           ]
         },
@@ -117,9 +117,9 @@
           "warning": "",
           "images": [
             {
-              "src": "/assets/sop/sharepoint/sharepoint-b1e2321-03.webp",
-              "alt": "打开任意文件夹即可看到此共享文件夹",
-              "caption": "打开任意文件夹即可看到此共享文件夹"
+              "src": "/assets/sop/sharepoint/1785207424069-f6319a-sharepoint-b1e2321-03.webp",
+              "caption": "打开任意文件夹即可看到此共享文件夹",
+              "alt": "打开任意文件夹即可看到此共享文件夹"
             }
           ]
         }
