@@ -71,7 +71,7 @@
           "type": "step",
           "number": "1",
           "title": "输入工作或学校账号",
-          "body": "在组织登录页面输入公司邮箱和密码。",
+          "body": "在组织登录页面输入hr提供公司邮箱和密码。\nxxx@incorp.international\nWelcome@xxx",
           "note": "",
           "warning": "",
           "images": []
@@ -82,7 +82,7 @@
           "number": "2",
           "title": "完成验证",
           "body": "根据页面提示使用 Microsoft Authenticator、腾讯身份验证器或其他已登记方式。",
-          "note": "",
+          "note": "验证器配置方式可访问“首次登陆并激活公司账号”获取。",
           "warning": "",
           "images": []
         }
@@ -170,7 +170,13 @@
           "body": "从开始菜单搜索“公司门户 / Company Portal”，使用公司账号登录。",
           "note": "",
           "warning": "",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/sop/autopilot-new-pc/1785206850732-d8dd2f-1.webp",
+              "caption": "搜索并打开公司门户",
+              "alt": "1"
+            }
+          ]
         },
         {
           "id": "step-3",
@@ -180,7 +186,18 @@
           "body": "进入“应用 / Apps”，只安装当前工作需要的软件，等待状态变为“已安装”。",
           "note": "",
           "warning": "",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/sop/autopilot-new-pc/1785206886420-df68b5-2.webp",
+              "caption": "公司门户对应应用",
+              "alt": "2"
+            },
+            {
+              "src": "/assets/sop/autopilot-new-pc/1785206950397-9abdb9-3.webp",
+              "caption": "公司门户界面",
+              "alt": "3"
+            }
+          ]
         }
       ]
     },
