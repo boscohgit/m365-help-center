@@ -183,13 +183,23 @@ function run(command, args, options = {}) {
 }
 
 async function gitStatus() {
-  const raw = await run("git", ["status", "--porcelain=v1"]);
-  const files = raw
-    ? raw.split("\n").map((line) => ({
-        status: line.slice(0, 2),
-        path: line.slice(3).trim(),
-      }))
-    : [];
+  // NUL 分隔格式不会因 Windows 换行、文件名空格或 Git 的引号转义而丢失路径字符。
+  const raw = await run("git", ["status", "--porcelain=v1", "-z"]);
+  const entries = raw ? raw.split("\0").filter(Boolean) : [];
+  const files = [];
+  for (let index = 0; index < entries.length; index += 1) {
+    const entry = entries[index];
+    const status = entry.slice(0, 2);
+    files.push({ status, path: entry.slice(3) });
+    // porcelain -z 将重命名/复制的旧路径和新路径作为相邻两项返回。
+    if (status.includes("R") || status.includes("C")) {
+      const renamedPath = entries[index + 1];
+      if (renamedPath) {
+        files.push({ status, path: renamedPath });
+        index += 1;
+      }
+    }
+  }
   const allowed = files.every(
     (file) =>
       file.path.startsWith("src/data/guides-json/") ||
