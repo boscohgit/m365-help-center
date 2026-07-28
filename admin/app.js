@@ -268,6 +268,7 @@ function renderEditor() {
   editor.innerHTML = `
     <div class="editor-heading">
       <div><h1>${escapeHtml(guide.title)}</h1><p>拖动章节、步骤或图片调整前端显示顺序。</p></div>
+      <button type="button" class="button danger small" data-action="delete-guide">删除这篇 SOP</button>
     </div>
     <section class="panel">
       <h2>页面资料</h2>
@@ -319,6 +320,33 @@ async function selectGuide(slug) {
     markSaved("内容已载入");
   } catch (error) {
     toast(error.message, "error");
+  } finally {
+    setBusy(false);
+  }
+}
+
+async function deleteGuide() {
+  if (!state.guide) return;
+  const title = state.guide.title;
+  const warning = state.dirty ? "未保存的修改也会一并丢失。" : "";
+  if (!confirm(`确定删除“${title}”吗？${warning}\n\n这会同时删除文章内容、图片和首页排序记录。删除后需要点击“发布到 GitHub”才能更新线上网站。`)) {
+    return;
+  }
+  try {
+    setBusy(true, "正在删除…");
+    await api(`/api/guides/${state.guide.slug}`, { method: "DELETE" });
+    state.guides = state.guides.filter((guide) => guide.slug !== state.guide.slug);
+    state.guide = null;
+    state.selectedSlug = null;
+    state.dirty = false;
+    renderGuideList();
+    renderEditor();
+    previewFrame.src = "about:blank";
+    openPreview.removeAttribute("href");
+    markSaved("SOP 已删除");
+    toast(`已删除“${title}”。请点击“发布到 GitHub”同步线上网站。`, "normal", 7000);
+  } catch (error) {
+    toast(error.message, "error", 8000);
   } finally {
     setBusy(false);
   }
@@ -659,7 +687,9 @@ editor.addEventListener("click", async (event) => {
   const blockIndex = Number(button.dataset.block);
   const imageIndex = Number(button.dataset.image);
 
-  if (action === "add-prepare") {
+  if (action === "delete-guide") {
+    await deleteGuide();
+  } else if (action === "add-prepare") {
     state.guide.prepare.push({ label: "准备项", text: "" });
     structuralChange();
   } else if (action === "remove-prepare") {

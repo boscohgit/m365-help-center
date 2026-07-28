@@ -490,6 +490,33 @@ async function handleApi(req, res, url) {
     return;
   }
 
+  if (guideMatch && req.method === "DELETE") {
+    const slug = safeSlug(guideMatch[1]);
+    if (!slug) return json(res, 400, { error: "指引标识无效。" });
+    try {
+      const guidePath = path.join(contentDir, `${slug}.json`);
+      await fsp.access(guidePath);
+      await fsp.unlink(guidePath);
+
+      const assetDirectory = path.join(publicDir, "assets", "sop", slug);
+      await fsp.rm(assetDirectory, { recursive: true, force: true });
+
+      const config = JSON.parse(await fsp.readFile(siteConfigPath, "utf8"));
+      config.guideOrder = Array.isArray(config.guideOrder)
+        ? config.guideOrder.filter((item) => item !== slug)
+        : [];
+      await atomicWriteJson(siteConfigPath, config);
+      json(res, 200, { ok: true, slug });
+    } catch (error) {
+      if (error.code === "ENOENT") {
+        json(res, 404, { error: "没有找到这篇指引。" });
+      } else {
+        json(res, 400, { error: error.message });
+      }
+    }
+    return;
+  }
+
   if (url.pathname === "/api/upload" && req.method === "POST") {
     try {
       const { slug: rawSlug, filename, dataUrl } = await readJsonBody(req);

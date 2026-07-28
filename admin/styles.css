@@ -301,6 +301,7 @@ a {
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
+  flex-wrap: wrap;
   margin-bottom: 18px;
 }
 
