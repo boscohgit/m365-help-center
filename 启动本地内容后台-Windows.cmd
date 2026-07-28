@@ -37,7 +37,17 @@ if defined GIT_AVAILABLE if exist ".git" (
     echo 正在从 GitHub 获取最新版本...
     git pull --ff-only
     if errorlevel 1 (
-      echo GitHub 更新失败，将继续使用当前本地版本。
+      echo 快进同步失败，检测到本地和 GitHub 都有提交，正在尝试安全 rebase...
+      git pull --rebase --autostash
+      if errorlevel 1 (
+        echo.
+        echo 自动同步发生冲突，已停止启动，避免使用过期代码或覆盖本地内容。
+        echo 请在 PowerShell 中处理冲突后再重新启动本文件。
+        echo.
+        pause
+        exit /b 1
+      )
+      echo 已完成安全同步。
     )
   )
 )

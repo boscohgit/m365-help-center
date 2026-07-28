@@ -6,6 +6,23 @@ PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CODEX_NODE="/Users/bosco/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node"
 CODEX_PNPM="/Users/bosco/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback/pnpm"
 
+cd "$PROJECT_DIR"
+if command -v git >/dev/null 2>&1 && [[ -d .git ]]; then
+  if [[ -n "$(git status --porcelain)" ]]; then
+    echo "检测到本地尚未发布的修改，已跳过 GitHub 更新。"
+  else
+    echo "正在从 GitHub 获取最新版本..."
+    if ! git pull --ff-only; then
+      echo "检测到本地和 GitHub 都有提交，正在尝试安全 rebase..."
+      if ! git pull --rebase --autostash; then
+        echo "自动同步发生冲突，已停止启动，避免使用过期代码或覆盖本地内容。"
+        read "?请处理冲突后按回车键关闭窗口。"
+        exit 1
+      fi
+    fi
+  fi
+fi
+
 if command -v node >/dev/null 2>&1; then
   NODE_BIN="$(command -v node)"
 elif [[ -x "$CODEX_NODE" ]]; then
@@ -26,7 +43,6 @@ else
   exit 1
 fi
 
-cd "$PROJECT_DIR"
 export M365_PNPM_BIN="$PNPM_BIN"
 export PATH="$(dirname "$NODE_BIN"):$PATH"
 "$NODE_BIN" admin/server.mjs
