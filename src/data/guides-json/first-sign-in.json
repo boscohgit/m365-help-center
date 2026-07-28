@@ -3,7 +3,7 @@
   "title": "首次登录并激活公司账号",
   "subtitle": "首次密码 · 多重身份验证 · 修改临时密码",
   "category": "账号与安全",
-  "description": "首次收到公司 Microsoft 365 账号后，完成登录、安全验证和临时密码修改。",
+  "description": "首次收到HR发送的 Microsoft 365 账号（xxx@incorp.international)后，完成登录、安全验证和临时密码修改。",
   "duration": "约 10 分钟",
   "device": "电脑 + 手机",
   "keywords": [
@@ -44,7 +44,7 @@
           "type": "step",
           "number": "1",
           "title": "打开“我的账户”",
-          "body": "在电脑浏览器访问 https://myaccount.microsoft.com/。",
+          "body": "在任意电脑浏览器访问 https://myaccount.microsoft.com/。",
           "note": "",
           "warning": "",
           "images": []
@@ -54,14 +54,14 @@
           "type": "step",
           "number": "2",
           "title": "输入公司账号",
-          "body": "输入欢迎邮件中的公司邮箱地址，点击“下一步”。",
+          "body": "输入欢迎邮件中的公司邮箱地址(xxx@incorp.international)，点击“下一步”。",
           "note": "",
           "warning": "",
           "images": [
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-01.webp",
-              "alt": "输入您的账号user@example.com",
-              "caption": "输入您的账号user@example.com"
+              "src": "/assets/sop/first-sign-in/1785200969907-32659e-Snipaste_2026-07-28_09-08-45.webp",
+              "caption": "登陆界面",
+              "alt": "Snipaste 2026 07 28 09 08 45"
             }
           ]
         },
@@ -70,7 +70,7 @@
           "type": "step",
           "number": "3",
           "title": "输入临时密码",
-          "body": "输入 HR 单独提供的临时密码。不要使用公开文档、聊天记录或他人的密码。",
+          "body": "输入 HR 单独提供的临时密码。",
           "note": "",
           "warning": "",
           "images": []
@@ -79,8 +79,8 @@
           "id": "step-4",
           "type": "step",
           "number": "4",
-          "title": "完成当前验证",
-          "body": "如果页面要求输入验证码，请使用公司指定且只发给您本人的验证方式。无法获取时请联系 IT，不要反复猜测。",
+          "title": "跳过手机验证选择，选择邮箱认证",
+          "body": "进入下一步会要求你输入手机号，请拉到底点击其他选项，然后选择用邮箱验证。输入自己的私人邮箱接受验证码并完成验证。后续此账号重置密码需要用到这个邮箱。",
           "note": "",
           "warning": "",
           "images": []
@@ -91,119 +91,171 @@
       "id": "authenticator",
       "kicker": "步骤二",
       "title": "配置多重身份验证",
-      "intro": "页面要求保护账号时，请根据手机类型选择验证器。详细图文流程可打开“添加账号验证方式”指引。",
+      "intro": "完成邮箱认证后，请根据手机型号选择验证器。详细图文流程可打开“添加账号验证方式”指引。",
       "blocks": [
         {
           "id": "step-1",
           "type": "step",
-          "number": "1",
-          "title": "苹果手机",
-          "body": "安装 Microsoft Authenticator，在应用中添加“工作或学校账户”，扫描电脑二维码并完成数字匹配。",
+          "number": "1.1",
+          "title": "苹果手机安装Microsoft Authenticator",
+          "body": "AppStore搜索并安装 Microsoft Authenticator，电脑屏幕上点击下一步。直至出现二维码。",
           "note": "",
           "warning": "",
           "images": [
             {
               "src": "/assets/sop/branch-account/branch-account-15ce775-03.webp",
-              "alt": "苹果应用商店下载“Microsoft Authenticator”(请认真辨别应用)",
-              "caption": "苹果应用商店下载“Microsoft Authenticator”(请认真辨别应用)"
+              "alt": "苹果应用商店下载“Microsoft Authenticator”",
+              "caption": "苹果应用商店下载“Microsoft Authenticator”"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-04.webp",
-              "alt": "回到电脑上，请访问“安全信息”栏-“更新信息”",
-              "caption": "回到电脑上，请访问“安全信息”栏-“更新信息”"
+              "src": "/assets/sop/first-sign-in/1785201386438-edc51c-1785201376233-caee7c-1.webp",
+              "caption": "进入验证",
+              "alt": "图片1"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-05.webp",
-              "alt": "点击“添加登陆方法” > 添加“Microsoft Authenticator”并添加您的手机应用作为登录验证方式",
-              "caption": "点击“添加登陆方法” > 添加“Microsoft Authenticator”并添加您的手机应用作为登录验证方式"
+              "src": "/assets/sop/first-sign-in/1785201482481-55beda-2.webp",
+              "caption": "选择验证器",
+              "alt": "图片2"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-06.webp",
-              "alt": "苹果手机直接点击“下一步”",
-              "caption": "苹果手机直接点击“下一步”"
-            },
-            {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-07.webp",
-              "alt": "在手机应用Microsoft Authenticator上，点击右上角+号，选择“工作或学校账户”，然后选择“扫描QR码”，并扫描上一步中的二维码",
-              "caption": "在手机应用Microsoft Authenticator上，点击右上角+号，选择“工作或学校账户”，然后选择“扫描QR码”，并扫描上一步中的二维码"
+              "src": "/assets/sop/first-sign-in/1785201618913-761fe0-3.webp",
+              "caption": "扫二维码",
+              "alt": "图片3"
             }
           ]
         },
         {
           "id": "step-2",
           "type": "step",
-          "number": "2",
-          "title": "安卓手机",
-          "body": "按照公司要求安装腾讯身份验证器；在网页选择“其他身份验证器”，扫描二维码并输入 6 位动态验证码。",
+          "number": "1.2",
+          "title": "配置验证器",
+          "body": "打开手机上的刚安装的Microsoft Authenticator,点击右上角 \"+\" -> \"工作或学校帐户\" -> \"扫描二维码\"。扫描屏幕上的二维码。",
           "note": "",
           "warning": "",
           "images": [
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-02.webp",
-              "alt": "安卓下载“腾讯身份验证器”：https://sj.qq.com/appdetail/com.tencent.authenticator（您需要先安装腾讯应用宝）",
-              "caption": "安卓下载“腾讯身份验证器”：https://sj.qq.com/appdetail/com.tencent.authenticator（您需要先安装腾讯应用宝）"
+              "src": "/assets/sop/first-sign-in/1785201647660-c84842-4.webp",
+              "caption": "iphone操作",
+              "alt": "图片4"
+            }
+          ]
+        },
+        {
+          "id": "step-ms3z1tal-ttmiq",
+          "type": "step",
+          "number": "1.3",
+          "title": "通过验证",
+          "body": "扫描后手机端会弹出窗口要求输入网页上看到的数字，绑定即成功。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/first-sign-in/1785201873517-0475e0-5.webp",
+              "caption": "电脑生成2位数字",
+              "alt": "图片5"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-08.webp",
-              "alt": "安卓手机选择“我想要使用其他身份验证器应用”",
-              "caption": "安卓手机选择“我想要使用其他身份验证器应用”"
+              "src": "/assets/sop/first-sign-in/1785201909641-816da9-1785201898562-6acd7f-6.webp",
+              "caption": "手机输入验证码",
+              "alt": "图片6"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-09.webp",
-              "alt": "选择扫描二维码，并扫描电脑上二维码，您即可看到手机上的6位数字如下",
-              "caption": "选择扫描二维码，并扫描电脑上二维码，您即可看到手机上的6位数字如下"
+              "src": "/assets/sop/first-sign-in/1785204454629-607076-15.webp",
+              "caption": "验证完成",
+              "alt": "图片15"
+            }
+          ]
+        },
+        {
+          "id": "step-ms3ze2ok-vcnue",
+          "type": "step",
+          "number": "2.1",
+          "title": "安卓手机安装“腾讯身份验证器”",
+          "body": "手机浏览器访问https://doc.weixin.qq.com/doc/w3_AboAigb6AGcCNPdv0Gb4UTCCFlCrn?scode=ALAAzgfjADEF4jeMoq ，下载并安装腾讯身份验证器。请直接访问此链接下载，不要使用手机原生商店搜索",
+          "note": "https://doc.weixin.qq.com/doc/w3_AboAigb6AGcCNPdv0Gb4UTCCFlCrn?scode=ALAAzgfjADEF4jeMoq",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-ms3ziwq9-xqz36",
+          "type": "step",
+          "number": "2.2",
+          "title": "电脑进入二维码界面",
+          "body": "电脑屏幕上请不要直接点击“下一步”，选择“设置其他身份验证应用”，然后选择下一步。直至出现二维码。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/first-sign-in/1785203679568-db002f-1.webp",
+              "caption": "进入验证",
+              "alt": "图片1"
             },
             {
-              "src": "/assets/sop/branch-account/branch-account-15ce775-10.webp",
-              "alt": "选择扫描二维码，并扫描电脑上二维码，您即可看到手机上的6位数字如下",
-              "caption": "选择扫描二维码，并扫描电脑上二维码，您即可看到手机上的6位数字如下"
+              "src": "/assets/sop/first-sign-in/1785203694604-216dee-7.webp",
+              "caption": "选择验证器",
+              "alt": "图片7"
+            },
+            {
+              "src": "/assets/sop/first-sign-in/1785203715219-b51e4b-3.webp",
+              "caption": "图片3",
+              "alt": "图片3"
+            }
+          ]
+        },
+        {
+          "id": "step-ms3zm6w1-fc2al",
+          "type": "step",
+          "number": "2.3",
+          "title": "配置验证器",
+          "body": "手机上打开腾讯身份验证器，点击二维码激活，并扫屏幕上二维码。完成后点击下一步，电脑上输入身份验证器中看到的6位数字。通过验证即绑定成功。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/first-sign-in/1785203229151-28a253-10.webp",
+              "caption": "打开腾讯身份验证器",
+              "alt": "图片10"
+            },
+            {
+              "src": "/assets/sop/first-sign-in/1785203238798-d26ab6-9.webp",
+              "caption": "扫码后生成6位数字",
+              "alt": "图片9"
+            },
+            {
+              "src": "/assets/sop/first-sign-in/1785203245306-ab60c6-8.webp",
+              "caption": "电脑输入手机验证器上6位数字",
+              "alt": "图片8"
+            },
+            {
+              "src": "/assets/sop/first-sign-in/1785204462256-574814-15.webp",
+              "caption": "验证完成",
+              "alt": "图片15"
             }
           ]
         }
       ]
     },
     {
-      "id": "change-password",
+      "id": "psw",
       "kicker": "步骤三",
-      "title": "修改临时密码",
+      "title": "修改密码",
       "intro": "",
       "blocks": [
         {
-          "id": "step-1",
+          "id": "step-ms40pefj-wa2j3",
           "type": "step",
           "number": "1",
-          "title": "按照页面提示进入修改密码",
-          "body": "首次登录完成后，系统可能自动要求修改密码。",
-          "note": "",
+          "title": "更新密码",
+          "body": "验证器完成并使用验证码完成登录，随即会要求您修改密码，请输入当前密码（即邮件中收到的密码）及新密码并妥善保管。",
+          "note": "密码要求：同时有数字，英文字母大小写及符号，请不要使用1234，abcd等连续的形式",
           "warning": "",
-          "images": []
-        },
-        {
-          "id": "step-2",
-          "type": "step",
-          "number": "2",
-          "title": "设置新密码",
-          "body": "输入临时密码和两次相同的新密码。以页面显示的密码复杂度要求为准。",
-          "note": "",
-          "warning": "",
-          "images": []
-        },
-        {
-          "id": "step-3",
-          "type": "step",
-          "number": "3",
-          "title": "重新登录",
-          "body": "修改成功后，Outlook、Teams、OneDrive 和 Office 均应使用新密码。",
-          "note": "",
-          "warning": "",
-          "images": []
-        },
-        {
-          "id": "success",
-          "type": "callout",
-          "tone": "success",
-          "title": "检查结果",
-          "body": "能够使用新密码登录，并且安全信息中能看到已配置的验证方式。"
+          "images": [
+            {
+              "src": "/assets/sop/first-sign-in/1785204669764-ec4561-20.webp",
+              "caption": "图片20",
+              "alt": "图片20"
+            }
+          ]
         }
       ]
     }
