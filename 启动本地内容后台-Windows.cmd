@@ -43,31 +43,28 @@ if defined GIT_AVAILABLE if exist ".git" (
 )
 
 set "PNPM_BIN="
-where pnpm.cmd >nul 2>nul
-if not errorlevel 1 set "PNPM_BIN=pnpm"
+where corepack.cmd >nul 2>nul
+if not errorlevel 1 (
+  set "PNPM_BIN=admin\pnpm-corepack-windows.cmd"
+  call "!PNPM_BIN!" --version >nul 2>nul
+  if errorlevel 1 (
+    echo.
+    echo Corepack 无法启动项目指定的 pnpm 版本。
+    echo 请在 PowerShell 中运行：corepack enable
+    echo 然后重新双击本文件。如果仍然失败，请安装最新的 Node.js LTS。
+    echo.
+    pause
+    exit /b 1
+  )
+)
 
 if not defined PNPM_BIN (
-  where corepack.cmd >nul 2>nul
-  if errorlevel 1 (
-    echo.
-    echo 没有找到 pnpm 或 Corepack。
-    echo 请打开 PowerShell，运行：npm install -g pnpm
-    echo 完成后重新双击本文件。
-    echo.
-    pause
-    exit /b 1
-  )
-  call corepack.cmd pnpm --version >nul 2>nul
-  if errorlevel 1 (
-    echo.
-    echo Corepack 无法启动 pnpm。
-    echo 请打开 PowerShell，运行：npm install -g pnpm
-    echo 完成后重新双击本文件。
-    echo.
-    pause
-    exit /b 1
-  )
-  set "PNPM_BIN=admin\pnpm-corepack-windows.cmd"
+  echo.
+  echo 没有找到 Corepack。为避免调用不兼容的全局 pnpm，本启动文件不会继续运行。
+  echo 请安装或更新 Node.js LTS，然后重新双击本文件。
+  echo.
+  pause
+  exit /b 1
 )
 
 if not exist "node_modules\astro\package.json" (

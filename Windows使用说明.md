@@ -12,11 +12,15 @@
 
 安装 Node.js 时请保持“Add to PATH”选项开启。
 
-如果启动文件提示没有 pnpm，请打开 PowerShell，运行：
+启动文件会通过 Node.js 自带的 Corepack 自动使用项目指定的 pnpm 10，不需要单独安装全局 pnpm。这样可以避免 Windows 上的 Node.js 与 pnpm 版本不匹配。
+
+如果启动文件提示 Corepack 无法启动，请打开 PowerShell，运行：
 
 ```powershell
-npm install -g pnpm
+corepack enable
 ```
+
+然后重新双击启动文件。仍然失败时，请安装或更新 [Node.js LTS](https://nodejs.org/)，再重试。不要运行 `npm install -g pnpm` 安装 pnpm 11，否则可能与现有 Node.js 版本不兼容。
 
 ## 获取项目
 
