@@ -205,7 +205,7 @@
       "id": "chathistory",
       "kicker": "步骤六",
       "title": "转移聊天记录位置",
-      "intro": "",
+      "intro": "安装企业微信/微信后首次登录",
       "blocks": [
         {
           "id": "step-ms6ywpp2-gr8da",
