@@ -202,6 +202,46 @@
       ]
     },
     {
+      "id": "chathistory",
+      "kicker": "步骤六",
+      "title": "转移聊天记录位置",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-ms6ywpp2-gr8da",
+          "type": "step",
+          "number": "1",
+          "title": "转移微信聊天记录位置",
+          "body": "打开微信并登录，点击左下角三横，选择“设置”，找到“存储位置\"并将其改至d:\\wechat",
+          "note": "找不到d:\\wechat文件夹请自行手动创建",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/autopilot-new-pc/1785383186371-1f03b3-wechatlocation.webp",
+              "caption": "微信修改聊天记录保存位置",
+              "alt": "wechatlocation"
+            }
+          ]
+        },
+        {
+          "id": "step-ms6z2f8n-fxh73",
+          "type": "step",
+          "number": "2",
+          "title": "转移企业微信聊天记录位置",
+          "body": "打开企业微信并登录，点击左上角头像，选择”设置“-”存储管理“找到文件存储位置”并将其改至d:\\wecom",
+          "note": "找不到d:\\wecom文件夹请自行手动创建",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/autopilot-new-pc/1785383367613-8ad9ba-wecomlocation.webp",
+              "caption": "企业微信修改聊天记录保存位置",
+              "alt": "wecomlocation"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "troubleshooting",
       "kicker": "异常处理",
       "title": "什么时候联系 IT",
