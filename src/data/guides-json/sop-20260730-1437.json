@@ -1,0 +1,231 @@
+{
+  "slug": "sop-20260730-1437",
+  "title": "共享文件给外部用户",
+  "subtitle": "文件共享 外部人员 文件 大文件",
+  "category": "OneDrive 与 SharePoint",
+  "description": "大文件无法通过邮件附件共享，可以通过OneDrive共享至外部用户",
+  "duration": "约 5–10 分钟",
+  "device": "电脑或手机",
+  "keywords": [
+    "共享文件给外部用户"
+  ],
+  "completion": "按照页面步骤完成操作，并确认结果正常。",
+  "prepare": [
+    {
+      "label": "开始前",
+      "text": "准备好操作所需的公司账号、设备和稳定网络。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "application",
+      "kicker": "步骤一",
+      "title": "申请外部共享",
+      "intro": "确认外部用户是否已经通过审核",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "访问网站并登录公司账号",
+          "body": "在公司网络访问https://guestrequest.incorp.asia/并登录公司账号xxx@incorp.international",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785393713088-79caf7-1.webp",
+              "caption": "登录网站",
+              "alt": "1"
+            }
+          ]
+        },
+        {
+          "id": "step-ms75bjnp-bmasf",
+          "type": "step",
+          "number": "2",
+          "title": "申请外部共享",
+          "body": "输入对方账号，名称并发起申请。",
+          "note": "1. 若显示Guest email looks new 请点击发起申请\n2.若显示This external user already exists 则可以直接跳过申请",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785393861748-97d148-2.webp",
+              "caption": "输入对方信息",
+              "alt": "2"
+            }
+          ]
+        },
+        {
+          "id": "step-ms75gtho-xqrsv",
+          "type": "step",
+          "number": "3",
+          "title": "等待申请通过",
+          "body": "发起申请后请等待邮件通知",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394035716-53be5f-3.webp",
+              "caption": "申请通过邮件模板",
+              "alt": "3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sharefile-desktop",
+      "kicker": "步骤二",
+      "title": "OneDrive客户端共享文件给外部用户",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-ms75kqlg-r7758",
+          "type": "step",
+          "number": "1",
+          "title": "将文件上传到OneDrive",
+          "body": "直接将文件复制到OneDrive文件夹里",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-ms75nhud-7c9wy",
+          "type": "step",
+          "number": "2",
+          "title": "共享文件",
+          "body": "右键点击文件选择“OneDrive” → 点击”共享“",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394316434-0cc3a5-4.webp",
+              "caption": "发起共享文件",
+              "alt": "4"
+            }
+          ]
+        },
+        {
+          "id": "step-ms75ptc4-ziaro",
+          "type": "step",
+          "number": "3",
+          "title": "输入对方信息",
+          "body": "在弹窗中输入对方邮箱地址\n复制链接：通过邮件/Teams/企业微信/微信发送链接；\n直接发送：系统自动向对方发送共享通知邮件。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394445783-40dabf-5.webp",
+              "caption": "设置接收者",
+              "alt": "5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fileshare-web",
+      "kicker": "步骤三",
+      "title": "Onedrive网页版共享文件给外部用户",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-ms75sraw-rc183",
+          "type": "step",
+          "number": "1",
+          "title": "登录OneDrive网页版",
+          "body": "打开浏览器访问https://prokorpsg-my.sharepoint.com，并使用公司账号xxx@incorp.international登录",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-ms75txkj-vjkji",
+          "type": "step",
+          "number": "2",
+          "title": "上传文件",
+          "body": "进入页面后点击左上角上传按钮上文文件。",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-ms75uh30-mddnn",
+          "type": "step",
+          "number": "3",
+          "title": "共享文件",
+          "body": "点击文件旁共享按钮并在弹窗中输入对方邮箱地址\n复制链接：通过邮件/Teams/企业微信/微信发送链接；\n直接发送：系统自动向对方发送共享通知邮件。",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394653995-e4a61b-6.webp",
+              "caption": "选择文件",
+              "alt": "6"
+            },
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394670573-771783-5.webp",
+              "caption": "共享文件",
+              "alt": "5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sharefile-wecom",
+      "kicker": "步骤四",
+      "title": "企业微信共享文件给外部用户",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-ms75xkrb-f92tt",
+          "type": "step",
+          "number": "1",
+          "title": "上传文件",
+          "body": "打开企业微信 → 进入左侧「微盘」 → 上传文件",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-ms75y5ar-soo05",
+          "type": "step",
+          "number": "2",
+          "title": "设置共享权限",
+          "body": "右键点击文件 → 选择「权限管理」 → 在「企业外」设置「可下载」 → 关闭窗口",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394815085-7dec9e-8.webp",
+              "caption": "设置权限",
+              "alt": "8"
+            },
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394823047-b16e93-7.webp",
+              "caption": "设置权限",
+              "alt": "7"
+            }
+          ]
+        },
+        {
+          "id": "step-ms75zgbf-d40i0",
+          "type": "step",
+          "number": "3",
+          "title": "共享文件",
+          "body": "再次右键点击文件 → 选择「获取分享链接」",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sop-20260730-1437/1785394869379-34dd44-9.webp",
+              "caption": "共享文件",
+              "alt": "9"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
