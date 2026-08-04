@@ -1,0 +1,73 @@
+{
+  "slug": "wecom-mail",
+  "title": "企业微信内邮箱登录",
+  "subtitle": "企业微信登录邮箱流程",
+  "category": "Outlook 邮箱",
+  "description": "企业微信内置邮箱配置流程",
+  "duration": "约 5–10 分钟",
+  "device": "电脑及手机",
+  "keywords": [
+    "企业微信",
+    "邮箱登录",
+    "邮箱验证"
+  ],
+  "completion": "企业微信内邮件正常收发",
+  "prepare": [
+    {
+      "label": "开始前",
+      "text": "准备好操作所需的公司账号、设备、稳定网络和登录企业微信手机版"
+    }
+  ],
+  "sections": [
+    {
+      "id": "removemailbox",
+      "kicker": "移除登录账号",
+      "title": "企业微信邮箱登录",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "手机端移除邮箱登录",
+          "body": "手机端打开企业微信邮箱，依次点击\n1.右上角+\n2. 更多\n3. 邮件设置\n4. 账户\n5. 删除账户",
+          "note": "",
+          "warning": "若从未登录企微邮箱可以跳过此步骤",
+          "images": [
+            {
+              "src": "/assets/sop/wecom-mail/1785810027292-6470d4-final1.webp",
+              "caption": "删除企微邮箱",
+              "alt": "final1"
+            }
+          ]
+        },
+        {
+          "id": "step-mse0th0w-wjlru",
+          "type": "step",
+          "number": "2",
+          "title": "企微手机端登录账号",
+          "body": "回到邮箱首页，再次点击右上角+，选择绑定邮箱地址\n等待片刻邮箱地址自动出现，输入密码， 同意协议，跳转登录界面再次登录。最后通过验证器登录即可\n",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/wecom-mail/1785810307538-4443aa-final2.webp",
+              "caption": "登录企微邮箱",
+              "alt": "final2"
+            }
+          ]
+        },
+        {
+          "id": "step-mse1d33r-08k5h",
+          "type": "step",
+          "number": "3",
+          "title": "等待企微客户端同步",
+          "body": "稍等约5分钟后，公司电脑企业微信电脑端自动完成同步。",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    }
+  ]
+}
