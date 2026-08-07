@@ -1,0 +1,95 @@
+{
+  "slug": "run-wechat-fail",
+  "title": "微信无法正常打开",
+  "subtitle": "无法正常打开微信",
+  "category": "设备与工具",
+  "description": "正常打开并升级微信",
+  "duration": "约 5–10 分钟",
+  "device": "电脑",
+  "keywords": [
+    "微信无法正常打开"
+  ],
+  "completion": "微信后续可以正常打开",
+  "prepare": [
+    {
+      "label": "开始前",
+      "text": "准备好操作所需的公司账号、设备和稳定网络。"
+    }
+  ],
+  "sections": [
+    {
+      "id": "wechat-update",
+      "kicker": "更新微信",
+      "title": "更新微信",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "重新打开微信",
+          "body": "右键选择微信图片，并选择“使用提升的访问权限运行”",
+          "note": "若桌面找不到微信图标，可以打开C:\\Program Files\\Tencent\\Weixin 找到“微信”",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/run-wechat-fail/1786084806867-ab20d9-1.webp",
+              "caption": "使用提升管理权限打开微信",
+              "alt": "1"
+            }
+          ]
+        },
+        {
+          "id": "step-msiktm7f-xuve0",
+          "type": "step",
+          "number": "2A",
+          "title": "输入业务理由",
+          "body": "若应用要求你输入业务理由，请填入理由后并联系IT告知情况",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/run-wechat-fail/1786085021735-13242e-2.webp",
+              "caption": "输入任意理由即可",
+              "alt": "2"
+            }
+          ]
+        },
+        {
+          "id": "step-msikwynh-1llj0",
+          "type": "step",
+          "number": "2B",
+          "title": "点击继续并选择账号",
+          "body": "若应用没要求输入，请点击继续，并选择正确的账号，输入开机密码",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/run-wechat-fail/1786085109958-8b1f96-3.webp",
+              "caption": "无需业务理由，直接点击继续",
+              "alt": "3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wechat-launch",
+      "kicker": "正常使用微信",
+      "title": "使用微信",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-msikzx79-lkcbn",
+          "type": "step",
+          "number": "1",
+          "title": "正常运行微信约5分钟",
+          "body": "正常运行微信约5分钟，即可关闭并再次双击打开微信即可",
+          "note": "",
+          "warning": "",
+          "images": []
+        }
+      ]
+    }
+  ]
+}
