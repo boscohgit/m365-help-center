@@ -82,7 +82,7 @@
           "number": "2",
           "title": "完成验证",
           "body": "根据页面提示使用 Microsoft Authenticator、腾讯身份验证器或其他已登记方式。",
-          "note": "验证器配置方式可访问“首次登陆并激活公司账号”获取。",
+          "note": "验证器配置方式可访问“首次登陆并激活公司账号”(https://help.incorp-int.com/guides/first-sign-in/)获取。",
           "warning": "",
           "images": []
         }
