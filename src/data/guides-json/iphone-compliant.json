@@ -39,7 +39,13 @@
           "body": "打开iPhone设置-通用-VPN与设备管理",
           "note": "",
           "warning": "",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/sop/iphone-compliant/1786431004134-c03f4d-8.webp",
+              "caption": "8",
+              "alt": "8"
+            }
+          ]
         },
         {
           "id": "step-msoa1olq-vmete",
