@@ -1,0 +1,86 @@
+{
+  "slug": "iphone-compliant",
+  "title": "iPhone设备合规流程",
+  "subtitle": "iPhone访问公司资源",
+  "category": "设备与工具",
+  "description": "iPhone登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
+  "duration": "约 5–10 分钟",
+  "device": "iPhone",
+  "keywords": [
+    "iPhone设备合规流程"
+  ],
+  "completion": "按照页面步骤完成操作，并确认结果正常。",
+  "prepare": [
+    {
+      "label": "开始前",
+      "text": "准备好操作所需的公司账号密码，iPhone和稳定网络。"
+    },
+    {
+      "label": "准备项",
+      "text": "iPhone上已经安装Microsoft Authenticator及录入公司账号"
+    }
+  ],
+  "sections": [
+    {
+      "id": "steps",
+      "kicker": "操作指引",
+      "title": "iPhone设备合规流程",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开登录界面",
+          "body": "打开iPhone设置-通用-VPN与设备管理",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-msoa1olq-vmete",
+          "type": "step",
+          "number": "2",
+          "title": "登录账号",
+          "body": "进入页面后选择登录工作或学校账户，按照指引输入公司账号并完成登录",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-msoa4hmc-x41v9",
+          "type": "step",
+          "number": "3",
+          "title": "配置iCloud，安装配置",
+          "body": "登录完成后请继续点击登录iCloud,允许远程配置文件",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/iphone-compliant/1786430012885-1be015-1.webp",
+              "caption": "登录公司账号iCloud",
+              "alt": "图片1"
+            },
+            {
+              "src": "/assets/sop/iphone-compliant/1786430018352-2612aa-2.webp",
+              "caption": "允许远程配置文件",
+              "alt": "图片2"
+            }
+          ]
+        },
+        {
+          "id": "point-msoadgkn-f2t1g",
+          "type": "point",
+          "text": "后续相关应用Office/Outlook/Teams等可以通过公司门户安装并自动登录。",
+          "images": [
+            {
+              "src": "/assets/sop/iphone-compliant/1786430727141-93010c-1786430716868-8085d1-3.webp",
+              "caption": "公司门户可安装office应用",
+              "alt": "3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
