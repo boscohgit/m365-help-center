@@ -18,6 +18,10 @@
     {
       "label": "准备项",
       "text": "iPhone上已经安装Microsoft Authenticator及录入公司账号"
+    },
+    {
+      "label": "注意项",
+      "text": "不按此流程完成，企微微信无法登录公司邮箱"
     }
   ],
   "sections": [
