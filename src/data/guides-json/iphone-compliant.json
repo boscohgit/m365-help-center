@@ -1,13 +1,13 @@
 {
   "slug": "iphone-compliant",
-  "title": "iPhone设备合规流程",
-  "subtitle": "iPhone访问公司资源",
+  "title": "苹果设备合规流程",
+  "subtitle": "苹果设备iPhone/iPad/Mac访问公司资源",
   "category": "设备与工具",
-  "description": "iPhone登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
+  "description": "iPhone/iPad/Mac登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
   "duration": "约 5–10 分钟",
-  "device": "iPhone",
+  "device": "iPhone/iPad/Mac",
   "keywords": [
-    "iPhone设备合规流程"
+    "iPhone/iPad/Mac设备合规流程"
   ],
   "completion": "按照页面步骤完成操作，并确认结果正常。",
   "prepare": [
@@ -89,6 +89,16 @@
               "alt": "3"
             }
           ]
+        },
+        {
+          "id": "step-msob8dgb-puzq4",
+          "type": "step",
+          "number": "4",
+          "title": "可选：通过公司门户安装Microsoft Defender: Security",
+          "body": "安装此应用后，通过邮件《关于合规外网访问方式的使用通知》申请后，手机也可以合规访问海外网络。",
+          "note": "",
+          "warning": "",
+          "images": []
         }
       ]
     }
