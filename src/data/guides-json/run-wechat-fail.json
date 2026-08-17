@@ -42,9 +42,9 @@
         {
           "id": "step-msiktm7f-xuve0",
           "type": "step",
-          "number": "2A",
+          "number": "情况一",
           "title": "输入业务理由",
-          "body": "若应用要求你输入业务理由，请填入理由后并联系IT告知情况",
+          "body": "若应用要求你输入业务理由，随后关闭窗口。",
           "note": "",
           "warning": "",
           "images": [
@@ -56,9 +56,25 @@
           ]
         },
         {
+          "id": "step-mswjvtw7-f02yw",
+          "type": "step",
+          "number": "情况一",
+          "title": "重新安装微信",
+          "body": "打开公司门户，找到应用-wechat，点击“安装”，等待显示“安装完成“后，点击卸载并再次安装即可",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/run-wechat-fail/1786930077296-98a63b-1.webp",
+              "caption": "1",
+              "alt": "1"
+            }
+          ]
+        },
+        {
           "id": "step-msikwynh-1llj0",
           "type": "step",
-          "number": "2B",
+          "number": "情况二",
           "title": "点击继续并选择账号",
           "body": "若应用没要求输入，请点击继续，然后选择更多选项，找到PIN，并输入开机密码",
           "note": "",
