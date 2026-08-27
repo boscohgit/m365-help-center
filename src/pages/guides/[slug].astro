@@ -17,6 +17,16 @@ interface Props {
 
 const { guide } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const escapeHtml = (value: string) => value
+  .replace(/&/g, "&amp;")
+  .replace(/</g, "&lt;")
+  .replace(/>/g, "&gt;")
+  .replace(/\"/g, "&quot;")
+  .replace(/'/g, "&#039;");
+const linkify = (value: string) => escapeHtml(value).replace(
+  /(https?:\/\/[^\s<]+)/g,
+  '<a href="$1" target="_blank" rel="noopener">打开详细 SOP →</a>',
+);
 ---
 
 <BaseLayout
@@ -73,7 +83,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
             {section.blocks.map((block) => (
               block.type === "step" ? (
                 <Step number={block.number} title={block.title}>
-                  <p>{block.body}</p>
+                  <p set:html={linkify(block.body)}></p>
                   {block.note && <div class="inline-note">{block.note}</div>}
                   {block.warning && <div class="inline-warning">{block.warning}</div>}
                   <InstructionImages images={block.images ?? []} />
@@ -88,12 +98,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
               ) : block.type === "details" ? (
                 <details>
                   <summary>{block.title}</summary>
-                  <p>{block.body}</p>
+                  <p set:html={linkify(block.body)}></p>
                 </details>
               ) : (
                 <div class:list={["callout", block.tone]}>
                   <strong>{block.title}</strong>
-                  <p>{block.body}</p>
+                  <p set:html={linkify(block.body)}></p>
                 </div>
               )
             ))}
@@ -148,6 +158,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   .callout.warning { border-color:var(--red); background:var(--red-soft); }.callout.warning strong { color:var(--red); }
   .callout.success { border-color:var(--green); background:var(--green-soft); }.callout.success strong { color:var(--green); }
   .callout.info { border-color:var(--blue); background:var(--blue-soft); }.callout.info strong { color:var(--blue); }
+  .callout.info a { display:inline-flex; margin-top:12px; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff; font-weight:700; text-decoration:none; }
+  .callout.info a:hover { background:var(--navy); }
+  .step-body a,.inline-note a,.inline-warning a { color:var(--blue); font-weight:700; }
   .step { position:relative; margin:24px 0 36px; padding-left:64px; }
   .step-number { position:absolute; left:0; top:0; display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:var(--navy); color:#fff; font-size:14px; font-weight:800; }
   .step h3 { margin:0; color:var(--navy); font-size:21px; }.step-body { margin-top:8px; color:#3b4654; line-height:1.9; }
