@@ -1,0 +1,73 @@
+{
+  "slug": "android-compliant",
+  "title": "安卓设备合规流程",
+  "subtitle": "安卓设备手机/平板访问公司资源",
+  "category": "账号与安全",
+  "description": "安卓手机/平板登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
+  "duration": "约 5–10 分钟",
+  "device": "安卓手机/平板",
+  "keywords": [
+    "安卓设备合规流程"
+  ],
+  "completion": "按照页面步骤完成操作，并确认结果正常。",
+  "prepare": [
+    {
+      "label": "开始前",
+      "text": "准备好操作所需的公司账号、设备和稳定网络。"
+    },
+    {
+      "label": "准备项",
+      "text": "手机上上已经安装公司门户并登录公司账号"
+    },
+    {
+      "label": "准备项",
+      "text": "公司门户下载地址https://sj.qq.com/appdetail/com.microsoft.windowsintune.companyportal"
+    }
+  ],
+  "sections": [
+    {
+      "id": "steps",
+      "kicker": "操作指引",
+      "title": "安卓设备合规流程",
+      "intro": "",
+      "blocks": [
+        {
+          "id": "step-1",
+          "type": "step",
+          "number": "1",
+          "title": "打开公司门户完成账号登录",
+          "body": "打开公司门户点击登录，输入公司账号及密码完成登录",
+          "note": "",
+          "warning": "",
+          "images": []
+        },
+        {
+          "id": "step-mtbdnreo-arypz",
+          "type": "step",
+          "number": "2",
+          "title": "合规设备",
+          "body": "点击下方设备页，点击页面中设备旁感叹号。按照指引点击下一步并完成合规流程。",
+          "note": "",
+          "warning": "设备完成操作后需要自行设置6位密码。请牢记此密码。若丢失只能重置手机。",
+          "images": [
+            {
+              "src": "/assets/sop/android-compliant/1787826688063-d4f3c4-1.webp",
+              "caption": "点击登录并输入账号密码",
+              "alt": "图片1"
+            },
+            {
+              "src": "/assets/sop/android-compliant/1787826704468-4790db-2.webp",
+              "caption": "选择设备页，并点击设备旁感叹号完成合规",
+              "alt": "2"
+            },
+            {
+              "src": "/assets/sop/android-compliant/1787826884356-7a6da7-3.webp",
+              "caption": "看到一切就绪即完成合规流程",
+              "alt": "3"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

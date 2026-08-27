@@ -1,11 +1,11 @@
 {
   "slug": "iphone-compliant",
   "title": "苹果设备合规流程",
-  "subtitle": "苹果设备iPhone/iPad/Mac访问公司资源",
+  "subtitle": "苹果设备iPhone/iPad访问公司资源",
   "category": "设备与工具",
-  "description": "iPhone/iPad/Mac登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
+  "description": "iPhone/iPad登录公司账号，访问邮箱，OneDrive网盘，使用Teams等资源",
   "duration": "约 5–10 分钟",
-  "device": "iPhone/iPad/Mac",
+  "device": "iPhone/iPad",
   "keywords": [
     "iPhone/iPad/Mac设备合规流程"
   ],
