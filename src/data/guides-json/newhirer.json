@@ -20,10 +20,10 @@
       "title": "请依次完成以下四个模块",
       "intro": "每个按钮会打开一篇独立的详细 SOP。完成当前模块后，再继续下一个。",
       "blocks": [
-        { "id": "module-1", "type": "callout", "tone": "info", "title": "1. 首次登录并激活公司账号", "body": "完成首次登录、绑定 Microsoft Authenticator 或腾讯身份验证器，并修改临时密码。详细 SOP：https://help.incorp-int.com/guides/first-sign-in/" },
-        { "id": "module-2", "type": "callout", "tone": "info", "title": "2. 新电脑首次登录（Autopilot）", "body": "完成全新 Windows 公司电脑的 Autopilot、ESP、Windows PIN 和公司门户应用安装。详细 SOP：https://help.incorp-int.com/guides/autopilot-new-pc/" },
-        { "id": "module-3", "type": "callout", "tone": "info", "title": "3. 安卓设备合规", "body": "安卓手机或平板需要访问公司邮箱、OneDrive、Teams 等资源时，打开此 SOP 完成公司门户登录和设备合规。详细 SOP：https://help.incorp-int.com/guides/android-compliant/" },
-        { "id": "module-4", "type": "callout", "tone": "info", "title": "4. iPhone 设备合规", "body": "iPhone 需要访问公司资源时，打开此 SOP 完成工作账户登录和远程配置文件安装。详细 SOP：https://help.incorp-int.com/guides/iphone-compliant/" }
+        { "id": "module-1", "type": "callout", "tone": "info", "title": "1. 首次登录并激活公司账号", "body": "完成首次登录、绑定 Microsoft Authenticator 或腾讯身份验证器，并修改临时密码。https://help.incorp-int.com/guides/first-sign-in/" },
+        { "id": "module-2", "type": "callout", "tone": "info", "title": "2. 新电脑首次登录（Autopilot）", "body": "完成全新 Windows 公司电脑的 Autopilot、ESP、Windows PIN 和公司门户应用安装。https://help.incorp-int.com/guides/autopilot-new-pc/" },
+        { "id": "module-3", "type": "callout", "tone": "info", "title": "3. 安卓设备合规", "body": "安卓手机或平板需要访问公司邮箱、OneDrive、Teams 等资源时，打开此页面完成公司门户登录和设备合规。https://help.incorp-int.com/guides/android-compliant/" },
+        { "id": "module-4", "type": "callout", "tone": "info", "title": "4. iPhone 设备合规", "body": "iPhone 需要访问公司资源时，打开此页面完成工作账户登录和远程配置文件安装。https://help.incorp-int.com/guides/iphone-compliant/" }
       ]
     }
   ]
