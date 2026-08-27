@@ -1,0 +1,65 @@
+{
+  "slug": "newhirer",
+  "title": "新员工 IT 入职须知",
+  "subtitle": "账号激活 · 设备合规 · 公司电脑配置",
+  "category": "设备与工具",
+  "description": "新入职同事的第一站：按顺序完成公司账号激活、验证器配置、手机合规，以及新 Windows 公司电脑的首次登录。",
+  "duration": "约 30–60 分钟",
+  "device": "电脑 + 手机",
+  "keywords": ["新员工", "入职", "new hire", "入职须知", "首次登录", "验证器", "设备合规", "Autopilot", "公司门户"],
+  "completion": "公司账号可以登录，验证器已绑定；需要使用手机时设备已合规；新公司电脑完成 Autopilot 配置并可以使用公司应用。",
+  "prepare": [
+    { "label": "账号资料", "text": "准备好 HR 提供的公司邮箱、临时密码，以及可接收验证的私人邮箱。" },
+    { "label": "手机", "text": "准备好工作时使用的手机和稳定网络；iPhone 使用 Microsoft Authenticator，安卓按指引安装指定验证器。" },
+    { "label": "新电脑", "text": "如领取了新 Windows 公司电脑，请全程接电并连接稳定 Wi‑Fi 或网线。" }
+  ],
+  "sections": [
+    {
+      "id": "account",
+      "kicker": "第一步",
+      "title": "激活公司账号并配置验证器",
+      "intro": "先完成账号首次登录和多重身份验证，后续电脑、手机和 Microsoft 365 应用都会用到。",
+      "blocks": [
+        { "id": "account-1", "type": "step", "number": "1", "title": "首次登录公司账号", "body": "打开 https://myaccount.microsoft.com/，输入 HR 提供的公司邮箱和临时密码。按页面提示完成邮箱或其他验证方式。", "note": "详细图文：首次登录并激活公司账号 https://help.incorp-int.com/guides/first-sign-in/", "warning": "临时密码只用于首次登录；新密码请妥善保管。", "images": [] },
+        { "id": "account-2", "type": "step", "number": "2", "title": "绑定手机验证器", "body": "iPhone 安装 Microsoft Authenticator；安卓安装公司指定的腾讯身份验证器，然后扫描电脑上的二维码并输入 6 位数字完成绑定。", "note": "如果验证器配置遇到问题，可参考账号与安全分类中的详细指引。", "warning": "验证码有时效性，不要截图或转发。", "images": [] },
+        { "id": "account-3", "type": "step", "number": "3", "title": "修改临时密码并确认登录", "body": "使用验证器完成登录后，按提示修改临时密码。完成后重新进入“我的账户”，确认可以正常登录。", "note": "新密码应包含数字、英文字母大小写和符号，不要使用 1234、abcd 等连续组合。", "warning": "本网站和 IT 支持不会要求你提交密码或验证码。", "images": [] }
+      ]
+    },
+    {
+      "id": "mobile",
+      "kicker": "第二步",
+      "title": "按手机型号完成设备合规",
+      "intro": "需要在手机上使用公司邮箱、OneDrive、Teams 或企业微信时，请先完成对应设备合规。",
+      "blocks": [
+        { "id": "mobile-1", "type": "callout", "tone": "info", "title": "安卓手机 / 平板", "body": "打开 Microsoft Intune Company Portal，登录公司账号，在设备页点击设备旁的感叹号，按提示完成合规。详细流程：https://help.incorp-int.com/guides/android-compliant/" },
+        { "id": "mobile-2", "type": "callout", "tone": "info", "title": "iPhone", "body": "打开“设置 → 通用 → VPN 与设备管理”，选择登录工作或学校账户，按提示登录并允许远程配置文件。详细流程：https://help.incorp-int.com/guides/iphone-compliant/" },
+        { "id": "mobile-3", "type": "warning", "tone": "warning", "title": "设备密码请牢记", "body": "完成手机合规后可能需要设置 6 位设备密码。忘记设备密码通常只能重置手机。" }
+      ]
+    },
+    {
+      "id": "computer",
+      "kicker": "第三步",
+      "title": "完成新公司电脑首次登录",
+      "intro": "仅适用于 IT 发放的、已注册 Autopilot 的全新 Windows 公司电脑。",
+      "blocks": [
+        { "id": "computer-1", "type": "step", "number": "1", "title": "启动并连接稳定网络", "body": "启动电脑，选择国家、地区和键盘布局，连接稳定 Wi‑Fi 或网线，并保持电脑接通电源。", "images": [] },
+        { "id": "computer-2", "type": "step", "number": "2", "title": "使用公司账号登录并完成验证", "body": "在组织登录页面输入公司邮箱和密码，根据提示使用已登记的 Microsoft Authenticator、腾讯身份验证器或其他方式完成验证。", "images": [] },
+        { "id": "computer-3", "type": "step", "number": "3", "title": "等待设备配置完成", "body": "看到“正在为你的组织设置设备”时，请保持接电和联网，不要强制关机、恢复出厂设置或跳过组织页面。电脑可能自动重启。", "note": "详细图文：新公司电脑首次登录 https://help.incorp-int.com/guides/autopilot-new-pc/", "warning": "如果 ESP 连续 60 分钟没有进度，或出现应用安装失败、红色错误页和错误代码，请联系 IT。", "images": [] },
+        { "id": "computer-4", "type": "step", "number": "4", "title": "设置 PIN 并安装工作应用", "body": "进入桌面后等待约 10–15 分钟，打开“公司门户 / Company Portal”，登录并在“应用 / Apps”中安装当前工作需要的软件。设置 Windows Hello PIN 时不要使用生日、手机号或 123456。", "images": [] }
+      ]
+    },
+    {
+      "id": "checklist",
+      "kicker": "入职完成检查",
+      "title": "确认以下事项后开始工作",
+      "intro": "如果每项都能完成，说明基础 IT 入职流程已经完成。",
+      "blocks": [
+        { "id": "check-1", "type": "point", "text": "可以使用公司账号登录 Microsoft 365。", "images": [] },
+        { "id": "check-2", "type": "point", "text": "验证器已绑定，并能完成一次 MFA 验证。", "images": [] },
+        { "id": "check-3", "type": "point", "text": "需要使用手机资源时，对应设备已显示合规。", "images": [] },
+        { "id": "check-4", "type": "point", "text": "新公司电脑可以使用 PIN 登录，公司门户可以打开。", "images": [] },
+        { "id": "check-5", "type": "point", "text": "遇到问题时，向 IT 提供设备名称或序列号、准确时间、网络环境、完整错误截图和已尝试的操作；不要发送密码、验证码或二维码。", "images": [] }
+      ]
+    }
+  ]
+}

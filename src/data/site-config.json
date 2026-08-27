@@ -8,7 +8,10 @@
     "设备与工具"
   ],
   "guideOrder": [
+    "newhirer",
     "first-sign-in",
+    "android-compliant",
+    "iphone-compliant",
     "security-info",
     "password-reset",
     "install-m365",
