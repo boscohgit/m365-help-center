@@ -66,6 +66,16 @@
               "alt": "3"
             }
           ]
+        },
+        {
+          "id": "step-mtc8njjb-2iyqi",
+          "type": "step",
+          "number": "3",
+          "title": "下载安装应用并登录",
+          "body": "现在即可前往应用商店下载outlook/teams/onedrive等应用，并完成登录",
+          "note": "",
+          "warning": "",
+          "images": []
         }
       ]
     }

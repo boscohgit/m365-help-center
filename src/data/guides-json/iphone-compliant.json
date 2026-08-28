@@ -89,16 +89,6 @@
               "alt": "3"
             }
           ]
-        },
-        {
-          "id": "step-msob8dgb-puzq4",
-          "type": "step",
-          "number": "4",
-          "title": "可选：通过公司门户安装Microsoft Defender: Security",
-          "body": "安装此应用后，通过邮件《关于合规外网访问方式的使用通知》申请后，手机也可以合规访问海外网络。",
-          "note": "",
-          "warning": "",
-          "images": []
         }
       ]
     }
