@@ -17,11 +17,11 @@
     },
     {
       "label": "准备项",
-      "text": "手机上上已经安装公司门户并登录公司账号"
+      "text": "公司门户下载地址 https://sj.qq.com/appdetail/com.microsoft.windowsintune.companyportal"
     },
     {
-      "label": "准备项",
-      "text": "公司门户下载地址 https://sj.qq.com/appdetail/com.microsoft.windowsintune.companyportal"
+      "label": "注意项",
+      "text": "不按此流程完成，企微微信无法登录公司邮箱"
     }
   ],
   "sections": [
@@ -75,6 +75,12 @@
           "body": "现在即可前往应用商店下载outlook/teams/onedrive等应用，并完成登录",
           "note": "",
           "warning": "",
+          "images": []
+        },
+        {
+          "id": "point-mtcb5v0t-qt7k7",
+          "type": "point",
+          "text": "越狱的手机无法通过合规流程",
           "images": []
         }
       ]
