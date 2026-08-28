@@ -89,6 +89,12 @@
               "alt": "3"
             }
           ]
+        },
+        {
+          "id": "point-mtcb482b-dysuf",
+          "type": "point",
+          "text": "越狱的手机无法通过合规流程",
+          "images": []
         }
       ]
     }
