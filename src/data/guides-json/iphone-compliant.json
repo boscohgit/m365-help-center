@@ -52,7 +52,7 @@
           "type": "step",
           "number": "2",
           "title": "登录账号",
-          "body": "进入页面后选择登录工作或学校账户，按照指引输入公司账号并完成登录",
+          "body": "进入页面后选择登录工作或学校账户先使用xxx@incorp.asia进行登录。进入页面后再使用xxx@incorp.international，按照指引输入公司账号并完成登录",
           "note": "",
           "warning": "",
           "images": []
