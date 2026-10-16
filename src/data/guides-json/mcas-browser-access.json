@@ -3,15 +3,15 @@
   "title": "非合规电脑访问 Microsoft 365",
   "subtitle": "使用浏览器访问 Outlook、OneDrive、Teams 和 Office",
   "category": "账号与安全",
-  "description": "当电脑未通过设备合规检查时，可以使用浏览器访问部分 Microsoft 365 服务。访问会经过 Microsoft Defender for Cloud Apps（MCAS）提示，并按组织策略限制为浏览器访问和只读体验。",
+  "description": "当电脑未通过设备合规检查时，可以使用浏览器访问部分 Microsoft 365 服务。登录后可能会出现 Microsoft Defender for Cloud Apps（MCAS）的安全访问提示，部分功能只能在浏览器中使用。",
   "duration": "约 5–10 分钟",
   "device": "非合规电脑 + 浏览器",
   "keywords": ["MCAS", "非合规设备", "浏览器访问", "Outlook", "OneDrive", "Teams", "Office", "只读"],
-  "completion": "能够在隐私/无痕浏览器中打开需要的 Microsoft 365 服务，并理解 MCAS 提示、浏览器限制和下载已被策略禁止的使用边界。",
+  "completion": "能够在隐私/无痕浏览器中打开需要的 Microsoft 365 服务，并了解安全访问提示、浏览器访问方式和下载不可用的使用边界。",
   "prepare": [
-    { "label": "浏览器", "text": "先打开 Chrome、Edge 或 Safari 的隐私/无痕窗口；不要尝试使用桌面客户端绕过访问限制。" },
+    { "label": "浏览器", "text": "先打开 Chrome、Edge 或 Safari 的隐私/无痕窗口；这台电脑只通过浏览器访问公司服务。" },
     { "label": "账号", "text": "准备好公司账号和验证器。登录或 MFA 页面出现时，按公司账号流程完成验证。" },
-    { "label": "使用边界", "text": "本流程用于临时访问和查看信息；非合规电脑的下载已由 MCAS 策略禁止，OneDrive 同步和桌面客户端也不可用。" }
+    { "label": "使用边界", "text": "本流程用于临时访问和查看信息；这台电脑的下载功能不可用，OneDrive 同步和桌面客户端也不可用。" }
   ],
   "sections": [
     {
@@ -44,7 +44,7 @@
       "id": "browser-access",
       "kicker": "浏览器访问流程",
       "title": "按需打开对应服务",
-      "intro": "打开服务网址后，可能先出现 Microsoft 账号选择、密码或 MFA 页面；完成登录后会看到 MCAS 的监控提示。确认提示内容后，点击继续进入服务。",
+      "intro": "打开服务网址后，可能先出现 Microsoft 账号选择、密码或 MFA 页面；完成登录后可能会看到安全访问提示。确认提示内容后，点击继续进入服务。",
       "blocks": [
         {
           "id": "outlook",
@@ -52,7 +52,7 @@
           "number": "1",
           "title": "Outlook 邮箱",
           "body": "打开 https://outlook.office.com/mail/ 。选择公司工作账号，按提示完成密码和 MFA。出现“Access to Microsoft Exchange Online is monitored”时，确认这是浏览器访问提示，再点击“Continue to Microsoft Exchange Online”。Outlook 继续在浏览器中打开；不要切换到 Outlook 桌面客户端。",
-          "note": "本次验证中，MCAS 明确提示 Exchange Online 只能从 Web 浏览器访问，并显示 Microsoft Defender for Cloud Apps。",
+          "note": "本次验证中，页面提示 Exchange Online 只能从 Web 浏览器访问。",
           "images": [
             {
               "src": "/assets/sop/mcas-access/microsoft-signin.png",
@@ -61,8 +61,8 @@
             },
             {
               "src": "/assets/sop/mcas-access/outlook-mcas.png",
-              "alt": "Microsoft Exchange Online 的 MCAS 监控提示页",
-              "caption": "Outlook 登录后显示的 MCAS 监控提示"
+              "alt": "Microsoft Exchange Online 的安全访问提示页",
+              "caption": "Outlook 登录后显示的安全访问提示"
             }
           ]
         },
@@ -71,8 +71,8 @@
           "type": "step",
           "number": "2",
           "title": "OneDrive",
-          "body": "打开 https://prokorpsg-my.sharepoint.com 。完成公司账号登录和 MFA 后，页面可能自动跳转到带有 .mcas.ms 的受保护地址。等待 OneDrive 页面加载完成后，可以在浏览器中查看允许访问的内容。",
-          "warning": "非合规电脑的下载已由 MCAS 策略禁止；OneDrive 同步和本地 Office 客户端编辑也不可用。",
+          "body": "打开 https://prokorpsg-my.sharepoint.com 。完成公司账号登录和 MFA 后，页面可能自动跳转到带有 .mcas.ms 的安全访问地址。等待 OneDrive 页面加载完成后，可以在浏览器中查看允许访问的内容。",
+          "warning": "当前电脑的下载功能不可用；OneDrive 同步和本地 Office 客户端编辑也不可用。",
           "images": [
             {
               "src": "/assets/sop/mcas-access/microsoft-signin.png",
@@ -92,7 +92,7 @@
           "number": "3",
           "title": "Teams",
           "body": "打开 https://teams.microsoft.com/ 。完成公司账号登录和 MFA。出现“Access to Microsoft Teams is monitored”时，确认提示内容，然后点击“Continue to Microsoft Teams”。Teams 会继续在浏览器中加载；不要尝试启动桌面版 Teams。",
-          "note": "Teams 可能跳转到 teams.cloud.microsoft 或带有 .mcas.ms 的地址，这是策略包装后的浏览器访问路径。",
+          "note": "Teams 可能跳转到 teams.cloud.microsoft 或带有 .mcas.ms 的地址，这是安全访问使用的浏览器地址。",
           "images": [
             {
               "src": "/assets/sop/mcas-access/microsoft-signin.png",
@@ -101,8 +101,8 @@
             },
             {
               "src": "/assets/sop/mcas-access/teams-mcas.png",
-              "alt": "Microsoft Teams 的 MCAS 监控提示页",
-              "caption": "Teams 登录后显示的 MCAS 监控提示"
+              "alt": "Microsoft Teams 的安全访问提示页",
+              "caption": "Teams 登录后显示的安全访问提示"
             }
           ]
         },
@@ -112,7 +112,7 @@
           "number": "4",
           "title": "Office 门户和 Web 应用",
           "body": "打开 https://m365.cloud.microsoft/ ，选择公司工作账号并完成 MFA，然后在浏览器中进入 Microsoft 365/Copilot 页面；按需打开 Word、Excel 或 PowerPoint 的 Web 版本。",
-          "warning": "在非合规电脑上只使用浏览器版本；下载已由 MCAS 策略禁止，不能启用同步或使用“在桌面应用中打开”。",
+          "warning": "在这台电脑上只使用浏览器版本；下载功能不可用，不能启用同步或使用“在桌面应用中打开”。",
           "images": [
             {
               "src": "/assets/sop/mcas-access/microsoft-signin.png",
@@ -131,7 +131,7 @@
           "type": "callout",
           "tone": "success",
           "title": "完成标准",
-          "body": "能在浏览器中打开需要的服务，并看到或通过 MCAS 的监控提示；确认下载已被策略禁止，且桌面客户端和 OneDrive 同步不可用。完成临时工作后，关闭隐私/无痕窗口并退出公司账号。"
+          "body": "能在浏览器中打开需要的服务，并完成安全访问提示；确认下载功能不可用，且桌面客户端和 OneDrive 同步不可用。完成临时工作后，关闭隐私/无痕窗口并退出公司账号。"
         }
       ]
     },
@@ -139,7 +139,7 @@
       "id": "limits",
       "kicker": "常见提示",
       "title": "遇到限制时怎么处理",
-      "intro": "MCAS 的提示和最终限制由组织策略决定，页面文字或跳转地址可能随服务更新而变化。",
+      "intro": "安全访问提示和可用功能可能随服务更新而变化，页面文字或跳转地址也可能不同。",
       "blocks": [
         {
           "id": "browser-only",
@@ -150,8 +150,8 @@
         {
           "id": "download-blocked",
           "type": "details",
-          "title": "下载、同步或桌面打开被策略禁止",
-          "body": "这是 MCAS 的预期策略结果，不是浏览器故障。需要编辑、下载或离线使用文件时，请改用已通过公司设备合规检查的电脑，或联系 IT 服务台。"
+          "title": "下载、同步或桌面打开不可用",
+          "body": "这是当前电脑的正常使用结果，不是浏览器故障。需要编辑、下载或离线使用文件时，请改用已通过公司设备合规检查的电脑，或联系 IT 服务台。"
         },
         {
           "id": "sign-in-loop",
