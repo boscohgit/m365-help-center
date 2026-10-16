@@ -25,7 +25,20 @@ const escapeHtml = (value: string) => value
   .replace(/'/g, "&#039;");
 const linkify = (value: string) => escapeHtml(value).replace(
   /(https?:\/\/[^\s<]+)/g,
-  '<span class="url-action"><a href="$1" target="_blank" rel="noopener">打开链接 →</a></span>',
+  (_match, url: string) => {
+    const label = url.includes("outlook.office.com")
+      ? "打开 Outlook →"
+      : url.includes("prokorpsg-my.sharepoint.com")
+        ? "打开 OneDrive →"
+        : url.includes("teams.microsoft.com")
+          ? "打开 Teams →"
+          : url.includes("m365.cloud.microsoft")
+            ? "打开 Microsoft 365 门户 →"
+            : url.includes("www.office.com")
+              ? "打开 Office 门户 →"
+              : "打开详细 SOP →";
+    return `<span class="url-action"><a href="${url}" target="_blank" rel="noopener">${label}</a></span>`;
+  },
 );
 ---
 
@@ -161,7 +174,7 @@ const linkify = (value: string) => escapeHtml(value).replace(
   .callout.info a { display:flex; width:max-content; margin-top:12px; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff; font-weight:700; text-decoration:none; }
   .callout.info a:hover { background:var(--navy); }
   .url-action { display:block; margin-top:12px; }
-  .url-action a { display:inline-flex; width:max-content; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff; font-weight:700; line-height:1.35; text-decoration:none; }
+  .url-action a { display:inline-flex; width:max-content; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff !important; font-weight:700; line-height:1.35; text-decoration:none; }
   .url-action a:hover { background:var(--navy); }
   .step-body a,.inline-note a,.inline-warning a { color:var(--blue); font-weight:700; }
   .step { position:relative; margin:24px 0 36px; padding-left:64px; }
