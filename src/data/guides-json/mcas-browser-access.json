@@ -111,7 +111,7 @@
           "type": "step",
           "number": "4",
           "title": "Office 门户和 Web 应用",
-          "body": "打开 https://www.office.com/ 。点击“Sign in”，选择公司工作账号并完成 MFA。Office 门户可能跳转到 https://m365.cloud.microsoft/ ，然后在浏览器中进入 Microsoft 365/Copilot 页面；按需打开 Word、Excel 或 PowerPoint 的 Web 版本。",
+          "body": "打开 https://m365.cloud.microsoft/ ，选择公司工作账号并完成 MFA，然后在浏览器中进入 Microsoft 365/Copilot 页面；按需打开 Word、Excel 或 PowerPoint 的 Web 版本。",
           "warning": "在非合规电脑上只使用浏览器版本；下载已由 MCAS 策略禁止，不能启用同步或使用“在桌面应用中打开”。",
           "images": [
             {
