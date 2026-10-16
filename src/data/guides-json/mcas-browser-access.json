@@ -7,13 +7,39 @@
   "duration": "约 5–10 分钟",
   "device": "非合规电脑 + 浏览器",
   "keywords": ["MCAS", "非合规设备", "浏览器访问", "Outlook", "OneDrive", "Teams", "Office", "只读"],
-  "completion": "能够在浏览器中打开需要的 Microsoft 365 服务，并理解 MCAS 提示、浏览器限制和不能下载的使用边界。",
+  "completion": "能够在隐私/无痕浏览器中打开需要的 Microsoft 365 服务，并理解 MCAS 提示、浏览器限制和下载已被策略禁止的使用边界。",
   "prepare": [
-    { "label": "浏览器", "text": "使用 Chrome、Edge 或 Safari 的隐私/无痕窗口；不要尝试使用桌面客户端绕过访问限制。" },
+    { "label": "浏览器", "text": "先打开 Chrome、Edge 或 Safari 的隐私/无痕窗口；不要尝试使用桌面客户端绕过访问限制。" },
     { "label": "账号", "text": "准备好公司账号和验证器。登录或 MFA 页面出现时，按公司账号流程完成验证。" },
-    { "label": "使用边界", "text": "本流程用于临时访问和查看信息；不要下载、同步或复制公司文件到这台非合规电脑。" }
+    { "label": "使用边界", "text": "本流程用于临时访问和查看信息；非合规电脑的下载已由 MCAS 策略禁止，OneDrive 同步和桌面客户端也不可用。" }
   ],
   "sections": [
+    {
+      "id": "private-window",
+      "kicker": "开始前准备",
+      "title": "打开隐私/无痕浏览器",
+      "intro": "先打开一个新的隐私窗口，再访问下面的 Microsoft 365 服务。这样可以避免使用上一位用户的登录会话和浏览器缓存。",
+      "blocks": [
+        {
+          "id": "chrome-private",
+          "type": "details",
+          "title": "Chrome：新建无痕窗口",
+          "body": "在 Windows 按 Ctrl + Shift + N；在 macOS 按 Command + Shift + N。也可以打开右上角三点菜单，选择“新建无痕窗口（New Incognito Window）”。"
+        },
+        {
+          "id": "edge-private",
+          "type": "details",
+          "title": "Edge：新建 InPrivate 窗口",
+          "body": "在 Windows 按 Ctrl + Shift + N；在 macOS 按 Command + Shift + N。也可以打开右上角三点菜单，选择“新建 InPrivate 窗口（New InPrivate window）”。"
+        },
+        {
+          "id": "safari-private",
+          "type": "details",
+          "title": "Safari：新建私人浏览窗口",
+          "body": "在 macOS 菜单栏选择“文件 > 新建私人窗口”，或按 Shift + Command + N。"
+        }
+      ]
+    },
     {
       "id": "browser-access",
       "kicker": "浏览器访问流程",
@@ -29,6 +55,11 @@
           "note": "本次验证中，MCAS 明确提示 Exchange Online 只能从 Web 浏览器访问，并显示 Microsoft Defender for Cloud Apps。",
           "images": [
             {
+              "src": "/assets/sop/mcas-access/microsoft-signin.png",
+              "alt": "Microsoft 通用登录页面，未填写账号",
+              "caption": "每个服务都会先进入类似的 Microsoft 登录页面"
+            },
+            {
               "src": "/assets/sop/mcas-access/outlook-mcas.png",
               "alt": "Microsoft Exchange Online 的 MCAS 监控提示页",
               "caption": "Outlook 登录后显示的 MCAS 监控提示"
@@ -41,8 +72,13 @@
           "number": "2",
           "title": "OneDrive",
           "body": "打开 https://prokorpsg-my.sharepoint.com 。完成公司账号登录和 MFA 后，页面可能自动跳转到带有 .mcas.ms 的受保护地址。等待 OneDrive 页面加载完成后，可以在浏览器中查看允许访问的内容。",
-          "warning": "非合规电脑不要下载、同步或打开本地 Office 客户端编辑公司文件；如果页面提供下载或同步入口，请不要操作。",
+          "warning": "非合规电脑的下载已由 MCAS 策略禁止；OneDrive 同步和本地 Office 客户端编辑也不可用。",
           "images": [
+            {
+              "src": "/assets/sop/mcas-access/microsoft-signin.png",
+              "alt": "Microsoft 通用登录页面，未填写账号",
+              "caption": "OneDrive 登录前的 Microsoft 通用登录页面"
+            },
             {
               "src": "/assets/sop/mcas-access/onedrive-browser.jpg",
               "alt": "OneDrive 浏览器访问页面示例，敏感内容已遮盖",
@@ -59,6 +95,11 @@
           "note": "Teams 可能跳转到 teams.cloud.microsoft 或带有 .mcas.ms 的地址，这是策略包装后的浏览器访问路径。",
           "images": [
             {
+              "src": "/assets/sop/mcas-access/microsoft-signin.png",
+              "alt": "Microsoft 通用登录页面，未填写账号",
+              "caption": "Teams 登录前的 Microsoft 通用登录页面"
+            },
+            {
               "src": "/assets/sop/mcas-access/teams-mcas.png",
               "alt": "Microsoft Teams 的 MCAS 监控提示页",
               "caption": "Teams 登录后显示的 MCAS 监控提示"
@@ -71,8 +112,13 @@
           "number": "4",
           "title": "Office 门户和 Web 应用",
           "body": "打开 https://www.office.com/ 。点击“Sign in”，选择公司工作账号并完成 MFA。Office 门户可能跳转到 https://m365.cloud.microsoft/ ，然后在浏览器中进入 Microsoft 365/Copilot 页面；按需打开 Word、Excel 或 PowerPoint 的 Web 版本。",
-          "warning": "在非合规电脑上只使用浏览器版本；不要下载文件、启用同步，或使用“在桌面应用中打开”。",
+          "warning": "在非合规电脑上只使用浏览器版本；下载已由 MCAS 策略禁止，不能启用同步或使用“在桌面应用中打开”。",
           "images": [
+            {
+              "src": "/assets/sop/mcas-access/microsoft-signin.png",
+              "alt": "Microsoft 通用登录页面，未填写账号",
+              "caption": "Office 登录前的 Microsoft 通用登录页面"
+            },
             {
               "src": "/assets/sop/mcas-access/office-entry.jpg",
               "alt": "Microsoft 365 Office 门户浏览器页面示例，敏感内容已遮盖",
@@ -85,7 +131,7 @@
           "type": "callout",
           "tone": "success",
           "title": "完成标准",
-          "body": "能在浏览器中打开需要的服务，并看到或通过 MCAS 的监控提示；全程不安装桌面客户端、不下载文件、不启用 OneDrive 同步。完成临时工作后，关闭隐私/无痕窗口并退出公司账号。"
+          "body": "能在浏览器中打开需要的服务，并看到或通过 MCAS 的监控提示；确认下载已被策略禁止，且桌面客户端和 OneDrive 同步不可用。完成临时工作后，关闭隐私/无痕窗口并退出公司账号。"
         }
       ]
     },
@@ -104,8 +150,8 @@
         {
           "id": "download-blocked",
           "type": "details",
-          "title": "下载、同步或桌面打开不可用",
-          "body": "不要反复尝试绕过限制。需要编辑、下载或离线使用文件时，请改用已通过公司设备合规检查的电脑，或联系 IT 服务台。"
+          "title": "下载、同步或桌面打开被策略禁止",
+          "body": "这是 MCAS 的预期策略结果，不是浏览器故障。需要编辑、下载或离线使用文件时，请改用已通过公司设备合规检查的电脑，或联系 IT 服务台。"
         },
         {
           "id": "sign-in-loop",
