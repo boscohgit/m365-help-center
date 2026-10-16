@@ -25,7 +25,7 @@ const escapeHtml = (value: string) => value
   .replace(/'/g, "&#039;");
 const linkify = (value: string) => escapeHtml(value).replace(
   /(https?:\/\/[^\s<]+)/g,
-  '<a href="$1" target="_blank" rel="noopener">打开详细 SOP →</a>',
+  '<span class="url-action"><a href="$1" target="_blank" rel="noopener">打开链接 →</a></span>',
 );
 ---
 
@@ -160,6 +160,9 @@ const linkify = (value: string) => escapeHtml(value).replace(
   .callout.info { border-color:var(--blue); background:var(--blue-soft); }.callout.info strong { color:var(--blue); }
   .callout.info a { display:flex; width:max-content; margin-top:12px; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff; font-weight:700; text-decoration:none; }
   .callout.info a:hover { background:var(--navy); }
+  .url-action { display:block; margin-top:12px; }
+  .url-action a { display:inline-flex; width:max-content; padding:9px 13px; border-radius:10px; background:var(--blue); color:#fff; font-weight:700; line-height:1.35; text-decoration:none; }
+  .url-action a:hover { background:var(--navy); }
   .step-body a,.inline-note a,.inline-warning a { color:var(--blue); font-weight:700; }
   .step { position:relative; margin:24px 0 36px; padding-left:64px; }
   .step-number { position:absolute; left:0; top:0; display:grid; place-items:center; width:44px; height:44px; border-radius:14px; background:var(--navy); color:#fff; font-size:14px; font-weight:800; }
