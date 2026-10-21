@@ -41,16 +41,48 @@
           "id": "step-1",
           "type": "step",
           "number": "1",
-          "title": "打开站点链接",
-          "body": "在浏览器中打开站点负责人提供的 SharePoint 地址。",
-          "note": "若需要秘书处共享盘地址，请联系秘书处同事。\n如需要分所共享盘地址，请联系分所行政同事。",
+          "title": "找到Teams团队",
+          "body": "打开Teams,找到你所在的分所团队，选择常规，点击该页面中的已共享",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sharepoint/1792544395823-e986a6-111.webp",
+              "caption": "Teams页面",
+              "alt": ""
+            }
+          ]
+        },
+        {
+          "id": "step-mvheovk7-e3ytm",
+          "type": "step",
+          "number": "2",
+          "title": "同步文件夹",
+          "body": "点击右上角三点，展开点击同步",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/sharepoint/1792544509797-440d50-222.webp",
+              "caption": "222",
+              "alt": "222"
+            }
+          ]
+        },
+        {
+          "id": "step-mvheqxr2-gn37f",
+          "type": "step",
+          "number": "3",
+          "title": "打开公盘链接",
+          "body": "若需要秘书处共享盘地址，请联系秘书处同事。",
+          "note": "",
           "warning": "",
           "images": []
         },
         {
           "id": "step-2",
           "type": "step",
-          "number": "2",
+          "number": "4",
           "title": "登录并验证",
           "body": "使用公司账号登录，输入密码并完成多重身份验证。",
           "note": "",
@@ -66,7 +98,7 @@
         {
           "id": "step-3",
           "type": "step",
-          "number": "3",
+          "number": "5",
           "title": "打开文档",
           "body": "在左侧导航栏点击“文档 / Documents”浏览文件和文件夹。",
           "note": "",
