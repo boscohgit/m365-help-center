@@ -51,16 +51,38 @@
           "id": "step-msoa1olq-vmete",
           "type": "step",
           "number": "2",
-          "title": "登录账号",
-          "body": "进入页面后选择登录工作或学校账户先使用xxx@incorp.asia进行登录。进入页面后再使用xxx@incorp.international，按照指引输入公司账号并完成登录",
+          "title": "验证公司账号",
+          "body": "进入页面后选择登录工作或学校账户先使用xxx@incorp.asia进行登录。",
           "note": "",
           "warning": "",
-          "images": []
+          "images": [
+            {
+              "src": "/assets/sop/iphone-compliant/1794196289396-a9dd79-3.webp",
+              "caption": "3",
+              "alt": "3"
+            }
+          ]
+        },
+        {
+          "id": "step-mw8q1jfj-nz4yw",
+          "type": "step",
+          "number": "3",
+          "title": "登录账号",
+          "body": "进入页面后再使用xxx@incorp.international，按照指引输入公司账号并完成登录",
+          "note": "",
+          "warning": "",
+          "images": [
+            {
+              "src": "/assets/sop/iphone-compliant/1794196343066-5a1e0a-4.webp",
+              "caption": "4",
+              "alt": "4"
+            }
+          ]
         },
         {
           "id": "step-msoa4hmc-x41v9",
           "type": "step",
-          "number": "3",
+          "number": "4",
           "title": "配置iCloud，安装配置",
           "body": "登录完成后请继续点击登录iCloud,允许远程配置文件",
           "note": "",
@@ -81,14 +103,8 @@
         {
           "id": "point-msoadgkn-f2t1g",
           "type": "point",
-          "text": "后续相关应用Office/Outlook/Teams等可以通过公司门户安装并自动登录。",
-          "images": [
-            {
-              "src": "/assets/sop/iphone-compliant/1786430727141-93010c-1786430716868-8085d1-3.webp",
-              "caption": "公司门户可安装office应用",
-              "alt": "3"
-            }
-          ]
+          "text": "后续相关应用Office/Outlook/Teams/Edge等将自动安装。",
+          "images": []
         },
         {
           "id": "point-mtcb482b-dysuf",
